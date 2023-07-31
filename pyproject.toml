@@ -1,0 +1,31 @@
+[project]
+name = "chathelper"
+version = "1.0.0a1"
+
+authors = [{ name = "Gordon Watts", email = "gwatts@uw.edu" }]
+
+description = "Code to build build a chatbot based on PDF documents"
+readme = "README.md"
+requires-python = ">=3.10"
+
+# keywords = ["one", "two"]
+# license = { text = "BSD-3-Clause" }
+# classifiers = ["Framework :: Django", "Programming Language :: Python :: 3"]
+
+dependencies = ["PyYAML"]
+
+[tool.setuptools.packages.find]
+include = ["chathelper"]
+
+[project.scripts]
+chatter = "chathelper.cli:main"
+
+
+[project.urls]
+Repository = "https://github.com/gordonwatts/snowmass-chat.git"
+Homepage = "https://github.com/gordonwatts/snowmass-chat"
+
+[project.optional-dependencies]
+test = ["pytest", "black", "flake8"]
+
+# [project.entry-points]
