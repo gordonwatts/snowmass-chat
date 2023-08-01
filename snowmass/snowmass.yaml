@@ -2,4 +2,4 @@
 --- # Do not place anything in here that can't be checked into a public github repo!!
 papers:
   - ref: inspirehep:1926149
-    tag: EF
+    tags: ["EF", "whitepaper"]

@@ -1,0 +1,8 @@
+--- # Simple test file with 2 papers for basic testing
+papers:
+  - ref: "/tmp/bogus.pdf"
+    tags:
+      - "EF"
+      - "talk"
+  - ref: "https://www.nytimes.com/"
+    tags: ["popular", "press"]
