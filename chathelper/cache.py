@@ -1,5 +1,7 @@
 from pathlib import Path
 from typing import Iterable, Optional
+
+import fsspec
 from .config import ChatDocument
 from urllib.parse import urlparse
 
@@ -51,13 +53,22 @@ def find_paper(paper: ChatDocument, cache_dir: Path) -> Optional[Path]:
 
 
 def download_paper(paper: ChatDocument, cache_dir: Path) -> None:
-    """Download a paper to the local cache directory
+    """Download a paper to the local cache directory.
+
+    All sources that fsspec knows about can be
+    copied from.
 
     Args:
         paper (ChatDocument): Paper to download
         cache_dir (Path): Location of the cache directory
     """
-    raise NotImplementedError()
+    uri = urlparse(paper.ref)
+    fs = fsspec.filesystem(uri.scheme)
+
+    if not cache_dir.exists():
+        cache_dir.mkdir(parents=True)
+
+    fs.copy(paper.ref, str(_paper_path(paper, cache_dir)))
 
 
 def download_all(papers: Iterable[ChatDocument], cache_dir: Path) -> None:
@@ -67,4 +78,5 @@ def download_all(papers: Iterable[ChatDocument], cache_dir: Path) -> None:
         papers (List[ChatDocument]): List of papers to download
         cache_dir (Path): Location of the cache directory
     """
-    raise NotImplementedError()
+    for paper in papers:
+        download_paper(paper, cache_dir)

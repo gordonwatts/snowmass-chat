@@ -1,5 +1,5 @@
 import pytest
-from chathelper.cache import find_paper, _paper_path
+from chathelper.cache import download_all, download_paper, find_paper, _paper_path
 from chathelper.config import ChatDocument
 
 
@@ -59,3 +59,31 @@ def test_find(tmp_path):
 
     paper2 = ChatDocument(ref="inspirehep://fork", tags=[])
     assert find_paper(paper2, tmp_path) is None
+
+
+def test_download(tmp_path):
+    "Download a paper to the cache"
+    paper_name = "01234"
+    paper_file = tmp_path / f"{paper_name}.pdf"
+    paper_file.touch()
+
+    cache_dir = tmp_path / "cache"
+    expected_paper = cache_dir / f"{paper_name}.pdf"
+
+    paper = ChatDocument(ref=paper_file.as_uri(), tags=[])
+    download_paper(paper, cache_dir)
+    assert expected_paper.exists()
+
+
+def test_download_all(tmp_path):
+    "Download list of papers to the cache"
+    paper_name = "01234"
+    paper_file = tmp_path / f"{paper_name}.pdf"
+    paper_file.touch()
+
+    cache_dir = tmp_path / "cache"
+    expected_paper = cache_dir / f"{paper_name}.pdf"
+
+    paper = ChatDocument(ref=paper_file.as_uri(), tags=[])
+    download_all([paper], cache_dir)
+    assert expected_paper.exists()
