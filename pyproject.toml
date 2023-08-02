@@ -30,3 +30,4 @@ test = ["pytest", "black", "flake8"]
 
 [project.entry-points."fsspec.specs"]
 inspirehep = "chathelper.fsspec.inspirehep:InspireFileSystem"
+arxiv = "chathelper.fsspec.arxiv:ArxivFileSystem"
