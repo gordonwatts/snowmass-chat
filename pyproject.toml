@@ -12,7 +12,7 @@ requires-python = ">=3.10"
 # license = { text = "BSD-3-Clause" }
 # classifiers = ["Framework :: Django", "Programming Language :: Python :: 3"]
 
-dependencies = ["PyYAML", "pydantic", "fsspec"]
+dependencies = ["PyYAML", "pydantic", "fsspec", "requests"]
 
 [tool.setuptools.packages.find]
 include = ["chathelper"]
@@ -28,4 +28,5 @@ Homepage = "https://github.com/gordonwatts/snowmass-chat"
 [project.optional-dependencies]
 test = ["pytest", "black", "flake8"]
 
-# [project.entry-points]
+[project.entry-points."fsspec.specs"]
+inspirehep = "chathelper.fsspec.inspirehep:InspireFileSystem"
