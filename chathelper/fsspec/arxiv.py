@@ -1,10 +1,7 @@
-from typing import Any, Dict
 from urllib.parse import urlparse
 from fsspec import AbstractFileSystem
 import fsspec
 from pydantic_core import Url
-import requests
-import functools
 
 
 class ArxivFileSystem(AbstractFileSystem):
