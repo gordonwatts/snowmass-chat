@@ -12,7 +12,7 @@ requires-python = ">=3.10"
 # license = { text = "BSD-3-Clause" }
 # classifiers = ["Framework :: Django", "Programming Language :: Python :: 3"]
 
-dependencies = ["PyYAML", "pydantic", "fsspec", "requests"]
+dependencies = ["PyYAML", "pydantic", "fsspec[http]", "requests"]
 
 [tool.setuptools.packages.find]
 include = ["chathelper"]

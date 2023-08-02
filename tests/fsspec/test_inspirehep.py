@@ -5,7 +5,7 @@ from chathelper.fsspec.inspirehep import InspireFileSystem
 def test_copy(tmp_path):
     output_file = tmp_path / "2043503.pdf"
     fs = InspireFileSystem()
-    fs.copy("inspirehep://2043503", output_file.as_uri())
+    fs.get("inspirehep://2043503", str(output_file))
 
     assert output_file.exists()
 

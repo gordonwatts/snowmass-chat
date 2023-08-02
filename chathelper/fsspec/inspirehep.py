@@ -1,28 +1,74 @@
+from typing import Any, Dict
 from urllib.parse import urlparse
 from fsspec import AbstractFileSystem
 import fsspec
+from pydantic_core import Url
 import requests
+import functools
 
 
 class InspireFileSystem(AbstractFileSystem):
-    def ls(self, path, detail=True, **kwargs):
-        return []
-        # return super().ls(path, detail, **kwargs)
+    @functools.lru_cache(maxsize=None)
+    def _get_meta(self, path: str) -> Dict[str, Any]:
+        """Return the metadata for the given path. Cached.
 
-    def cp_file(self, path1, path2, **kwargs):
+        Note: Inspire API is rate limited.
+        Docs: https://github.com/inspirehep/rest-api-doc
+
+        Args:
+            path (str): The path from `fsspec`
+        """
         # Extract the inspire id from the path
-        uri = urlparse(path1)
+        uri = urlparse(path)
         paper_id = uri.netloc
 
         # Request the metadata info
         meta_url = f"https://inspirehep.net/api/literature/{paper_id}?format=json"
-        meta = requests.get(meta_url).json()
+        return requests.get(meta_url).json()
 
-        # Grab the URL of the document out of there:
-        doc_url = meta["metadata"]["documents"][0]["url"]
+    def _get_paper_url(self, path: str) -> Url:
+        """Get the URL of the paper from the metadata
 
-        # Now copy the data from there to the destination
-        dest_uri = urlparse(path2)
-        dest_fs = fsspec.filesystem(dest_uri.scheme)
-        with dest_fs.open(path2, "wb") as f:
-            f.write(requests.get(doc_url).content)
+        Args:
+            path (str): The path from `fsspec`
+
+        Returns:
+            Url: The URL of the paper
+        """
+        meta = self._get_meta(path)
+        return Url(meta["metadata"]["documents"][0]["url"])
+
+    def ls(self, path, detail=True, **kwargs):
+        """Get metadata info for the given path. Cached.
+
+        Args:
+            path (str): Path to the file
+            detail (bool, optional): How many details. Defaults to True.
+
+        Returns:
+            Dict[]: Keys needed for fsspec
+        """
+        meta = self._get_meta(path)
+        meta["name"] = path
+        meta["size"] = None
+        meta["type"] = "file"
+        return [meta]
+
+    def open(
+        self,
+        path,
+        mode="rb",
+        block_size=None,
+        cache_options=None,
+        compression=None,
+        **kwargs,
+    ):
+        if mode != "rb":
+            raise NotImplementedError("Only read-byte mode is supported ('rb')")
+
+        # Grab the URL of the document and open it with fsspec's http backend.
+        doc_url = self._get_paper_url(path)
+        source_fs = fsspec.filesystem(doc_url.scheme)
+        return source_fs.open(
+            str(doc_url), mode, block_size, cache_options, compression
+        )
