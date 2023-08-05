@@ -68,3 +68,23 @@ embedding = OpenAIEmbeddings(
 vectorstore = Chroma.from_documents(
     documents=all_splits, embedding=embedding, persist_directory=str(vector_store_path)
 )
+
+# Next, lets ask a question and see what we get back
+question = "What does the FASER experiment do?"
+docs = vectorstore.similarity_search(question)
+len(docs)
+
+# I am really surprised that worked - it got 4 things with FASER mentioned in it.
+# Given that almost certainly isn't in the embedding... Can we test the embedding?
+emb_vector = embedding.embed_query(question)
+print(emb_vector)
+print(embedding.embed_query("FASER"))
+# Ok - so they are different. Weird!!
+
+from langchain.chains import RetrievalQA
+from langchain.chat_models import ChatOpenAI
+
+llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0, openai_api_key=api_key)
+qa_chain = RetrievalQA.from_chain_type(llm, retriever=vectorstore.as_retriever())
+r = qa_chain({"query": question})
+print(r)
