@@ -1,6 +1,11 @@
 # Try to download and "cache" the data loaded from a document on the archive
 
 # from langchain.document_loaders import ArxivLoader
+from logging import Logger
+import logging
+from pathlib import Path
+
+from charset_normalizer import from_path
 from .archive_loader import ArxivLoader
 
 document_name = "id:2109.10905"
@@ -29,6 +34,17 @@ with open("good_doc.pickle", "rb") as f:
     good_doc_prime = pickle.load(f)
 print(len(good_doc_prime.page_content), len(good_doc.page_content))
 
+# Fix up the metadata - can only be a str, int, flaot, or bool.
+for k, v in good_doc_prime.metadata.items():
+    if isinstance(v, (list, dict)):
+        logging.warning(
+            f"Metadata {k} is a {type(v)} - {str(v)} - which is not legal! Attempting fix"
+        )
+        good_doc_prime.metadata[k] = str(v)
+    # and if not a legal type, then complain!
+    if not isinstance(v, (str, int, float, bool)):
+        logging.warning(f"Metadata {k} is a {type(v)} - which is not legal!")
+
 # Next, lets see if we can create the database with this character (e.g. make sure
 # nothing that anyone cares about was lost during the pickling).
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -41,5 +57,14 @@ print(len(all_splits))
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
 
-# Need api for this next line.
-# vectorstore = Chroma.from_documents(documents=all_splits, embedding=OpenAIEmbeddings())
+# Need api key for this next bit - to access the embeddings.
+vector_store_path = Path("vector_store")
+print(vector_store_path.absolute())
+vector_store_path.mkdir(exist_ok=True)
+api_key = Path("openai.key").read_text().strip()
+embedding = OpenAIEmbeddings(
+    model_name="text-embedding-ada-002", openai_api_key=api_key
+)
+vectorstore = Chroma.from_documents(
+    documents=all_splits, embedding=embedding, persist_directory=str(vector_store_path)
+)

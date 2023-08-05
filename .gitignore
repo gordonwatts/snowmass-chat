@@ -161,3 +161,5 @@ cython_debug/
 .chatter
 *.pickle
 .vscode/launch.json
+*.key
+vector_store/*
