@@ -1,0 +1,4 @@
+# This uses pydantic 1.X which is in conflict with 2.0 used by the base package currently
+langchain
+arxiv
+pymupdf
