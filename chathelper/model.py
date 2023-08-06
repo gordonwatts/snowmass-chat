@@ -48,6 +48,12 @@ def _load_vector_store(
     # vector store.
     count = 0
     for doc_info in docs:
+        # ChromaDB cannot deal with complex metadata, so flatten lists
+        for k, v in doc_info.metadata.items():
+            if isinstance(v, list):
+                doc_info.metadata[k] = ", ".join(v)
+
+        # Split and then store
         splits = text_splitter.split_documents([doc_info])
         vector_store.add_documents(splits)
 
