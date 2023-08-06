@@ -20,7 +20,7 @@ class ChatConfig(BaseModel):
     papers: List[ChatDocument]
 
 
-def load_config(path: str) -> ChatConfig:
+def load_chat_config(path: str) -> ChatConfig:
     """Load a chat config from a yaml file path"""
 
     with open(path, "r") as f:

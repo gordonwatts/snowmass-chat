@@ -20,6 +20,7 @@ dependencies = [
     "openai",
     "chromadb",
     "tiktoken",
+    "rich",
 ]
 
 [tool.setuptools.packages.find]

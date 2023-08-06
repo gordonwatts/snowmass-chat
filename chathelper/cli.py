@@ -1,8 +1,13 @@
 import argparse
 import logging
 from pathlib import Path
+import shutil
 from typing import Any, Dict
 import yaml
+from rich.progress import Progress
+from chathelper.cache import download_all
+
+from chathelper.config import ChatConfig, load_chat_config
 
 
 class config_cache:
@@ -28,12 +33,26 @@ class config_cache:
     @property
     def cache_dir(self) -> Path:
         """Return the cache directory"""
-        return Path(self._load().get("cache_dir", "/tmp"))
+        return Path(self._load().get("cache_dir", Path("./chatter_cache").absolute()))
 
     @cache_dir.setter
     def cache_dir(self, value: Path) -> None:
         """Set the cache directory"""
         self._update({"cache_dir": str(value.absolute())})
+
+
+def load_config(args) -> ChatConfig:
+    """Load the config file from the command line arguments
+
+    Args:
+        args (_type_): The command line arguments
+
+    Raises:
+        FileNotFoundError: Raised if the config file can't be located."""
+    config_file = Path(args.config).absolute()
+    if not config_file.exists():
+        raise FileNotFoundError(f"Config file {config_file} does not exist")
+    return load_chat_config(str(config_file))
 
 
 def cache_set(args):
@@ -51,12 +70,27 @@ def cache_get(args):
 
 def cache_download(args):
     """Download everything in the config file to the cache"""
-    raise NotImplementedError()
+    config = load_config(args)
+    cache_dir = config_cache().cache_dir
+
+    progress = Progress()
+    with progress:
+        task1 = progress.add_task("Downloading", total=len(config.papers))
+        download_all(
+            config.papers, cache_dir, lambda _: progress.update(task1, advance=1)
+        )
 
 
 def cache_clear(args):
     """Clear the cache"""
-    raise NotImplementedError()
+    cache_dir = config_cache().cache_dir
+    if not args.force:
+        if input(f"Are you sure you want to delete {cache_dir}? (y/N) ").lower() != "y":
+            return
+
+    logging.info(f"Deleting cache directory {cache_dir}")
+    if cache_dir.exists():
+        shutil.rmtree(cache_dir)
 
 
 def execute_command_line():
@@ -94,6 +128,11 @@ def execute_command_line():
 
     # Add the cache clear command
     cache_clear_parser = cache_subparsers.add_parser("clear", help="cache clear help")
+    cache_clear_parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Do not ask before deleting cache directory",
+    )
     cache_clear_parser.set_defaults(func=cache_clear)
 
     # Add the cache download command
@@ -103,7 +142,7 @@ def execute_command_line():
     cache_download_parser.set_defaults(func=cache_download)
 
     # Parse the arguments
-    args = parser.parse_args()
+    args = parser.parse_args(namespace=None)
     args.func(args)
 
 
