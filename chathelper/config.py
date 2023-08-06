@@ -13,7 +13,7 @@ class ChatDocument:
     tags: list[str]
 
     class Config:
-        env_file = "bogus.yaml"
+        _env_file = "bogus.yaml"
 
 
 class ChatConfig(BaseModel):
@@ -21,6 +21,7 @@ class ChatConfig(BaseModel):
 
 
 def load_config(path: str) -> ChatConfig:
-    """Load a chat config from a path"""
+    """Load a chat config from a yaml file path"""
+
     with open(path, "r") as f:
-        return ChatConfig.model_validate(yaml.safe_load(f))
+        return ChatConfig(**yaml.safe_load(f))
