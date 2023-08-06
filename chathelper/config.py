@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List
 from pydantic import BaseModel
 from dataclasses import dataclass
 import yaml
