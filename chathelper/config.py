@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 from pydantic import BaseModel
 from dataclasses import dataclass
 import yaml
@@ -18,6 +18,7 @@ class ChatDocument:
 
 class ChatConfig(BaseModel):
     papers: List[ChatDocument]
+    short_name: str
 
 
 def load_chat_config(path: str) -> ChatConfig:

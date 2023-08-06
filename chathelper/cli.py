@@ -1,13 +1,18 @@
 import argparse
 import logging
-from pathlib import Path
 import shutil
+from pathlib import Path
 from typing import Any, Dict
-import yaml
-from rich.progress import Progress
-from chathelper.cache import download_all
+import openai
 
+import yaml
+from rich.console import Console
+from rich.progress import Progress
+from rich.table import Table
+
+from chathelper.cache import download_all
 from chathelper.config import ChatConfig, load_chat_config
+from chathelper.model import load_vector_store, load_vector_store_files
 
 
 class config_cache:
@@ -39,6 +44,29 @@ class config_cache:
     def cache_dir(self, value: Path) -> None:
         """Set the cache directory"""
         self._update({"cache_dir": str(value.absolute())})
+
+    @property
+    def vector_store_dir(self) -> Path:
+        """Return the vector store directory"""
+        return Path(
+            self._load().get("vector_store_dir", Path("./vector_store").absolute())
+        )
+
+    @vector_store_dir.setter
+    def vector_store_dir(self, value: Path) -> None:
+        """Set the vector store directory"""
+        self._update({"vector_store_dir": str(value.absolute())})
+
+    @property
+    def keys(self) -> Dict[str, str]:
+        """Return the keys"""
+        return self._load().get("keys", {})
+
+    def add_key(self, key, value) -> None:
+        """Add a key"""
+        keys = self.keys
+        keys[key] = value
+        self._update({"keys": keys})
 
 
 def load_config(args) -> ChatConfig:
@@ -93,6 +121,103 @@ def cache_clear(args):
         shutil.rmtree(cache_dir)
 
 
+def keys_list(args):
+    """List all keys"""
+    keys = config_cache().keys
+    if len(keys) == 0:
+        print("No keys set")
+        return
+
+    table = Table()
+    table.add_column("Key")
+    table.add_column("Value")
+    for key, value in keys.items():
+        table.add_row(key, value)
+
+    console = Console()
+    console.print(table)
+
+
+def keys_set(args):
+    """Set a new key"""
+    config_cache().add_key(args.key, args.value)
+
+
+def vector_get(args):
+    """display the current vector directory"""
+    vector_dir = config_cache().vector_store_dir
+    print(f"Vector directory is {vector_dir}")
+
+
+def vector_set(args):
+    """set the vector directory"""
+    vector_dir = Path(args.dir)
+    config_cache().vector_store_dir = vector_dir
+
+
+def vector_store_path(args) -> Path:
+    """Determine the path to the vector store from the configuration file name"""
+    config = load_config(args)
+    assert (
+        config.short_name is not None and len(config.short_name) > 0
+    ), "The 'shortname' key must be defined in the config file"
+    return config_cache().vector_store_dir / config.short_name
+
+
+def vector_clear(args):
+    """clear the vector store"""
+    vector_dir = vector_store_path(args)
+    if not args.force:
+        if (
+            input(f"Are you sure you want to delete {vector_dir}? (y/N) ").lower()
+            != "y"
+        ):
+            return
+    logging.info(f"Deleting vector directory {vector_dir}")
+    if vector_dir.exists():
+        shutil.rmtree(vector_dir)
+
+
+def vector_list(args):
+    """List the references that are in the store"""
+    vector_dir = vector_store_path(args)
+    f_list = load_vector_store_files(vector_dir)
+    if len(f_list.refs) == 0:
+        print("No vectors in the vector store")
+        return
+
+    table = Table()
+    table.add_column("Ref")
+    for ref in f_list.refs:
+        table.add_row(ref)
+
+    console = Console()
+    console.print(table)
+
+
+def vector_populate(args):
+    """Populate the store from cached papers"""
+    vector_dir = vector_store_path(args)
+    cache_dir = config_cache().cache_dir
+    chat_config = load_config(args)
+    openai_key = config_cache().keys.get("openai", None)
+    if openai_key is None:
+        print("No OpenAI API key set, use chatter set key openai <key>")
+        return
+
+    progress = Progress()
+    with progress:
+        task1 = progress.add_task("Populating", total=len(chat_config.papers))
+
+        load_vector_store(
+            vector_dir,
+            cache_dir,
+            openai_key,
+            chat_config.papers,
+            lambda _: progress.update(task1, advance=1),
+        )
+
+
 def execute_command_line():
     """Parse command line arguments using the `argparse` module as a series of
     sub-commands.
@@ -111,23 +236,39 @@ def execute_command_line():
     parser.add_argument(
         "-c", "--config", help="The yaml filename we will use for the config file."
     )
-    subparsers = parser.add_subparsers(help="sub-command help")
+    parser.set_defaults(func=lambda _: parser.print_help())
+    subparsers = parser.add_subparsers(help="Possible Commands")
+
+    # Add the keys sub-command to add keys needed to access services
+    keys_parser = subparsers.add_parser("keys", help="API Keys Access")
+    keys_parser.set_defaults(func=lambda _: keys_parser.print_help())
+    keys_subparsers = keys_parser.add_subparsers(help="Possible Commands")
+
+    # list all keys command, and set all keys
+    keys_list_parser = keys_subparsers.add_parser("list", help="List API keys")
+    keys_list_parser.set_defaults(func=keys_list)
+
+    keys_set_parser = keys_subparsers.add_parser("set", help="Set/Add a API key")
+    keys_set_parser.add_argument("key", help="The key to set")
+    keys_set_parser.add_argument("value", help="The value to set the key to")
+    keys_set_parser.set_defaults(func=keys_set)
 
     # Add the cache sub-command & sub-commands parser for it.
-    cache_parser = subparsers.add_parser("cache", help="cache help")
-    cache_subparsers = cache_parser.add_subparsers(help="cache sub-command help")
+    cache_parser = subparsers.add_parser("cache", help="Paper/Document Download Cache")
+    cache_parser.set_defaults(func=lambda _: cache_parser.print_help())
+    cache_subparsers = cache_parser.add_subparsers(help="Possible Commands")
 
     # Add the cache set command and the callback to execute when it is called.
-    cache_set_parser = cache_subparsers.add_parser("set", help="cache set help")
+    cache_set_parser = cache_subparsers.add_parser("set", help="Set cache directory")
     cache_set_parser.add_argument("dir", help="Location of the cache, defaults to /tmp")
     cache_set_parser.set_defaults(func=cache_set)
 
     # Add the cache get command
-    cache_get_parser = cache_subparsers.add_parser("get", help="cache get help")
+    cache_get_parser = cache_subparsers.add_parser("get", help="Show cache directory")
     cache_get_parser.set_defaults(func=cache_get)
 
     # Add the cache clear command
-    cache_clear_parser = cache_subparsers.add_parser("clear", help="cache clear help")
+    cache_clear_parser = cache_subparsers.add_parser("clear", help="Delete cache")
     cache_clear_parser.add_argument(
         "--force",
         action="store_true",
@@ -137,9 +278,42 @@ def execute_command_line():
 
     # Add the cache download command
     cache_download_parser = cache_subparsers.add_parser(
-        "download", help="cache download help"
+        "download", help="Download all papers to cache for a configuration file"
     )
     cache_download_parser.set_defaults(func=cache_download)
+
+    # The vector sub-command deals with the vector store.
+    vector_parser = subparsers.add_parser(
+        "vector",
+        help="Vector Store DB",
+        epilog="All commands other than get/set require a configuration file",
+    )
+    vector_parser.set_defaults(func=lambda _: vector_parser.print_help())
+    vector_subparsers = vector_parser.add_subparsers(help="Possible Commands")
+
+    # You can get, set, clear, list, and populate the contents of the store.
+    vector_get_parser = vector_subparsers.add_parser(
+        "get", help="show master vector store directory"
+    )
+    vector_get_parser.set_defaults(func=vector_get)
+    vector_set_parser = vector_subparsers.add_parser(
+        "set", help="set master vector store directory"
+    )
+    vector_set_parser.add_argument("directory", help="where to put vector stores")
+    vector_set_parser.set_defaults(func=vector_set)
+    vector_clear_parser = vector_subparsers.add_parser(
+        "clear", help="clear vector store directory"
+    )
+    vector_clear_parser.set_defaults(func=vector_clear)
+    vector_clear_parser.add_argument("--force", help="do not ask before deleting")
+    vector_list_parser = vector_subparsers.add_parser(
+        "list", help="list papers already stored in a vector store"
+    )
+    vector_list_parser.set_defaults(func=vector_list)
+    vector_populate_parser = vector_subparsers.add_parser(
+        "populate", help="populate vector store with already cached papers"
+    )
+    vector_populate_parser.set_defaults(func=vector_populate)
 
     # Parse the arguments
     args = parser.parse_args(namespace=None)

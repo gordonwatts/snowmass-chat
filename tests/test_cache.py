@@ -1,8 +1,15 @@
-from unittest.mock import Mock, patch
+import pickle
+from unittest.mock import patch
 
 import pytest
 
-from chathelper.cache import _paper_path, download_all, download_paper, find_paper
+from chathelper.cache import (
+    _paper_path,
+    download_all,
+    download_paper,
+    find_paper,
+    load_paper,
+)
 from chathelper.config import ChatDocument
 from chathelper.lc_experimental.archive_loader import ArxivLoader
 
@@ -121,6 +128,18 @@ def test_download_cached(mock_load, tmp_path):
     # This download should do nothing
     download_paper(paper, cache_dir)
     mock_load.assert_not_called()
+
+
+def test_load_cached(tmp_path):
+    cache_dir = tmp_path / "cache"
+    paper = ChatDocument(ref="arxiv://2109.10905", tags=[])
+
+    expected_paper_path = _paper_path(paper, cache_dir)
+    expected_paper_path.parent.mkdir(exist_ok=True, parents=True)
+    with expected_paper_path.open("wb") as f:
+        pickle.dump(["this is the paper contents"], f)
+
+    assert load_paper(paper, cache_dir) == ["this is the paper contents"]
 
 
 def test_download_all(tmp_path):

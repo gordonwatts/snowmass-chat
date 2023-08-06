@@ -5,7 +5,9 @@
         "docstore",
         "indico",
         "langchain",
+        "openai",
         "pydantic",
-        "snowmass"
+        "snowmass",
+        "vectorstores"
     ]
 }

@@ -98,6 +98,24 @@ def download_paper(paper: ChatDocument, cache_dir: Path) -> None:
         pickle.dump(data[0], f)
 
 
+def load_paper(paper: ChatDocument, cache_dir: Path):
+    """Load a paper from the local cache directory.
+
+    Args:
+        paper (ChatDocument): Paper to load
+        cache_dir (Path): Location of the cache directory
+
+    Returns:
+        ChatDocument: Paper loaded from the cache directory
+    """
+    paper_path = _paper_path(paper, cache_dir)
+    if not paper_path.exists():
+        return None
+
+    with open(paper_path, "rb") as f:
+        return pickle.load(f)
+
+
 def download_all(
     papers: Iterable[ChatDocument],
     cache_dir: Path,
