@@ -3,7 +3,6 @@ import logging
 import shutil
 from pathlib import Path
 from typing import Any, Dict
-import openai
 
 import yaml
 from rich.console import Console
@@ -12,7 +11,11 @@ from rich.table import Table
 
 from chathelper.cache import download_all
 from chathelper.config import ChatConfig, load_chat_config
-from chathelper.model import load_vector_store, load_vector_store_files
+from chathelper.model import (
+    find_similar_text_chucks,
+    populate_vector_store,
+    load_vector_store_files,
+)
 
 
 class config_cache:
@@ -209,13 +212,36 @@ def vector_populate(args):
     with progress:
         task1 = progress.add_task("Populating", total=len(chat_config.papers))
 
-        load_vector_store(
+        populate_vector_store(
             vector_dir,
             cache_dir,
             openai_key,
             chat_config.papers,
             lambda _: progress.update(task1, advance=1),
         )
+
+
+def query_find(args):
+    """Find all similar text chunks to the query"""
+    vector_dir = vector_store_path(args)
+    openai_key = config_cache().keys.get("openai", None)
+    if openai_key is None:
+        print("No OpenAI API key set, use chatter set key openai <key>")
+        return
+
+    chunks = find_similar_text_chucks(vector_dir, openai_key, args.query)
+    if len(chunks) == 0:
+        print("No similar chunks found")
+        return
+    table = Table(show_lines=True)
+    table.add_column("Title", width=30)
+    table.add_column("Text")
+
+    for c in chunks:
+        table.add_row(c.metadata["Title"], c.page_content.replace("\n", " "))
+
+    console = Console()
+    console.print(table)
 
 
 def execute_command_line():
@@ -314,6 +340,20 @@ def execute_command_line():
         "populate", help="populate vector store with already cached papers"
     )
     vector_populate_parser.set_defaults(func=vector_populate)
+
+    # The query sub command has find and ask sub commands
+    query_parser = subparsers.add_parser("query", help="Query the vector store")
+    query_parser.set_defaults(func=lambda _: query_parser.print_help())
+    query_subparsers = query_parser.add_subparsers(help="Possible Commands")
+
+    # The find command finds similar text chunks.
+    query_find_parser = query_subparsers.add_parser(
+        "find", help="Find similar text chunks"
+    )
+    query_find_parser.add_argument(
+        "query", help="The query to find similar text chunks for"
+    )
+    query_find_parser.set_defaults(func=query_find)
 
     # Parse the arguments
     args = parser.parse_args(namespace=None)

@@ -31,16 +31,8 @@ def _load_vector_store(
     Returns:
         Chroma: The vector store
     """
-
-    # Open the DB from the path
-
-    embedding = OpenAIEmbeddings(
-        model="text-embedding-ada-002",
-        openai_api_key=api_key,
-    )  # type: ignore
-    vector_store = Chroma(
-        embedding_function=embedding, persist_directory=str(vector_store_path)
-    )
+    # Get the vector store and splitter
+    vector_store = load_vector_store_database(vector_store_path, api_key)
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=0)
 
     # Loop over the documents, sending them through the splitter
@@ -61,6 +53,27 @@ def _load_vector_store(
 
     # Make sure all data is on disk
     vector_store.persist()
+    return vector_store
+
+
+def load_vector_store_database(vector_store_path, api_key) -> Chroma:
+    """Open the Vector store and create the embedding function
+
+    Args:
+        vector_store_path (Path): The location of the vector store
+        api_key (str): The OpenAPI api key
+
+    Returns:
+        Tuple[Chroma, OpenAIEmbeddings]: The vector store and the embedding function
+    """
+    embedding = OpenAIEmbeddings(
+        model="text-embedding-ada-002",
+        openai_api_key=api_key,
+    )  # type: ignore
+    vector_store = Chroma(
+        embedding_function=embedding, persist_directory=str(vector_store_path)
+    )
+
     return vector_store
 
 
@@ -88,13 +101,28 @@ def _save_store(vector_store_path: Path, files: VectorStoreFiles):
         f.write(files.json())
 
 
-def load_vector_store(
+def populate_vector_store(
     vector_store_path: Path,
     cache_dir: Path,
     api_key: str,
     docs: Iterable[ChatDocument],
     progress_cb: Optional[Callable[[int], None]] = None,
 ):
+    """
+    Populates a vector store with the embeddings of the given documents.
+
+    Args:
+        vector_store_path (Path): The path to the directory where the vector store will
+            be saved.
+        cache_dir (Path): The path to the directory where the cached documents are
+            stored.
+        api_key (str): The OpenAI API key.
+        docs (Iterable[ChatDocument]): The documents to be added to the vector store.
+        progress_cb (Optional[Callable[[int], None]], optional): A callback function
+            that will be called with the number of documents processed so far.
+            Defaults to None.
+    """
+
     def my_cb(count: int):
         if progress_cb is not None:
             progress_cb(count)
@@ -119,3 +147,13 @@ def load_vector_store(
             my_cb(count)
 
     _load_vector_store(vector_store_path, cache_dir, api_key, good_documents())
+
+
+def find_similar_text_chucks(
+    vector_store_path: Path,
+    api_key: str,
+    query: str,
+):
+    # Vector store db and embedding function
+    vector_store = load_vector_store_database(vector_store_path, api_key)
+    return vector_store.similarity_search(query)  # type: ignore
