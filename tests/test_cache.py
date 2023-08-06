@@ -1,7 +1,10 @@
+from unittest.mock import Mock, patch
+
 import pytest
-from chathelper.cache import download_all, download_paper, find_paper, _paper_path
+
+from chathelper.cache import _paper_path, download_all, download_paper, find_paper
 from chathelper.config import ChatDocument
-from unittest.mock import patch
+from chathelper.lc_experimental.archive_loader import ArxivLoader
 
 
 def test_paper_path(tmp_path):
@@ -65,7 +68,8 @@ def test_find(tmp_path):
     assert find_paper(paper2, tmp_path) is None
 
 
-def test_download_archive(tmp_path):
+@patch.object(ArxivLoader, "load", return_value=["this is the paper contents"])
+def test_download_archive_loaded(mock_load, tmp_path):
     "Download a paper to the cache"
     paper_name = "2109.10905"
 
@@ -79,6 +83,45 @@ def test_download_archive(tmp_path):
     assert downloaded is not None
     assert downloaded.exists()
 
+    mock_load.assert_called_once_with()
+
+
+@patch.object(ArxivLoader, "__init__", return_value=None)
+@patch.object(ArxivLoader, "load", return_value=["hi there"])
+def test_download_arxiv(mock_load, mock_init, tmp_path):
+    "Download a paper to the cache"
+    paper_name = "2109.10905"
+
+    cache_dir = tmp_path / "cache"
+    # expected_paper = cache_dir / f"{paper_name}.pickle"
+
+    paper = ChatDocument(ref=f"arxiv://{paper_name}", tags=[])
+    download_paper(paper, cache_dir)
+
+    assert mock_init.called_once_with(
+        "id:2109.10905",
+        load_all_available_meta=True,
+        doc_content_chars_max=None,
+    )
+
+
+@patch.object(ArxivLoader, "load", side_effect=ValueError("should not be called"))
+def test_download_cached(mock_load, tmp_path):
+    "Do not re-download a paper"
+    paper_name = "2109.10905"
+
+    cache_dir = tmp_path / "cache"
+    # expected_paper = cache_dir / f"{paper_name}.pickle"
+
+    paper = ChatDocument(ref=f"arxiv://{paper_name}", tags=[])
+    expected_paper_path = _paper_path(paper, cache_dir)
+    expected_paper_path.parent.mkdir(exist_ok=True, parents=True)
+    expected_paper_path.touch()
+
+    # This download should do nothing
+    download_paper(paper, cache_dir)
+    mock_load.assert_not_called()
+
 
 def test_download_all(tmp_path):
     "Download list of papers to the cache"
@@ -89,3 +132,21 @@ def test_download_all(tmp_path):
     with patch("chathelper.cache.download_paper") as mock_download:
         download_all([paper], cache_dir)
         mock_download.assert_called_once_with(paper, cache_dir)
+
+
+def test_download_all_callback(tmp_path):
+    cache_dir = tmp_path / "cache"
+
+    paper = ChatDocument(ref="arxiv://2109.10905", tags=[])
+
+    calls = []
+
+    def callback(downloaded):
+        calls.append(downloaded)
+
+    with patch("chathelper.cache.download_paper") as mock_download:
+        download_all([paper], cache_dir, callback)
+        mock_download.assert_called_once_with(paper, cache_dir)
+
+    assert len(calls) == 1
+    assert calls == [1]

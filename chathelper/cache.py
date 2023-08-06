@@ -1,6 +1,6 @@
 from pathlib import Path
 import pickle
-from typing import Iterable, Optional
+from typing import Callable, Iterable, Optional
 
 from chathelper.utils import throttle
 from .config import ChatDocument
@@ -71,7 +71,10 @@ def download_paper(paper: ChatDocument, cache_dir: Path) -> None:
     """
     # Get the final path - this will also do some sanity checking
     # on the url(s).
+    # Return if the paper is already there.
     paper_path = _paper_path(paper, cache_dir)
+    if paper_path.exists():
+        return
 
     # Now parse and figure out how to get the thing
     uri = urlparse(paper.ref)
@@ -95,12 +98,24 @@ def download_paper(paper: ChatDocument, cache_dir: Path) -> None:
         pickle.dump(data[0], f)
 
 
-def download_all(papers: Iterable[ChatDocument], cache_dir: Path) -> None:
+def download_all(
+    papers: Iterable[ChatDocument],
+    cache_dir: Path,
+    progress_callback: Optional[Callable[[int], None]] = None,
+) -> None:
     """Download all papers to the local cache directory
 
     Args:
         papers (List[ChatDocument]): List of papers to download
         cache_dir (Path): Location of the cache directory
     """
+    counter = 0
+
+    def my_cb(count: int):
+        if progress_callback is not None:
+            progress_callback(count)
+
     for paper in papers:
         download_paper(paper, cache_dir)
+        counter += 1
+        my_cb(counter)
