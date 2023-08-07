@@ -146,6 +146,23 @@ def cache_list(args):
     console.print(table)
 
 
+def cache_dump(args):
+    """Dump the page contents of a locally cached item"""
+    config = load_config(args)
+    cache_dir = config_cache().cache_dir
+
+    found = [c for c in config.papers if c.ref == args.ref]
+    if len(found) == 0:
+        print(f"Paper {args.ref} not found in config file")
+        return
+
+    doc = load_paper(found[0], cache_dir)
+    if doc is None:
+        print(f"Paper {args.ref} not found in cache")
+        return
+    print(doc.page_content)
+
+
 def cache_clear(args):
     """Clear the cache"""
     cache_dir = config_cache().cache_dir
@@ -353,6 +370,13 @@ def execute_command_line():
         "list", help="List all downloaded files in the cache"
     )
     cache_list_parser.set_defaults(func=cache_list)
+
+    # Dump a paper content
+    cache_dump_parser = cache_subparsers.add_parser(
+        "dump", help="Dump a paper content to stdout"
+    )
+    cache_dump_parser.add_argument("ref", help="The Ref of the paper to dump")
+    cache_dump_parser.set_defaults(func=cache_dump)
 
     # Add the cache download command
     cache_download_parser = cache_subparsers.add_parser(
