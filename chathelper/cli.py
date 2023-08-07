@@ -15,6 +15,7 @@ from chathelper.model import (
     find_similar_text_chucks,
     populate_vector_store,
     load_vector_store_files,
+    query_llm,
 )
 
 
@@ -244,6 +245,18 @@ def query_find(args):
     console.print(table)
 
 
+def query_ask(args):
+    """Find all similar text chunks to the query"""
+    vector_dir = vector_store_path(args)
+    openai_key = config_cache().keys.get("openai", None)
+    if openai_key is None:
+        print("No OpenAI API key set, use chatter set key openai <key>")
+        return
+
+    response = query_llm(vector_dir, openai_key, args.query)
+    print(response["result"])
+
+
 def execute_command_line():
     """Parse command line arguments using the `argparse` module as a series of
     sub-commands.
@@ -348,12 +361,15 @@ def execute_command_line():
 
     # The find command finds similar text chunks.
     query_find_parser = query_subparsers.add_parser(
-        "find", help="Find similar text chunks"
+        "find", help="Find similar text chunks from the vector store"
     )
-    query_find_parser.add_argument(
-        "query", help="The query to find similar text chunks for"
-    )
+    query_find_parser.add_argument("query", help="The query to match")
     query_find_parser.set_defaults(func=query_find)
+
+    # The ask command queries the LLM for the answer to a question.
+    query_ask_parser = query_subparsers.add_parser("ask", help="Ask the LLM a question")
+    query_ask_parser.add_argument("query", help="The question to ask")
+    query_ask_parser.set_defaults(func=query_ask)
 
     # Parse the arguments
     args = parser.parse_args(namespace=None)

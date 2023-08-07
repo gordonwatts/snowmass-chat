@@ -2,6 +2,8 @@ import logging
 from pathlib import Path
 from typing import Callable, Iterable, List, Optional
 
+from langchain.chains import RetrievalQA
+from langchain.chat_models import ChatOpenAI
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
@@ -154,6 +156,20 @@ def find_similar_text_chucks(
     api_key: str,
     query: str,
 ):
+    """Return documents from store that might answer the question"""
     # Vector store db and embedding function
     vector_store = load_vector_store_database(vector_store_path, api_key)
     return vector_store.similarity_search(query)  # type: ignore
+
+
+def query_llm(
+    vector_store_path: Path,
+    api_key: str,
+    query: str,
+):
+    # Vector store db and embedding function
+    vector_store = load_vector_store_database(vector_store_path, api_key)
+    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0, openai_api_key=api_key)
+    qa_chain = RetrievalQA.from_chain_type(llm, retriever=vector_store.as_retriever())
+
+    return qa_chain({"query": query})

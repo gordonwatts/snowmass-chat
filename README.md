@@ -16,6 +16,8 @@ Getting from a list of documents to a working chat-bot follows the below steps:
     * use `chatter -c snowmass/snowmass.yaml vector populate`
     * This could take some time as it involves sending and receiving all the PDF data to OpenAI for their embedding.
 1. Make your query
+    * Use `chatter -c snowmass/snowmass.yaml query ask "What does the MATHUSULA experiment do?`
+    * Change `ask` to `find` to see what chunks of text are used by the LLM to answer your question.
 
 ### Snowmass Info
 
