@@ -1,4 +1,8 @@
-from chathelper.config import load_chat_config
+from chathelper.config import ChatDocument, load_chat_config
+
+
+def test_create_chat_doc():
+    ChatDocument(ref="arxiv://2109.10905", tags=[])
 
 
 def test_config_load():

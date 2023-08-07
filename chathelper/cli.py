@@ -1,8 +1,9 @@
 import argparse
+from collections import defaultdict
 import logging
 import shutil
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 import yaml
 from rich.console import Console
@@ -10,7 +11,7 @@ from rich.progress import Progress
 from rich.table import Table
 
 from chathelper.cache import download_all, find_paper, load_paper
-from chathelper.config import ChatConfig, load_chat_config
+from chathelper.config import ChatConfig, ChatDocument, load_chat_config
 from chathelper.model import (
     find_similar_text_chucks,
     populate_vector_store,
@@ -272,6 +273,63 @@ def vector_populate(args):
         )
 
 
+def config_list(args):
+    config = load_config(args)
+    print(f"Config file: {config.short_name}")
+
+    table = Table()
+    table.add_column("Ref")
+    table.add_column("Tags")
+
+    for paper in config.papers:
+        table.add_row(paper.ref, ", ".join(paper.tags))
+
+    console = Console()
+    console.print(table)
+
+
+def config_check(args):
+    """Look for duplicate papers, etc"""
+    config = load_config(args)
+
+    all_papers: Dict[str, List[ChatDocument]] = defaultdict(list)
+    for paper in config.papers:
+        all_papers[paper.ref].append(paper)
+
+    if not args.fix:
+        table = Table()
+        table.add_column("Ref")
+        table.add_column("Tags")
+
+        count = 0
+        for ref in all_papers.keys():
+            if len(all_papers[ref]) > 1:
+                all_tags = set([t for p in all_papers[ref] for t in p.tags])
+                table.add_row(ref, ", ".join(sorted(list(all_tags))))
+                count += 1
+
+        console = Console()
+        console.print(table)
+        print(f"Found {count} duplicate papers")
+    else:
+        new_config = ChatConfig(**config.dict())
+        new_config.papers = []
+        for ref in all_papers.keys():
+            paper = all_papers[ref][0]
+            paper.tags = sorted(list(set([t for p in all_papers[ref] for t in p.tags])))
+            new_config.papers.append(paper)
+
+        new_config_path = (
+            Path(args.config).parent / f"{Path(args.config).stem}_fixed.yaml"
+        )
+        with open(new_config_path, "w") as f:
+            yaml.dump(new_config.dict(), f)
+        print(
+            f"New config file written to {new_config_path}. "
+            "Any comments in the original were lost!"
+        )
+
+
 def query_find(args):
     """Find all similar text chunks to the query"""
     vector_dir = vector_store_path(args)
@@ -437,6 +495,34 @@ def execute_command_line():
         "-n", help="The number of results to return", default=4
     )
     query_ask_parser.set_defaults(func=query_ask)
+
+    # The config sub command, which will allow us to list a config file, and combine
+    # duplicate entries.
+    config_parser = subparsers.add_parser(
+        "config",
+        help="Working with config files",
+        epilog="All commands require a config file",
+    )
+    config_parser.set_defaults(func=lambda _: config_parser.print_help())
+    config_subparsers = config_parser.add_subparsers(help="Possible Commands")
+
+    # list the contents of a config file
+    config_list_parser = config_subparsers.add_parser(
+        "list", help="List the contents of a config file"
+    )
+    config_list_parser.set_defaults(func=config_list)
+
+    # The check command will look for duplicate entries in a config file, and will
+    # print a fixed up version to stdout if asked.
+    config_check_parser = config_subparsers.add_parser(
+        "check", help="Check a config file consistency"
+    )
+    config_check_parser.add_argument(
+        "--fix",
+        action="store_true",
+        help="Resolve issues detected if possible.",
+    )
+    config_check_parser.set_defaults(func=config_check)
 
     # Parse the arguments
     args = parser.parse_args(namespace=None)

@@ -1,11 +1,9 @@
 from typing import List
 from pydantic import BaseModel
-from dataclasses import dataclass
 import yaml
 
 
-@dataclass
-class ChatDocument:
+class ChatDocument(BaseModel):
     # the fsspec string that leads to the paper itself
     ref: str
 
