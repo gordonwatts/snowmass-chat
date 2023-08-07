@@ -130,21 +130,30 @@ def cache_list(args):
     table.add_column("Size")
     table.add_column("Tags")
 
+    count_cached = 0
+    count_uncached = 0
     for paper in config.papers:
         title = ""
         size = "<not in cache>"
         doc_path = find_paper(paper, cache_dir)
         tags = ""
         if doc_path is not None:
+            count_cached += 1
             doc = load_paper(paper, cache_dir)
             assert doc is not None
             title = doc.metadata["Title"]
             size = f"{len(doc.page_content) / 1024:.0f} kb"
             tags = ", ".join(doc.metadata["chatter_tags"])
+        else:
+            count_uncached += 1
         table.add_row(paper.ref, title, size, tags)
 
     console = Console()
     console.print(table)
+    print(
+        f"{count_cached} papers cached, {count_uncached} not cached, "
+        f"for a total of {count_cached + count_uncached}"
+    )
 
 
 def cache_dump(args):
@@ -286,6 +295,7 @@ def config_list(args):
 
     console = Console()
     console.print(table)
+    print(f"There are {len(config.papers)} papers in this configuration")
 
 
 def config_check(args):
