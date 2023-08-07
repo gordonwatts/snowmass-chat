@@ -172,7 +172,7 @@ def find_similar_text_chucks(
     """Return documents from store that might answer the question"""
     # Vector store db and embedding function
     vector_store = load_vector_store_database(vector_store_path, api_key)
-    return vector_store.similarity_search(query, k=results)  # type: ignore
+    return vector_store.similarity_search(query, k=n_results)  # type: ignore
 
 
 def query_llm(
