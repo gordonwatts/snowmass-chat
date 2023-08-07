@@ -14,6 +14,12 @@ from chathelper.config import ChatDocument
 from chathelper.lc_experimental.archive_loader import ArxivLoader
 
 
+class _dummy_document:
+    def __init__(self):
+        self.page_content = "holy cow"
+        self.metadata = {}
+
+
 def test_paper_path(tmp_path):
     "Different papers use different ways of turning into a path"
 
@@ -75,7 +81,7 @@ def test_find(tmp_path):
     assert find_paper(paper2, tmp_path) is None
 
 
-@patch.object(ArxivLoader, "load", return_value=["this is the paper contents"])
+@patch.object(ArxivLoader, "load", return_value=[_dummy_document()])
 def test_download_archive_loaded(mock_load, tmp_path):
     "Download a paper to the cache"
     paper_name = "2109.10905"
@@ -94,7 +100,7 @@ def test_download_archive_loaded(mock_load, tmp_path):
 
 
 @patch.object(ArxivLoader, "__init__", return_value=None)
-@patch.object(ArxivLoader, "load", return_value=["hi there"])
+@patch.object(ArxivLoader, "load", return_value=[_dummy_document()])
 def test_download_arxiv(mock_load, mock_init, tmp_path):
     "Download a paper to the cache"
     paper_name = "2109.10905"

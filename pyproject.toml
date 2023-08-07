@@ -28,6 +28,7 @@ include = ["chathelper"]
 
 [project.scripts]
 chatter = "chathelper.cli:main"
+mk_url_extractor = "chathelper.mk_url_extractor:main"
 
 
 [project.urls]

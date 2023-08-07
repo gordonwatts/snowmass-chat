@@ -17,8 +17,9 @@ def throttle(wait_time: float):
             elapsed = time.time() - last_called
             if elapsed < wait_time:
                 time.sleep(wait_time - elapsed)
+            result = func(*args, **kwargs)
             last_called = time.time()
-            return func(*args, **kwargs)
+            return result
 
         return wrapper
 

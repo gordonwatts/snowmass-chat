@@ -1,6 +1,653 @@
 # Everything to load and control, etc., the snowmass chat
 # Do not place anything in here that can't be checked into a public github repo!!
+# SNowmass white papers are from: https://snowmass21.org/submissions
 short_name: "snowmass"
 papers:
+  - ref: arxiv://2203.08127
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07316
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.06207
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2205.02140
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07202
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07668
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2111.12156
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2204.07944
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2209.01995
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.11110
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07218
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08064
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08094
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2206.13431
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2206.12465
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.09718
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08107
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2106.01393
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2205.14486
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07495
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://1901.11146
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08126
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07913
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.11129
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.13979
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07353
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07270
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07344
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.12806
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.09425
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2202.11529
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08132
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2209.03333
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2103.10217
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2107.13581
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07056
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08033
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.06520
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2209.03281
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07646
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08135
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2207.07641
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.12035
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.06819
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08347
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2206.03456
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.06114
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.06800
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2205.05708
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.03852
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.06929
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.15729
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.09451
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.09503
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07261
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2205.08553
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.17258
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.10393
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.05939
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.03700
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2209.03505
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.06476
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2209.03303
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07462
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08271
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07212
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2005.05221
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2202.07193
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.06776
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07964
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2202.02222
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07944
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.09512
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08353
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://1912.11871
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2109.15181
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08330
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.01396
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08129
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08210
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08211
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.02760
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.06131
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2202.03389
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2209.06755
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07883
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08874
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.10046
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2205.11730
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.10184
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.05484
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2107.01252
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.06164
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://1906.02693
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2111.03096
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07535
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2205.00031
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2208.10466
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07406
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.06258
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.03710
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08206
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2209.03988
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2005.10289
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08270
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.06255
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.13305
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.05090
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2101.08320
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2208.06030
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07994
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2103.00522
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.15138
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2111.12119
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07224
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2202.03285
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2205.11920
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.05729
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.16994
+    tags:
+      - EF
+      - whitepaper
   - ref: arxiv://2109.10905
-    tags: ["EF", "whitepaper"]
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08484
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08042
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07972
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.13923
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07272
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07614
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2202.08273
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07351
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2107.06021
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2202.06703
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2112.09548
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07622
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.11623
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.16255
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07048
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07358
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07455
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.06705
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2205.12198
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.03698
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07256
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2205.12847
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07645
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.10089
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2205.10404
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2110.15800
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.08088
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.09186
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2202.11578
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.06773
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://1910.14149
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.13199
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.06788
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2111.02442
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2204.02928
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.07314
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.05591
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2204.02280
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2205.14379
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2206.08326
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2207.05103
+    tags:
+      - EF
+      - whitepaper
+  - ref: arxiv://2203.05502
+    tags:
+      - EF
+      - whitepaper

@@ -57,7 +57,6 @@ def find_paper(paper: ChatDocument, cache_dir: Path) -> Optional[Path]:
     return p if p.exists() else None
 
 
-@throttle(5)
 def download_paper(paper: ChatDocument, cache_dir: Path) -> None:
     """Download a paper to the local cache directory.
 
@@ -76,26 +75,35 @@ def download_paper(paper: ChatDocument, cache_dir: Path) -> None:
     if paper_path.exists():
         return
 
-    # Now parse and figure out how to get the thing
-    uri = urlparse(paper.ref)
-    if uri.scheme == "arxiv":
-        query = f"id:{uri.netloc}"
-        loader = ArxivLoader(
-            query, load_all_available_meta=True, doc_content_chars_max=None
-        )
-        data = loader.load()
-    else:
-        raise NotImplementedError(f"Unknown scheme {uri.scheme} for {paper.ref}")
+    @throttle(10)
+    def do_download():
+        # Now parse and figure out how to get the thing
+        uri = urlparse(paper.ref)
+        if uri.scheme == "arxiv":
+            query = f"id:{uri.netloc}"
+            loader = ArxivLoader(
+                query, load_all_available_meta=True, doc_content_chars_max=None
+            )
+            data = loader.load()
+        else:
+            raise NotImplementedError(f"Unknown scheme {uri.scheme} for {paper.ref}")
 
-    # Check what came back is good.
-    if len(data) != 1:
-        raise ValueError(f"Expected one paper, got {len(data)} for {paper.ref}")
+        # Check what came back is good.
+        if len(data) != 1:
+            raise ValueError(f"Expected one paper, got {len(data)} for {paper.ref}")
 
-    # Save the data using pickle
-    if not cache_dir.exists():
-        cache_dir.mkdir(parents=True)
-    with open(paper_path, "wb") as f:
-        pickle.dump(data[0], f)
+        # Save the data using pickle
+        if not cache_dir.exists():
+            cache_dir.mkdir(parents=True)
+
+        # Add the metadata tags
+        data[0].metadata["chatter_tags"] = paper.tags
+
+        # Finally, save it!
+        with open(paper_path, "wb") as f:
+            pickle.dump(data[0], f)
+
+    do_download()
 
 
 def load_paper(paper: ChatDocument, cache_dir: Path):

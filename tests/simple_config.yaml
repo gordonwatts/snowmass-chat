@@ -1,4 +1,5 @@
 --- # Simple test file with 2 papers for basic testing
+short_name: forky
 papers:
   - ref: "/tmp/bogus.pdf"
     tags:

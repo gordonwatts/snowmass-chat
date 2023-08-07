@@ -9,7 +9,7 @@ from rich.console import Console
 from rich.progress import Progress
 from rich.table import Table
 
-from chathelper.cache import download_all
+from chathelper.cache import download_all, find_paper, load_paper
 from chathelper.config import ChatConfig, load_chat_config
 from chathelper.model import (
     find_similar_text_chucks,
@@ -81,6 +81,11 @@ def load_config(args) -> ChatConfig:
 
     Raises:
         FileNotFoundError: Raised if the config file can't be located."""
+    if args.config is None:
+        raise ValueError(
+            "No config file specified on the command line. "
+            "Please use the --config option"
+        )
     config_file = Path(args.config).absolute()
     if not config_file.exists():
         raise FileNotFoundError(f"Config file {config_file} does not exist")
@@ -111,6 +116,34 @@ def cache_download(args):
         download_all(
             config.papers, cache_dir, lambda _: progress.update(task1, advance=1)
         )
+
+
+def cache_list(args):
+    "List all the files in the cache"
+    config = load_config(args)
+    cache_dir = config_cache().cache_dir
+
+    table = Table()
+    table.add_column("Ref")
+    table.add_column("Title")
+    table.add_column("Size")
+    table.add_column("Tags")
+
+    for paper in config.papers:
+        title = ""
+        size = "<not in cache>"
+        doc_path = find_paper(paper, cache_dir)
+        tags = ""
+        if doc_path is not None:
+            doc = load_paper(paper, cache_dir)
+            assert doc is not None
+            title = doc.metadata["Title"]
+            size = f"{len(doc.page_content) / 1024:.0f} kb"
+            tags = ", ".join(doc.metadata["chatter_tags"])
+        table.add_row(paper.ref, title, size, tags)
+
+    console = Console()
+    console.print(table)
 
 
 def cache_clear(args):
@@ -314,6 +347,12 @@ def execute_command_line():
         help="Do not ask before deleting cache directory",
     )
     cache_clear_parser.set_defaults(func=cache_clear)
+
+    # List all downloaded files in the cache for a config
+    cache_list_parser = cache_subparsers.add_parser(
+        "list", help="List all downloaded files in the cache"
+    )
+    cache_list_parser.set_defaults(func=cache_list)
 
     # Add the cache download command
     cache_download_parser = cache_subparsers.add_parser(
