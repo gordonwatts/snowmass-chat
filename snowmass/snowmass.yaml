@@ -1794,10 +1794,6 @@ papers:
     tags:
       - TF
       - whitepaper
-  - ref: arxiv://2219
-    tags:
-      - TF
-      - whitepaper
   - ref: arxiv://2203.05531
     tags:
       - TF
@@ -2184,7 +2180,7 @@ papers:
     tags:
       - AF
       - whitepaper
-  - ref: arxiv://22203.07620
+  - ref: arxiv://2203.07620
     tags:
       - CEF
       - CompF
