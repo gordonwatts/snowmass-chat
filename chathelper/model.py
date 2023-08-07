@@ -167,24 +167,25 @@ def populate_vector_store(
 
 
 def find_similar_text_chucks(
-    vector_store_path: Path,
-    api_key: str,
-    query: str,
+    vector_store_path: Path, api_key: str, query: str, n_results: int = 4
 ):
     """Return documents from store that might answer the question"""
     # Vector store db and embedding function
     vector_store = load_vector_store_database(vector_store_path, api_key)
-    return vector_store.similarity_search(query)  # type: ignore
+    return vector_store.similarity_search(query, k=results)  # type: ignore
 
 
 def query_llm(
     vector_store_path: Path,
     api_key: str,
     query: str,
+    n_chunks: int = 4,
 ):
     # Vector store db and embedding function
     vector_store = load_vector_store_database(vector_store_path, api_key)
     llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0, openai_api_key=api_key)
-    qa_chain = RetrievalQA.from_chain_type(llm, retriever=vector_store.as_retriever())
+    ret = vector_store.as_retriever()
+    ret.search_kwargs = {"k": n_chunks}
+    qa_chain = RetrievalQA.from_chain_type(llm, retriever=ret)
 
     return qa_chain({"query": query})

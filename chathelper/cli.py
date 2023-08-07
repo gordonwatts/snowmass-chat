@@ -280,7 +280,7 @@ def query_find(args):
         print("No OpenAI API key set, use chatter set key openai <key>")
         return
 
-    chunks = find_similar_text_chucks(vector_dir, openai_key, args.query)
+    chunks = find_similar_text_chucks(vector_dir, openai_key, args.query, int(args.n))
     if len(chunks) == 0:
         print("No similar chunks found")
         return
@@ -303,7 +303,7 @@ def query_ask(args):
         print("No OpenAI API key set, use chatter set key openai <key>")
         return
 
-    response = query_llm(vector_dir, openai_key, args.query)
+    response = query_llm(vector_dir, openai_key, args.query, int(args.n or 4))
     print(response["result"])
 
 
@@ -427,11 +427,15 @@ def execute_command_line():
         "find", help="Find similar text chunks from the vector store"
     )
     query_find_parser.add_argument("query", help="The query to match")
+    query_find_parser.add_argument("-n", help="The number of results to return")
     query_find_parser.set_defaults(func=query_find)
 
     # The ask command queries the LLM for the answer to a question.
     query_ask_parser = query_subparsers.add_parser("ask", help="Ask the LLM a question")
     query_ask_parser.add_argument("query", help="The question to ask")
+    query_ask_parser.add_argument(
+        "-n", help="The number of results to return", default=4
+    )
     query_ask_parser.set_defaults(func=query_ask)
 
     # Parse the arguments
