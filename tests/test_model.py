@@ -10,6 +10,12 @@ from chathelper.config import ChatDocument
 from chathelper.model import populate_vector_store
 
 
+class _dummy_document:
+    def __init__(self):
+        self.page_content = "holy cow"
+        self.metadata = {"chatter_tags": ["EF"]}
+
+
 @pytest.fixture()
 def cache_with_files(tmp_path) -> Tuple[Path, List[ChatDocument]]:
     """Create a cache populated with files.
@@ -24,7 +30,7 @@ def cache_with_files(tmp_path) -> Tuple[Path, List[ChatDocument]]:
     expected_paper_path = _paper_path(paper, cache_dir)
     expected_paper_path.parent.mkdir(exist_ok=True, parents=True)
     with expected_paper_path.open("wb") as f:
-        pickle.dump(["this is the paper contents"], f)
+        pickle.dump(_dummy_document(), f)
 
     return (cache_dir, [paper])
 

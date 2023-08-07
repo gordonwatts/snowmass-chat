@@ -122,7 +122,9 @@ def load_paper(paper: ChatDocument, cache_dir: Path):
         return None
 
     with open(paper_path, "rb") as f:
-        return pickle.load(f)
+        r = pickle.load(f)
+        r.metadata["chatter_tags"] = paper.tags
+        return r
 
 
 def download_all(
