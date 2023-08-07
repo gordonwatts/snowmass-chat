@@ -59,7 +59,7 @@ def _load_vector_store(
         except Exception as e:
             if "metadata" in str(e):
                 logging.warning(
-                    f"Failed to add document to vector store. "
+                    "Failed to add document to vector store. "
                     "Possible metadata problem. Metadata:"
                 )
                 for k, v in doc_info.metadata.items():
