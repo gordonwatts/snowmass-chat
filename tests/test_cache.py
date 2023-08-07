@@ -17,7 +17,7 @@ from chathelper.lc_experimental.archive_loader import ArxivLoader
 class _dummy_document:
     def __init__(self):
         self.page_content = "holy cow"
-        self.metadata = {}
+        self.metadata = {"chatter_tags": ["EF"]}
 
 
 def test_paper_path(tmp_path):
@@ -143,9 +143,23 @@ def test_load_cached(tmp_path):
     expected_paper_path = _paper_path(paper, cache_dir)
     expected_paper_path.parent.mkdir(exist_ok=True, parents=True)
     with expected_paper_path.open("wb") as f:
-        pickle.dump(["this is the paper contents"], f)
+        pickle.dump(_dummy_document(), f)
 
-    assert load_paper(paper, cache_dir) == ["this is the paper contents"]
+    assert isinstance(load_paper(paper, cache_dir), _dummy_document)
+
+
+def test_load_cached_new_metadata(tmp_path):
+    cache_dir = tmp_path / "cache"
+    paper = ChatDocument(ref="arxiv://2109.10905", tags=["WF"])
+
+    expected_paper_path = _paper_path(paper, cache_dir)
+    expected_paper_path.parent.mkdir(exist_ok=True, parents=True)
+    with expected_paper_path.open("wb") as f:
+        pickle.dump(_dummy_document(), f)
+
+    p = load_paper(paper, cache_dir)
+    assert p is not None
+    assert p.metadata["chatter_tags"] == ["WF"]
 
 
 def test_download_all(tmp_path):
