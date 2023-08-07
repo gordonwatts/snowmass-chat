@@ -955,7 +955,7 @@ papers:
     tags:
       - NF
       - whitepaper
-  - ref: arxiv://2004.005802004.00580
+  - ref: arxiv://2004.00580
     tags:
       - NF
       - whitepaper
@@ -3223,7 +3223,7 @@ papers:
     tags:
       - CompF
       - whitepaper
-  - ref: arxiv://2011.053292011.05329
+  - ref: arxiv://2011.05329
     tags:
       - CompF
       - whitepaper
