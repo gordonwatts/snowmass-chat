@@ -43,13 +43,28 @@ def _load_vector_store(
     count = 0
     for doc_info in docs:
         # ChromaDB cannot deal with complex metadata, so flatten lists
+        bad_metadata = []
         for k, v in doc_info.metadata.items():
             if isinstance(v, list):
                 doc_info.metadata[k] = ", ".join(v)
+            if v is None:
+                bad_metadata.append(k)
+        for k in bad_metadata:
+            del doc_info.metadata[k]
 
         # Split and then store
         splits = text_splitter.split_documents([doc_info])
-        vector_store.add_documents(splits)
+        try:
+            vector_store.add_documents(splits)
+        except Exception as e:
+            if "metadata" in str(e):
+                logging.warning(
+                    f"Failed to add document to vector store. "
+                    "Possible metadata problem. Metadata:"
+                )
+                for k, v in doc_info.metadata.items():
+                    logging.warning(f"  {k}: {v}")
+                raise
 
         count += 1
 
