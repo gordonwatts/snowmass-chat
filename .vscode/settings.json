@@ -4,6 +4,7 @@
         "chardet",
         "chathelper",
         "docstore",
+        "fitz",
         "indico",
         "langchain",
         "openai",

@@ -1,11 +1,14 @@
-from pathlib import Path
 import pickle
+from pathlib import Path
 from typing import Callable, Iterable, Optional
+from urllib.parse import urlparse
+
+from langchain.schema.document import Document
 
 from chathelper.utils import throttle
+
 from .config import ChatDocument
 from .lc_experimental.archive_loader import ArxivLoader
-from urllib.parse import urlparse
 
 
 def _paper_path(paper: ChatDocument, cache_dir: Path) -> Path:
@@ -64,7 +67,10 @@ def do_download(paper, cache_dir, paper_path):
     if uri.scheme == "arxiv":
         query = f"id:{uri.netloc}"
         loader = ArxivLoader(
-            query, load_all_available_meta=True, doc_content_chars_max=None
+            query,
+            load_all_available_meta=True,
+            doc_content_chars_max=None,
+            keep_pdf=True,
         )
         data = loader.load()
     else:
@@ -86,7 +92,7 @@ def do_download(paper, cache_dir, paper_path):
         pickle.dump(data[0], f)
 
 
-def download_paper(paper: ChatDocument, cache_dir: Path) -> None:
+def download_paper(paper: ChatDocument, cache_dir: Path) -> bool:
     """Download a paper to the local cache directory.
 
     Use the langchain loaders - and the uri scheme to set which one.
@@ -96,18 +102,23 @@ def download_paper(paper: ChatDocument, cache_dir: Path) -> None:
     Args:
         paper (ChatDocument): Paper to download
         cache_dir (Path): Location of the cache directory
+
+    Returns:
+        bool: True if the paper was downloaded, False if it was already in the cache.
+        Exception is thrown if the download attempt is made and fails.
     """
     # Get the final path - this will also do some sanity checking
     # on the url(s).
     # Return if the paper is already there.
     paper_path = _paper_path(paper, cache_dir)
     if paper_path.exists():
-        return
+        return False
 
     do_download(paper, cache_dir, paper_path)
+    return True
 
 
-def load_paper(paper: ChatDocument, cache_dir: Path):
+def load_paper(paper: ChatDocument, cache_dir: Path) -> Optional[Document]:
     """Load a paper from the local cache directory.
 
     Args:
@@ -131,20 +142,27 @@ def download_all(
     papers: Iterable[ChatDocument],
     cache_dir: Path,
     progress_callback: Optional[Callable[[int], None]] = None,
+    max_downloads: Optional[int] = None,
 ) -> None:
     """Download all papers to the local cache directory
 
     Args:
         papers (List[ChatDocument]): List of papers to download
         cache_dir (Path): Location of the cache directory
+        max_downloads (Optional[int], optional): Maximum number of papers to download.
+            Defaults to None. If None, everything is downloaded. Otherwise maximum
+            number of downloads. Already cached papers do not count.
     """
     counter = 0
+    downloaded = 0
 
     def my_cb(count: int):
         if progress_callback is not None:
             progress_callback(count)
 
     for paper in papers:
-        download_paper(paper, cache_dir)
+        if max_downloads is None or downloaded < max_downloads:
+            if download_paper(paper, cache_dir):
+                downloaded += 1
         counter += 1
         my_cb(counter)
