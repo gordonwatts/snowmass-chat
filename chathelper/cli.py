@@ -332,6 +332,10 @@ def config_check(args):
         for ref in all_papers.keys():
             paper = all_papers[ref][0]
             paper.tags = sorted(list(set([t for p in all_papers[ref] for t in p.tags])))
+            titles = set([p.title for p in all_papers[ref]])
+            if len(titles) > 1:
+                raise ValueError(f"Multiple titles for {ref}: {titles}")
+            paper.title = titles.pop()
             new_config.papers.append(paper)
 
         new_config_path = (
