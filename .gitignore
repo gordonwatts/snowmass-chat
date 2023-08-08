@@ -163,3 +163,4 @@ cython_debug/
 .vscode/launch.json
 *.key
 vector_store/*
+*.pdf

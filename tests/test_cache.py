@@ -90,7 +90,7 @@ def test_download_archive_loaded(mock_load, tmp_path):
     # expected_paper = cache_dir / f"{paper_name}.pickle"
 
     paper = ChatDocument(ref=f"arxiv://{paper_name}", tags=[])
-    download_paper(paper, cache_dir)
+    assert download_paper(paper, cache_dir)
 
     downloaded = find_paper(paper, cache_dir)
     assert downloaded is not None
@@ -132,7 +132,7 @@ def test_download_cached(mock_load, tmp_path):
     expected_paper_path.touch()
 
     # This download should do nothing
-    download_paper(paper, cache_dir)
+    assert not download_paper(paper, cache_dir)
     mock_load.assert_not_called()
 
 

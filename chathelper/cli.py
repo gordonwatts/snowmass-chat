@@ -111,11 +111,16 @@ def cache_download(args):
     config = load_config(args)
     cache_dir = config_cache().cache_dir
 
+    max_download: int | None = int(args.n) if args.n is not None else None
+
     progress = Progress()
     with progress:
         task1 = progress.add_task("Downloading", total=len(config.papers))
         download_all(
-            config.papers, cache_dir, lambda _: progress.update(task1, advance=1)
+            config.papers,
+            cache_dir,
+            lambda _: progress.update(task1, advance=1),
+            max_downloads=max_download,
         )
 
 
@@ -449,6 +454,11 @@ def execute_command_line():
     # Add the cache download command
     cache_download_parser = cache_subparsers.add_parser(
         "download", help="Download all papers to cache for a configuration file"
+    )
+    cache_download_parser.add_argument(
+        "-n",
+        help="Number of (uncached) papers to download",
+        type=int,
     )
     cache_download_parser.set_defaults(func=cache_download)
 
