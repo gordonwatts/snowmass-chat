@@ -188,7 +188,7 @@ def test_load_cached(tmp_path):
 
 def test_load_cached_new_metadata(tmp_path):
     cache_dir = tmp_path / "cache"
-    paper = ChatDocument(ref="arxiv://2109.10905", tags=["WF"])
+    paper = ChatDocument(ref="arxiv://2109.10905", tags=["WF"], title="fork")
 
     expected_paper_path = _paper_path(paper, cache_dir)
     expected_paper_path.parent.mkdir(exist_ok=True, parents=True)
@@ -198,6 +198,7 @@ def test_load_cached_new_metadata(tmp_path):
     p = load_paper(paper, cache_dir)
     assert p is not None
     assert p.metadata["chatter_tags"] == ["WF"]
+    assert p.metadata["Title"] == "fork"
 
 
 def test_download_all(tmp_path):

@@ -66,6 +66,13 @@ def find_paper(paper: ChatDocument, cache_dir: Path) -> Optional[Path]:
     return p if p.exists() else None
 
 
+def update_metadata(doc: Document, paper: ChatDocument):
+    """Update the metadata of a document"""
+    doc.metadata["chatter_tags"] = paper.tags
+    if paper.title is not None:
+        doc.metadata["Title"] = paper.title
+
+
 @throttle(10)
 def do_download(paper: ChatDocument, cache_dir: Path, paper_path: Path):
     # Now parse and figure out how to get the thing
@@ -101,7 +108,7 @@ def do_download(paper: ChatDocument, cache_dir: Path, paper_path: Path):
         cache_dir.mkdir(parents=True)
 
     # Add the metadata tags
-    data[0].metadata["chatter_tags"] = paper.tags
+    update_metadata(data[0], paper)
 
     # Finally, save it!
     with open(paper_path, "wb") as f:
@@ -150,7 +157,7 @@ def load_paper(paper: ChatDocument, cache_dir: Path) -> Optional[Document]:
 
     with open(paper_path, "rb") as f:
         r = pickle.load(f)
-        r.metadata["chatter_tags"] = paper.tags
+        update_metadata(r, paper)
         return r
 
 

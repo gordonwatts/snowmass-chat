@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from pydantic import BaseModel
 import yaml
 
@@ -9,6 +9,8 @@ class ChatDocument(BaseModel):
 
     # Tags is a list of tags (like the frontier, etc.) attached to the thing
     tags: list[str]
+
+    title: Optional[str] = None
 
     class Config:
         _env_file = "bogus.yaml"
