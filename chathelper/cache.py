@@ -69,6 +69,7 @@ def find_paper(paper: ChatDocument, cache_dir: Path) -> Optional[Path]:
 def update_metadata(doc: Document, paper: ChatDocument):
     """Update the metadata of a document"""
     doc.metadata["chatter_tags"] = paper.tags
+    doc.metadata["chatter_ref"] = paper.ref
     if paper.title is not None:
         doc.metadata["Title"] = paper.title
 
