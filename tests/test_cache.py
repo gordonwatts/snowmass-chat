@@ -1,7 +1,9 @@
+from pathlib import Path
 import pickle
 from unittest.mock import patch
 
 import pytest
+from langchain.document_loaders import UnstructuredPDFLoader
 
 from chathelper.cache import (
     _paper_path,
@@ -43,6 +45,19 @@ def test_paper_path(tmp_path):
         == tmp_path / "2203.01009.pickle"
     )
 
+    # URL https://www.slac.stanford.edu/econf/C210711/reports/ExecutiveSummary.pdf
+    assert (
+        _paper_path(
+            ChatDocument(
+                ref="https://www.slac.stanford.edu/econf/C210711/reports/"
+                "ExecutiveSummary.pdf",
+                tags=[],
+            ),
+            tmp_path,
+        )
+        == tmp_path / "ExecutiveSummary.pickle"
+    )
+
     # Local path
     assert (
         _paper_path(ChatDocument(ref="file:///tmp/2203.01009.pdf", tags=[]), tmp_path)
@@ -58,7 +73,7 @@ def test_paper_path_bad(tmp_path):
             ChatDocument(
                 ref="https://indico.cern.ch/event/1242538/contributions/"
                 "5432836/attachments/2689673/4669514/"
-                "2023%20-%20MODE%20-%20NN%20and%20Cuts.pdf",
+                "2023%20-%20MODE%20-%20NN%20and%20Cuts",
                 tags=[],
             ),
             tmp_path,
@@ -102,7 +117,7 @@ def test_download_archive_loaded(mock_load, tmp_path):
 @patch.object(ArxivLoader, "__init__", return_value=None)
 @patch.object(ArxivLoader, "load", return_value=[_dummy_document()])
 def test_download_arxiv(mock_load, mock_init, tmp_path):
-    "Download a paper to the cache"
+    "Make sure the Archive loader is called correctly"
     paper_name = "2109.10905"
 
     cache_dir = tmp_path / "cache"
@@ -116,6 +131,29 @@ def test_download_arxiv(mock_load, mock_init, tmp_path):
         load_all_available_meta=True,
         doc_content_chars_max=None,
     )
+
+
+@patch.object(UnstructuredPDFLoader, "__init__", return_value=None)
+@patch.object(UnstructuredPDFLoader, "load", return_value=[_dummy_document()])
+def test_download_pdf_From_url(mock_load, mock_init, tmp_path):
+    "Download a pdf from a url"
+    paper_name = (
+        "https://www.slac.stanford.edu/econf/C210711/reports/ExecutiveSummary.pdf"
+    )
+
+    cache_dir = tmp_path
+
+    paper = ChatDocument(ref=f"{paper_name}", tags=[])
+    download_paper(paper, cache_dir)
+
+    downloaded = find_paper(paper, cache_dir)
+    assert downloaded is not None
+    assert downloaded.exists()
+
+    mock_load.assert_called_once()
+
+    arg = mock_init.call_args[0][0]
+    assert Path(arg).name == "ExecutiveSummary.pdf"
 
 
 @patch.object(ArxivLoader, "load", side_effect=ValueError("should not be called"))
@@ -150,7 +188,7 @@ def test_load_cached(tmp_path):
 
 def test_load_cached_new_metadata(tmp_path):
     cache_dir = tmp_path / "cache"
-    paper = ChatDocument(ref="arxiv://2109.10905", tags=["WF"])
+    paper = ChatDocument(ref="arxiv://2109.10905", tags=["WF"], title="fork")
 
     expected_paper_path = _paper_path(paper, cache_dir)
     expected_paper_path.parent.mkdir(exist_ok=True, parents=True)
@@ -160,6 +198,7 @@ def test_load_cached_new_metadata(tmp_path):
     p = load_paper(paper, cache_dir)
     assert p is not None
     assert p.metadata["chatter_tags"] == ["WF"]
+    assert p.metadata["Title"] == "fork"
 
 
 def test_download_all(tmp_path):
