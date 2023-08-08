@@ -7,42 +7,51 @@ papers:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07316
     tags:
       - EF
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06207
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2205.02140
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07202
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07668
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2111.12156
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2204.07944
     tags:
       - CompF
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2209.01995
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.11110
     tags:
       - CF
@@ -51,78 +60,93 @@ papers:
       - NF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07218
     tags:
       - CF
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08064
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08094
     tags:
       - AF
       - EF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2206.13431
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2206.12465
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09718
     tags:
       - AF
       - EF
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08107
     tags:
       - EF
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2106.01393
     tags:
       - EF
       - NF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2205.14486
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07495
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://1901.11146
     tags:
       - EF
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08126
     tags:
       - EF
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07913
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.11129
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.13979
     tags:
       - AF
@@ -132,61 +156,74 @@ papers:
       - RF
       - UF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07353
     tags:
       - CompF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07270
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07344
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.12806
     tags:
       - EF
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09425
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2202.11529
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08132
     tags:
       - AF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2209.03333
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2103.10217
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2107.13581
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07056
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08033
     tags:
       - AF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06520
     tags:
       - AF
@@ -196,22 +233,26 @@ papers:
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2209.03281
     tags:
       - AF
       - EF
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07646
     tags:
       - AF
       - EF
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08135
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2207.07641
     tags:
       - CF
@@ -221,77 +262,93 @@ papers:
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.12035
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06819
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08347
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2206.03456
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06114
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06800
     tags:
       - AF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2205.05708
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.03852
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06929
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.15729
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09451
     tags:
       - AF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09503
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07261
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2205.08553
     tags:
       - AF
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.17258
     tags:
       - CF
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.10393
     tags:
       - AF
@@ -305,75 +362,91 @@ papers:
       - TF
       - UF
       - whitepaper
+    title: null
   - ref: arxiv://2203.05939
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.03700
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2209.03505
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06476
     tags:
       - AF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2209.03303
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07462
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08271
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07212
     tags:
       - CF
       - EF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2005.05221
     tags:
       - EF
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2202.07193
     tags:
       - CompF
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06776
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07964
     tags:
       - EF
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2202.02222
     tags:
       - CF
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07944
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09512
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08353
     tags:
       - AF
@@ -383,50 +456,61 @@ papers:
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://1912.11871
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2109.15181
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08330
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.01396
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08129
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08210
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08211
     tags:
       - AF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.02760
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06131
     tags:
       - EF
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2202.03389
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2209.06755
     tags:
       - AF
@@ -440,43 +524,52 @@ papers:
       - TF
       - UF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07883
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08874
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.10046
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2205.11730
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.10184
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.05484
     tags:
       - AF
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2107.01252
     tags:
       - CF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06164
     tags:
       - AF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://1906.02693
     tags:
       - AF
@@ -485,47 +578,57 @@ papers:
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2111.03096
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07535
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2205.00031
     tags:
       - AF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2208.10466
     tags:
       - AF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07406
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06258
     tags:
       - AF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.03710
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08206
     tags:
       - CF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2209.03988
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2005.10289
     tags:
       - AF
@@ -533,19 +636,23 @@ papers:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08270
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06255
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.13305
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.05090
     tags:
       - AF
@@ -556,58 +663,71 @@ papers:
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2101.08320
     tags:
       - CompF
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2208.06030
     tags:
       - AF
       - EF
       - TF
+      - report
       - whitepaper
+    title: null
   - ref: arxiv://2203.07994
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2103.00522
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.15138
     tags:
       - EF
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2111.12119
     tags:
       - CompF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07224
     tags:
       - EF
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2202.03285
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2205.11920
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.05729
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.16994
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2109.10905
     tags:
       - CF
@@ -616,29 +736,35 @@ papers:
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08484
     tags:
       - AF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08042
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07972
     tags:
       - CF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.13923
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07272
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07614
     tags:
       - CF
@@ -648,11 +774,13 @@ papers:
       - NF
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2202.08273
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07351
     tags:
       - AF
@@ -660,20 +788,24 @@ papers:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2107.06021
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2202.06703
     tags:
       - EF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2112.09548
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07622
     tags:
       - AF
@@ -685,12 +817,14 @@ papers:
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.11623
     tags:
       - AF
       - CompF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.16255
     tags:
       - CF
@@ -699,47 +833,56 @@ papers:
       - IF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07048
     tags:
       - EF
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07358
     tags:
       - AF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07455
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06705
     tags:
       - EF
       - NF
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2205.12198
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.03698
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07256
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2205.12847
     tags:
       - AF
       - EF
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07645
     tags:
       - CF
@@ -748,6 +891,7 @@ papers:
       - NF
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.10089
     tags:
       - CF
@@ -755,41 +899,49 @@ papers:
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2205.10404
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2110.15800
     tags:
       - AF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08088
     tags:
       - AF
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09186
     tags:
       - AF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2202.11578
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06773
     tags:
       - EF
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://1910.14149
     tags:
       - EF
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.13199
     tags:
       - AF
@@ -797,12 +949,14 @@ papers:
       - IF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06788
     tags:
       - EF
       - IF
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2111.02442
     tags:
       - AF
@@ -810,16 +964,19 @@ papers:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2204.02928
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07314
     tags:
       - EF
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.05591
     tags:
       - CF
@@ -829,39 +986,47 @@ papers:
       - TF
       - UF
       - whitepaper
+    title: null
   - ref: arxiv://2204.02280
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2205.14379
     tags:
       - EF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2206.08326
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2207.05103
     tags:
       - CF
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2203.05502
     tags:
       - EF
       - whitepaper
+    title: null
   - ref: arxiv://2202.12839
     tags:
       - IF
       - NF
       - UF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07919
     tags:
       - AF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08293
     tags:
       - CEF
@@ -872,25 +1037,30 @@ papers:
       - RF
       - UF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08804
     tags:
       - AF
       - CEF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07501
     tags:
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07479
     tags:
       - IF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07349
     tags:
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08386
     tags:
       - IF
@@ -898,6 +1068,7 @@ papers:
       - RF
       - UF
       - whitepaper
+    title: null
   - ref: arxiv://2203.03925
     tags:
       - AF
@@ -905,68 +1076,81 @@ papers:
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08779
     tags:
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.05914
     tags:
       - CF
       - IF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2202.12343
     tags:
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2207.12400
     tags:
       - CF
       - IF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.10811
     tags:
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07572
     tags:
       - IF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07377
     tags:
       - CF
       - NF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06219
     tags:
       - NF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2204.01919
     tags:
       - CF
       - IF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06853
     tags:
       - NF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09030
     tags:
       - CompF
       - NF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2004.00580
     tags:
       - IF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07901
     tags:
       - CF
@@ -975,31 +1159,37 @@ papers:
       - RF
       - UF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07214
     tags:
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07545
     tags:
       - NF
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08079
     tags:
       - AF
       - NF
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2111.06932
     tags:
       - AF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.10198
     tags:
       - IF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08821
     tags:
       - CF
@@ -1007,10 +1197,12 @@ papers:
       - NF
       - UF
       - whitepaper
+    title: null
   - ref: arxiv://2112.12593
     tags:
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06262
     tags:
       - CF
@@ -1018,59 +1210,71 @@ papers:
       - NF
       - UF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08319
     tags:
       - AF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07323
     tags:
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2204.01860
     tags:
       - AF
       - NF
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06104
     tags:
       - CompF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2106.02133
     tags:
       - AF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2204.08668
     tags:
       - NF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08276
     tags:
       - AF
       - NF
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08039
     tags:
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07361
     tags:
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2209.01899
     tags:
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.13768
     tags:
       - CompF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.00042
     tags:
       - AF
@@ -1079,48 +1283,57 @@ papers:
       - NF
       - UF
       - whitepaper
+    title: null
   - ref: arxiv://2203.12169
     tags:
       - NF
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2204.04575
     tags:
       - CF
       - IF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2209.02883
     tags:
       - CF
       - IF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08106
     tags:
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.05052
     tags:
       - AF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08771
     tags:
       - NF
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.05525
     tags:
       - CF
       - IF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08059
     tags:
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2207.06898
     tags:
       - CF
@@ -1128,15 +1341,18 @@ papers:
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2207.02882
     tags:
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.01955
     tags:
       - NF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08803
     tags:
       - AF
@@ -1145,15 +1361,18 @@ papers:
       - RF
       - UF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06281
     tags:
       - IF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.02029
     tags:
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.02309
     tags:
       - CF
@@ -1162,11 +1381,13 @@ papers:
       - RF
       - UF
       - whitepaper
+    title: null
   - ref: arxiv://2203.11298
     tags:
       - NF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08463
     tags:
       - CF
@@ -1174,17 +1395,20 @@ papers:
       - NF
       - UF
       - whitepaper
+    title: null
   - ref: arxiv://1906.10134
     tags:
       - CF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08102
     tags:
       - AF
       - NF
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08096
     tags:
       - CF
@@ -1192,12 +1416,14 @@ papers:
       - NF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06100
     tags:
       - CF
       - NF
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09734
     tags:
       - CF
@@ -1205,59 +1431,71 @@ papers:
       - NF
       - UF
       - whitepaper
+    title: null
   - ref: arxiv://2203.00740
     tags:
       - IF
       - NF
       - whitepaper
+    title: null
   - ref: arxiv://2203.05505
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2207.11055
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07250
     tags:
       - CF
       - IF
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07144
     tags:
       - AF
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2209.07429
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07059
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08192
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2207.06905
     tags:
       - CF
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2206.11331
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2205.15373
     tags:
       - CompF
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.14915
     tags:
       - CF
@@ -1265,22 +1503,27 @@ papers:
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.03211
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09524
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07569
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2207.01851
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.14923
     tags:
       - AF
@@ -1289,116 +1532,143 @@ papers:
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.11406
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2204.08943
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2204.00001
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07089
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2204.13394
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2105.12962
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2201.07805
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.10998
     tags:
       - CompF
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07141
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06961
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.15810
     tags:
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.03230
     tags:
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.16583
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07651
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.03035
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06827
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2205.13215
     tags:
       - AF
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07189
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.10203
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2204.06667
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08278
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08103
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2006.04824
     tags:
       - RF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.14919
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08208
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08322
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09691
     tags:
       - AF
@@ -1406,96 +1676,117 @@ papers:
       - IF
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08290
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08324
     tags:
       - RF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07492
     tags:
       - CF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07360
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07354
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2204.04045
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07638
     tags:
       - CF
       - IF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06508
     tags:
       - CF
       - IF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08228
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2209.03585
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07252
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08056
     tags:
       - CF
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2201.04219
     tags:
       - CF
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07700
     tags:
       - CF
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07864
     tags:
       - CF
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.15954
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07220
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2204.01992
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07506
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06680
     tags:
       - CF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.12714
     tags:
       - CF
@@ -1503,222 +1794,272 @@ papers:
       - IF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07943
     tags:
       - CF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2207.10618
     tags:
       - CF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09488
     tags:
       - CF
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07049
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07491
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.05728
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06142
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2106.06494
     tags:
       - CF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.10074
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08967
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06240
     tags:
       - CF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06781
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2209.04322
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2205.05745
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2205.01799
     tags:
       - CF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06200
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06894
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08128
     tags:
       - CF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07064
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08121
     tags:
       - CF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08084
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07623
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08113
     tags:
       - CF
       - CompF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06037
     tags:
       - CF
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06795
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08297
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08139
     tags:
       - CF
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08024
     tags:
       - CF
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07258
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07984
     tags:
       - CF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06859
     tags:
       - CF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07242
     tags:
       - CF
       - IF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2204.05194
     tags:
       - CF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2209.07412
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2103.08623
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07786
     tags:
       - CF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.05924
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07291
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2203.11226
     tags:
       - CF
       - whitepaper
+    title: null
   - ref: arxiv://2205.09545
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2207.10636
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08053
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.11846
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2202.06890
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07088
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.04981
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07629
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2111.11392
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2204.00039
     tags:
       - CompF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06809
     tags:
       - AF
@@ -1726,819 +2067,1539 @@ papers:
       - IF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2004.13687
     tags:
       - CompF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2204.04200
     tags:
       - CompF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2201.03096
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.05010
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2202.08292
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2202.05104
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2202.07683
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2109.14938
     tags:
       - CompF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2204.03381
     tags:
       - CompF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2202.07163
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2206.14249
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07533
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07117
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07946
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2207.06507
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08026
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.05531
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08232
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07726
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2204.01742
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2202.08154
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06771
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2201.13321
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07624
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2204.08605
     tags:
       - CompF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06805
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07336
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2205.01567
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2202.05838
     tags:
       - CompF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2204.06547
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.10057
     tags:
       - CompF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.05078
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2201.11696
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08117
     tags:
       - CompF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2202.11012
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.10110
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06730
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06380
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.02421
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06799
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2208.07910
     tags:
       - CompF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07907
     tags:
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.04902
     tags:
       - CompF
       - TF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07799
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.12118
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08869
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07654
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.13998
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07339
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.04714
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08871
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06253
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06024
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09010
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2205.12873
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.01847
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2204.01178
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08919
     tags:
       - AF
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.15984
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08054
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08275
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.12442
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07274
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.04391
     tags:
       - AF
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2206.15345
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2003.09084
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08335
     tags:
       - AF
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09198
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07804
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.11290
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07888
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08357
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06752
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08374
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08427
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06816
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07352
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2204.10774
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2204.01072
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07459
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08310
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07371
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09076
     tags:
       - AF
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08239
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08309
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08425
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08366
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2207.08875
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.10377
     tags:
       - AF
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.10431
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09094
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09336
     tags:
       - AF
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.12043
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08315
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07987
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2204.02536
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.13985
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08736
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07551
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08750
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09202
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.11047
     tags:
       - AF
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.05731
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08981
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2204.00701
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08379
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2208.12379
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07423
     tags:
       - AF
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.10564
     tags:
       - AF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07620
     tags:
       - CEF
       - CompF
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06525
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07287
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09942
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.14894
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.14347
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.13900
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.15062
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.11349
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06093
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06309
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.12542
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06267
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2204.00098
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07154
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2204.00149
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06146
     tags:
       - IF
       - whitepaper
-  - ref: arxiv://2203.07620
-    tags:
-      - CEF
-      - CompF
-      - IF
-      - whitepaper
+    title: null
   - ref: arxiv://2203.06216
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09939
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07286
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.04312
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.15978
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06731
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06562
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2204.07285
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2202.11828
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07626
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09944
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.15902
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08554
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09941
     tags:
       - IF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08805
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08010
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2011.05329
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08338
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09740
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08806
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07885
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2206.06632
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06153
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08811
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09467
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07091
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07347
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.12852
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2208.03284
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09886
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.16979
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06112
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.14345
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08280
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07237
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08861
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.10161
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07564
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2207.09060
     tags:
       - CEF
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09945
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08969
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2008.13636
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2202.02194
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2203.06843
     tags:
       - CompF
       - whitepaper
+    title: null
   - ref: arxiv://2209.10109
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.11518
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.11662
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08973
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07995
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.11665
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.15128
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08809
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.11508
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.07328
     tags:
       - CEF
+      - Early
+      - report
       - whitepaper
+    title: null
   - ref: arxiv://2203.08748
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.10953
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.10060
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08916
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2204.03713
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.08631
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.11513
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2206.01849
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2207.00124
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.14706
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.11523
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2207.07508
     tags:
       - CEF
+      - Early
+      - report
       - whitepaper
+    title: null
   - ref: arxiv://2204.08983
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.09585
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2207.00125
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2207.00122
     tags:
       - CEF
       - whitepaper
+    title: null
   - ref: arxiv://2203.12389
     tags:
       - CEF
       - whitepaper
+    title: null
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Frontmatter.pdf
+    tags:
+      - report
+    title: Snowmass Report Frontmatter
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Conclusion.pdf
+    tags:
+      - report
+    title: Snowmass Report Conclusion
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Summary.pdf
+    tags:
+      - report
+    title: Snowmass Report Summary
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/ExecutiveSummary.pdf
+    tags:
+      - report
+    title: Snowmass Report Executive Summary
+  - ref: arxiv://2209.08049
+    tags:
+      - CF
+      - report
+    title: null
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Cosmic.pdf
+    tags:
+      - CF
+      - report
+    title: Snowmass Report for the Cosmic Frontier
+  - ref: arxiv://2211.09978
+    tags:
+      - CF
+      - report
+    title: null
+  - ref: arxiv://2209.08654
+    tags:
+      - CF
+      - report
+    title: null
+  - ref: arxiv://2209.08215
+    tags:
+      - CF
+      - report
+    title: null
+  - ref: arxiv://2209.08265
+    tags:
+      - CF
+      - report
+    title: null
+  - ref: arxiv://2209.07426
+    tags:
+      - CF
+      - report
+    title: null
+  - ref: arxiv://2209.11726
+    tags:
+      - CF
+      - report
+    title: null
+  - ref: arxiv://2210.01770
+    tags:
+      - CF
+      - EF
+      - RF
+      - TF
+      - report
+    title: null
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/DarkMatter.pdf
+    tags:
+      - CF
+      - EF
+      - RF
+      - TF
+      - report
+    title: Snowmass Report on Dark Matter
+  - ref: arxiv://2209.08125
+    tags:
+      - CF
+      - report
+    title: null
+  - ref: arxiv://2207.14594
+    tags:
+      - RF
+      - report
+    title: null
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Rare.pdf
+    tags:
+      - RF
+      - report
+    title: Snowmass Report for the Rare Processes Frontier
+  - ref: arxiv://2209.07156
+    tags:
+      - RF
+      - report
+    title: null
+  - ref: arxiv://2208.05403
+    tags:
+      - RF
+      - report
+    title: null
+  - ref: arxiv://2209.08041
+    tags:
+      - RF
+      - report
+    title: null
+  - ref: arxiv://2208.00010
+    tags:
+      - RF
+      - report
+    title: null
+  - ref: arxiv://2210.04765
+    tags:
+      - RF
+      - report
+    title: null
+  - ref: arxiv://2209.04671
+    tags:
+      - RF
+      - report
+    title: null
+  - ref: arxiv://2209.00142
+    tags:
+      - RF
+      - report
+    title: null
+  - ref: arxiv://2209.11267
+    tags:
+      - EF
+      - report
+    title: null
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Energy.pdf
+    tags:
+      - EF
+      - report
+    title: Snowmass Report of the Energy Frontier
+  - ref: arxiv://2209.01318
+    tags:
+      - AF
+      - EF
+      - IF
+      - TF
+      - report
+    title: null
+  - ref: arxiv://2209.07510
+    tags:
+      - EF
+      - report
+    title: null
+  - ref: arxiv://2211.11084
+    tags:
+      - EF
+      - report
+    title: null
+  - ref: arxiv://2209.08078
+    tags:
+      - EF
+      - report
+    title: null
+  - ref: arxiv://2209.14872
+    tags:
+      - EF
+      - report
+    title: null
+  - ref: arxiv://2209.13128
+    tags:
+      - EF
+      - report
+    title: null
+  - ref: arxiv://2209.03472
+    tags:
+      - AF
+      - EF
+      - IF
+      - TF
+      - report
+    title: null
+  - ref: arxiv://2209.07668
+    tags:
+      - AF
+      - report
+    title: null
+  - ref: arxiv://2209.14136
+    tags:
+      - AF
+      - report
+    title: null
+  - ref: arxiv://2208.12368
+    tags:
+      - AF
+      - report
+    title: null
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Accelerator.pdf
+    tags:
+      - AF
+      - report
+    title: Snowmass Report on the Accelerator Frontier
+  - ref: arxiv://2209.06289
+    tags:
+      - AF
+      - report
+    title: null
+  - ref: arxiv://2208.13279
+    tags:
+      - AF
+      - report
+    title: null
+  - ref: arxiv://2208.13641
+    tags:
+      - AF
+      - report
+    title: null
+  - ref: arxiv://2208.13349
+    tags:
+      - AF
+      - report
+    title: null
+  - ref: arxiv://2209.05827
+    tags:
+      - AF
+      - report
+    title: null
+  - ref: arxiv://2209.10758
+    tags:
+      - TF
+      - report
+    title: null
+  - ref: arxiv://2210.02591
+    tags:
+      - TF
+      - report
+    title: null
+  - ref: arxiv://2210.01737
+    tags:
+      - TF
+      - report
+    title: null
+  - ref: arxiv://2209.10639
+    tags:
+      - TF
+      - report
+    title: null
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Theory.pdf
+    tags:
+      - TF
+      - report
+    title: Snowmass Report on the Theory Frontier
+  - ref: arxiv://2210.03075
+    tags:
+      - TF
+      - report
+    title: null
+  - ref: arxiv://2210.03146
+    tags:
+      - TF
+      - report
+    title: null
+  - ref: arxiv://2210.03199
+    tags:
+      - TF
+      - report
+    title: null
+  - ref: arxiv://2209.14839
+    tags:
+      - TF
+      - report
+    title: null
+  - ref: arxiv://2211.05772
+    tags:
+      - TF
+      - report
+    title: null
+  - ref: arxiv://2209.06854
+    tags:
+      - TF
+      - report
+    title: null
+  - ref: arxiv://2210.03128
+    tags:
+      - TF
+      - report
+    title: null
+  - ref: arxiv://2209.07983
+    tags:
+      - NF
+      - TF
+      - report
+    title: null
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Engagement.pdf
+    tags:
+      - CEF
+      - report
+    title: Snowmass Report on the Community Engagement Frontier
+  - ref: arxiv://2210.00983
+    tags:
+      - CEF
+      - report
+    title: null
+  - ref: arxiv://2209.12377
+    tags:
+      - CEF
+      - report
+    title: null
+  - ref: arxiv://2209.07684
+    tags:
+      - CEF
+      - report
+    title: null
+  - ref: arxiv://2209.08225
+    tags:
+      - CEF
+      - report
+    title: null
+  - ref: arxiv://2211.13210
+    tags:
+      - CEF
+      - report
+    title: null
+  - ref: arxiv://2210.01248
+    tags:
+      - CEF
+      - report
+    title: null
+  - ref: arxiv://2209.09067
+    tags:
+      - CEF
+      - report
+    title: null
+  - ref: arxiv://2209.10114
+    tags:
+      - CEF
+      - report
+    title: null
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Instrumentation.pdf
+    tags:
+      - IF
+      - report
+    title: Snowmass Report on the Instrumentation Frontier
+  - ref: arxiv://2208.11017
+    tags:
+      - IF
+      - report
+    title: null
+  - ref: arxiv://2209.03794
+    tags:
+      - IF
+      - report
+    title: null
+  - ref: arxiv://2209.15519
+    tags:
+      - IF
+      - report
+    title: null
+  - ref: arxiv://2208.12861
+    tags:
+      - IF
+      - report
+    title: null
+  - ref: arxiv://2208.13051
+    tags:
+      - IF
+      - report
+    title: null
+  - ref: arxiv://2208.13310
+    tags:
+      - IF
+      - report
+    title: null
+  - ref: arxiv://2209.05202
+    tags:
+      - IF
+      - report
+    title: null
+  - ref: arxiv://2209.14111
+    tags:
+      - IF
+      - report
+    title: null
+  - ref: arxiv://2209.00590
+    tags:
+      - IF
+      - report
+    title: null
+  - ref: arxiv://2209.03607
+    tags:
+      - IF
+      - report
+    title: null
+  - ref: arxiv://2209.07622
+    tags:
+      - UF
+      - report
+    title: null
+  - ref: arxiv://2212.07037
+    tags:
+      - UF
+      - report
+    title: null
+  - ref: arxiv://2209.07588
+    tags:
+      - UF
+      - report
+    title: null
+  - ref: arxiv://2212.00868
+    tags:
+      - UF
+      - report
+    title: null
+  - ref: arxiv://2211.13450
+    tags:
+      - UF
+      - report
+    title: null
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Underground.pdf
+    tags:
+      - UF
+      - report
+    title: Snowmass Report on the Underground Facilities Frontier
+  - ref: arxiv://2210.03145
+    tags:
+      - UF
+      - report
+    title: null
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Computation.pdf
+    tags:
+      - CompF
+      - report
+    title: Snowmass Report on the Computational Frontier
+  - ref: arxiv://2209.08054
+    tags:
+      - CompF
+      - report
+    title: null
+  - ref: arxiv://2209.06786
+    tags:
+      - CompF
+      - report
+    title: null
+  - ref: arxiv://2209.07559
+    tags:
+      - CompF
+      - report
+    title: null
+  - ref: arxiv://2210.05822
+    tags:
+      - CompF
+      - report
+    title: null
+  - ref: arxiv://2209.08868
+    tags:
+      - CompF
+      - report
+    title: null
+  - ref: arxiv://2209.07356
+    tags:
+      - CompF
+      - report
+    title: null
+  - ref: arxiv://2209.08177
+    tags:
+      - CompF
+      - report
+    title: null
+  - ref: arxiv://2209.14984
+    tags:
+      - CompF
+      - report
+    title: null
+  - ref: arxiv://2209.07480
+    tags:
+      - NF
+      - report
+    title: null
+  - ref: arxiv://2209.04298
+    tags:
+      - NF
+      - report
+    title: null
+  - ref: arxiv://2211.08641
+    tags:
+      - NF
+      - report
+    title: null
+  - ref: arxiv://2209.10362
+    tags:
+      - NF
+      - report
+    title: null
+  - ref: arxiv://2209.03340
+    tags:
+      - NF
+      - report
+    title: null
+  - ref: arxiv://2211.09669
+    tags:
+      - NF
+      - report
+    title: null
+  - ref: arxiv://2212.00809
+    tags:
+      - NF
+      - report
+    title: null
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Neutrino.pdf
+    tags:
+      - NF
+      - report
+    title: Snowmass Report on the Neutrino Frontier
+  - ref: arxiv://2209.06872
+    tags:
+      - NF
+      - report
+    title: null
+  - ref: arxiv://2209.07483
+    tags:
+      - NF
+      - report
+    title: null
+  - ref: arxiv://2209.05352
+    tags:
+      - NF
+      - report
+    title: null
+  - ref: arxiv://2210.12004
+    tags:
+      - Early
+      - report
+    title: null
 short_name: snowmass

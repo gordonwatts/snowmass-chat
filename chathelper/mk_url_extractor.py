@@ -11,7 +11,7 @@ from pydantic import BaseModel
 
 def extract_urls(markdown_text):
     # Define a regular expression to match URLs
-    url_regex = r"(?P<url>https?://[^\s]+)"
+    url_regex = r"(?P<url>https?://[^\s\"]+)"
 
     # Find all matches of the URL regex in the markdown text
     matches = re.finditer(url_regex, markdown_text)
@@ -70,8 +70,16 @@ def main():
     urls = [urlparse(u) for u in urls]
 
     # Now, extract all the archive ones, as they are the only ones we know how to use.
-    bad_urls = [u for u in urls if u.netloc != "arxiv.org"]
-    good_urls = [u for u in urls if u.netloc == "arxiv.org"]
+    def url_test(u):
+        if u.netloc == "arxiv.org":
+            return True
+        if u.scheme == "http" or u.scheme == "https":
+            if u.path.endswith("pdf"):
+                return True
+        return False
+
+    bad_urls = [u for u in urls if not url_test(u)]
+    good_urls = [u for u in urls if url_test(u)]
 
     for bad in bad_urls:
         logging.warning(f"Url that we can't currently process: {urlunparse(bad)}")
@@ -80,11 +88,14 @@ def main():
     # unique by putting them in a set.
     paper_numbers = set()
     for good in good_urls:
-        paper_numbers.add(sanitize_arxiv(good.path.split("/")[-1]))
+        if good.netloc == "arxiv.org":
+            paper_numbers.add("arxiv://" + sanitize_arxiv(good.path.split("/")[-1]))
+        else:
+            paper_numbers.add(good.geturl())
 
     # Now place them into a dataclass that looks a lot like the one we use for the
     # chatter documents.
     tags = args.tags or []
-    paper_list = [ChatterDoc(ref=f"arxiv://{p}", tags=tags) for p in paper_numbers]
+    paper_list = [ChatterDoc(ref=p, tags=tags) for p in paper_numbers]
     paper_docs = ChatterDocs(papers=paper_list)
     print(yaml.dump(paper_docs.dict(), None))

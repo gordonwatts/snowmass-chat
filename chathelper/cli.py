@@ -323,15 +323,21 @@ def config_check(args):
                 table.add_row(ref, ", ".join(sorted(list(all_tags))))
                 count += 1
 
-        console = Console()
-        console.print(table)
-        print(f"Found {count} duplicate papers")
+        if count > 0:
+            console = Console()
+            console.print(table)
+            print(f"Found {count} duplicate papers")
+        print(f"Config file checks out!")
     else:
         new_config = ChatConfig(**config.dict())
         new_config.papers = []
         for ref in all_papers.keys():
             paper = all_papers[ref][0]
             paper.tags = sorted(list(set([t for p in all_papers[ref] for t in p.tags])))
+            titles = set([p.title for p in all_papers[ref]])
+            if len(titles) > 1:
+                raise ValueError(f"Multiple titles for {ref}: {titles}")
+            paper.title = titles.pop()
             new_config.papers.append(paper)
 
         new_config_path = (
