@@ -2541,4 +2541,502 @@ papers:
     tags:
       - CEF
       - whitepaper
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Frontmatter.pdf
+    tags:
+      - report
+    title: "Snowmass Report Frontmatter"
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Conclusion.pdf
+    tags:
+      - report
+    title: "Snowmass Report Conclusion"
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Summary.pdf
+    tags:
+      - report
+    title: "Snowmass Report Summary"
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/ExecutiveSummary.pdf
+    tags:
+      - report
+    title: "Snowmass Report Executive Summary"
+  - ref: arxiv://2209.08049
+    tags:
+      - report
+      - CF
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Cosmic.pdf
+    tags:
+      - report
+      - CF
+    title: "Snowmass Report for the Cosmic Frontier"
+  - ref: arxiv://2211.09978
+    tags:
+      - report
+      - CF
+  - ref: arxiv://2209.08654
+    tags:
+      - report
+      - CF
+  - ref: arxiv://2209.08215
+    tags:
+      - report
+      - CF
+  - ref: arxiv://2209.08265
+    tags:
+      - report
+      - CF
+  - ref: arxiv://2209.07426
+    tags:
+      - report
+      - CF
+  - ref: arxiv://2209.11726
+    tags:
+      - report
+      - CF
+  - ref: arxiv://2210.01770
+    tags:
+      - report
+      - CF
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/DarkMatter.pdf
+    tags:
+      - report
+      - CF
+    title: "Snowmass report for Dark Matter"
+  - ref: arxiv://2209.08125
+    tags:
+      - report
+      - CF
+  - ref: arxiv://2207.14594
+    tags:
+      - report
+      - RF
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Rare.pdf
+    tags:
+      - report
+      - RF
+    title: "Snowmass Report for the Rare Processes Frontier"
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/DarkMatter.pdf
+    tags:
+      - report
+      - RF
+    title: Snowmass Report for Dark Matter"
+  - ref: arxiv://2209.07156
+    tags:
+      - report
+      - RF
+  - ref: arxiv://2210.01770
+    tags:
+      - report
+      - RF
+  - ref: arxiv://2208.05403
+    tags:
+      - report
+      - RF
+  - ref: arxiv://2209.08041
+    tags:
+      - report
+      - RF
+  - ref: arxiv://2208.00010
+    tags:
+      - report
+      - RF
+  - ref: arxiv://2210.04765
+    tags:
+      - report
+      - RF
+  - ref: arxiv://2209.04671
+    tags:
+      - report
+      - RF
+  - ref: arxiv://2209.00142
+    tags:
+      - report
+      - RF
+  - ref: arxiv://2209.11267
+    tags:
+      - report
+      - EF
+  - ref: arxiv://2208.06030
+    tags:
+      - report
+      - EF
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Energy.pdf
+    tags:
+      - report
+      - EF
+    title: "Snowmass Report of the Energy Frontier"
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/DarkMatter.pdf
+    tags:
+      - report
+      - EF
+    title: "Snowmass Report on Dark Matter"
+  - ref: arxiv://2209.01318
+    tags:
+      - report
+      - EF
+  - ref: arxiv://2209.07510
+    tags:
+      - report
+      - EF
+  - ref: arxiv://2211.11084
+    tags:
+      - report
+      - EF
+  - ref: arxiv://2209.08078
+    tags:
+      - report
+      - EF
+  - ref: arxiv://2209.14872
+    tags:
+      - report
+      - EF
+  - ref: arxiv://2209.13128
+    tags:
+      - report
+      - EF
+  - ref: arxiv://2209.03472
+    tags:
+      - report
+      - EF
+  - ref: arxiv://2210.01770
+    tags:
+      - report
+      - EF
+  - ref: arxiv://2209.07668
+    tags:
+      - report
+      - AF
+  - ref: arxiv://2209.14136
+    tags:
+      - report
+      - AF
+  - ref: arxiv://2209.03472
+    tags:
+      - report
+      - AF
+  - ref: arxiv://2208.12368
+    tags:
+      - report
+      - AF
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Accelerator.pdf
+    tags:
+      - report
+      - AF
+    title: "Snowmass Report on the Accelerator Frontier"
+  - ref: arxiv://2208.06030
+    tags:
+      - report
+      - AF
+  - ref: arxiv://2209.06289
+    tags:
+      - report
+      - AF
+  - ref: arxiv://2208.13279
+    tags:
+      - report
+      - AF
+  - ref: arxiv://2209.01318
+    tags:
+      - report
+      - AF
+  - ref: arxiv://2208.13641
+    tags:
+      - report
+      - AF
+  - ref: arxiv://2208.13349
+    tags:
+      - report
+      - AF
+  - ref: arxiv://2209.05827
+    tags:
+      - report
+      - AF
+  - ref: arxiv://2209.10758
+    tags:
+      - report
+      - TF
+  - ref: arxiv://2210.02591
+    tags:
+      - report
+      - TF
+  - ref: arxiv://2208.06030
+    tags:
+      - report
+      - TF
+  - ref: arxiv://2210.01737
+    tags:
+      - report
+      - TF
+  - ref: arxiv://2209.10639
+    tags:
+      - report
+      - TF
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Theory.pdf
+    tags:
+      - report
+      - TF
+    title: "Snowmass Report on the Theory Frontier"
+  - ref: arxiv://2209.01318
+    tags:
+      - report
+      - TF
+  - ref: arxiv://2210.03075
+    tags:
+      - report
+      - TF
+  - ref: arxiv://2210.03146
+    tags:
+      - report
+      - TF
+  - ref: arxiv://2210.03199
+    tags:
+      - report
+      - TF
+  - ref: arxiv://2209.14839
+    tags:
+      - report
+      - TF
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/DarkMatter.pdf
+    tags:
+      - report
+      - TF
+    title: "Snowmass Report on Dark Matter"
+  - ref: arxiv://2209.03472
+    tags:
+      - report
+      - TF
+  - ref: arxiv://2211.05772
+    tags:
+      - report
+      - TF
+  - ref: arxiv://2209.06854
+    tags:
+      - report
+      - TF
+  - ref: arxiv://2210.03128
+    tags:
+      - report
+      - TF
+  - ref: arxiv://2209.07983
+    tags:
+      - report
+      - TF
+  - ref: arxiv://2210.01770
+    tags:
+      - report
+      - TF
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Engagement.pdf
+    tags:
+      - report
+      - CEF
+    title: "Snowmass Report on the Community Engagement Frontier"
+  - ref: arxiv://2210.00983
+    tags:
+      - report
+      - CEF
+  - ref: arxiv://2209.12377
+    tags:
+      - report
+      - CEF
+  - ref: arxiv://2209.07684
+    tags:
+      - report
+      - CEF
+  - ref: arxiv://2209.08225
+    tags:
+      - report
+      - CEF
+  - ref: arxiv://2211.13210
+    tags:
+      - report
+      - CEF
+  - ref: arxiv://2210.01248
+    tags:
+      - report
+      - CEF
+  - ref: arxiv://2209.09067
+    tags:
+      - report
+      - CEF
+  - ref: arxiv://2209.10114
+    tags:
+      - report
+      - CEF
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Instrumentation.pdf
+    tags:
+      - report
+      - IF
+    title: "Snowmass Report on the Instrumentation Frontier"
+  - ref: arxiv://2208.11017
+    tags:
+      - report
+      - IF
+  - ref: arxiv://2209.03794
+    tags:
+      - report
+      - IF
+  - ref: arxiv://2209.15519
+    tags:
+      - report
+      - IF
+  - ref: arxiv://2208.12861
+    tags:
+      - report
+      - IF
+  - ref: arxiv://2209.01318
+    tags:
+      - report
+      - IF
+  - ref: arxiv://2209.03472
+    tags:
+      - report
+      - IF
+  - ref: arxiv://2208.13051
+    tags:
+      - report
+      - IF
+  - ref: arxiv://2208.13310
+    tags:
+      - report
+      - IF
+  - ref: arxiv://2209.05202
+    tags:
+      - report
+      - IF
+  - ref: arxiv://2209.14111
+    tags:
+      - report
+      - IF
+  - ref: arxiv://2209.00590
+    tags:
+      - report
+      - IF
+  - ref: arxiv://2209.03607
+    tags:
+      - report
+      - IF
+  - ref: arxiv://2209.07622
+    tags:
+      - report
+      - UF
+  - ref: arxiv://2212.07037
+    tags:
+      - report
+      - UF
+  - ref: arxiv://2209.07588
+    tags:
+      - report
+      - UF
+  - ref: arxiv://2212.00868
+    tags:
+      - report
+      - UF
+  - ref: arxiv://2211.13450
+    tags:
+      - report
+      - UF
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Underground.pdf
+    tags:
+      - report
+      - UF
+    title: "Snowmass Report on the Underground Facilities Frontier"
+  - ref: arxiv://2210.03145
+    tags:
+      - report
+      - UF
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Computation.pdf
+    tags:
+      - report
+      - CompF
+    title: "Snowmass Report on the Computational Frontier"
+  - ref: arxiv://2209.08054
+    tags:
+      - report
+      - CompF
+  - ref: arxiv://2209.06786
+    tags:
+      - report
+      - CompF
+  - ref: arxiv://2209.07559
+    tags:
+      - report
+      - CompF
+  - ref: arxiv://2210.05822
+    tags:
+      - report
+      - CompF
+  - ref: arxiv://2209.08868
+    tags:
+      - report
+      - CompF
+  - ref: arxiv://2209.07356
+    tags:
+      - report
+      - CompF
+  - ref: arxiv://2209.08177
+    tags:
+      - report
+      - CompF
+  - ref: arxiv://2209.14984
+    tags:
+      - report
+      - CompF
+  - ref: arxiv://2209.07480
+    tags:
+      - report
+      - NF
+  - ref: arxiv://2209.04298
+    tags:
+      - report
+      - NF
+  - ref: arxiv://2211.08641
+    tags:
+      - report
+      - NF
+  - ref: arxiv://2209.10362
+    tags:
+      - report
+      - NF
+  - ref: arxiv://2209.03340
+    tags:
+      - report
+      - NF
+  - ref: arxiv://2211.09669
+    tags:
+      - report
+      - NF
+  - ref: arxiv://2212.00809
+    tags:
+      - report
+      - NF
+  - ref: arxiv://2209.07983
+    tags:
+      - report
+      - NF
+  - ref: https://www.slac.stanford.edu/econf/C210711/reports/Neutrino.pdf
+    tags:
+      - report
+      - NF
+    title: "Snowmass Report on the Neutrino Frontier"
+  - ref: arxiv://2209.06872
+    tags:
+      - report
+      - NF
+  - ref: arxiv://2209.07483
+    tags:
+      - report
+      - NF
+  - ref: arxiv://2209.05352
+    tags:
+      - report
+      - NF
+  - ref: arxiv://2203.07328
+    tags:
+      - report
+      - Early
+  - ref: arxiv://2210.12004
+    tags:
+      - report
+      - Early
+  - ref: arxiv://2207.07508
+    tags:
+      - report
+      - Early
 short_name: snowmass
