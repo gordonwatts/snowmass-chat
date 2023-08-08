@@ -21,6 +21,7 @@ dependencies = [
     "chromadb",
     "tiktoken",
     "rich",
+    "unstructured[local-inference]",
 ]
 
 [tool.setuptools.packages.find]

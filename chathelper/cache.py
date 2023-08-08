@@ -2,8 +2,11 @@ import pickle
 from pathlib import Path
 from typing import Callable, Iterable, Optional
 from urllib.parse import urlparse
+import requests
+
 
 from langchain.schema.document import Document
+from langchain.document_loaders import UnstructuredPDFLoader
 
 from chathelper.utils import throttle
 
@@ -38,9 +41,12 @@ def _paper_path(paper: ChatDocument, cache_dir: Path) -> Path:
     # names get calculated - might want something that uses
     # all elements of a url (thinking about you, indico!).
     if r.scheme == "https" or r.scheme == "http":
-        raise NotImplementedError(
-            f"Arbitrary URL is not implemented as paper source {paper.ref}"
-        )
+        filename = r.path.split("/")[-1]
+        if not filename.endswith(".pdf"):
+            raise NotImplementedError(
+                f"Invalid URL {paper.ref} (must end with '.pdf'?)"
+            )
+        return cache_dir / f"{Path(filename).stem}.pickle"
 
     return cache_dir / f"{r.netloc}.pickle"
 
@@ -61,7 +67,7 @@ def find_paper(paper: ChatDocument, cache_dir: Path) -> Optional[Path]:
 
 
 @throttle(10)
-def do_download(paper, cache_dir, paper_path):
+def do_download(paper: ChatDocument, cache_dir: Path, paper_path: Path):
     # Now parse and figure out how to get the thing
     uri = urlparse(paper.ref)
     if uri.scheme == "arxiv":
@@ -72,6 +78,16 @@ def do_download(paper, cache_dir, paper_path):
             doc_content_chars_max=None,
             keep_pdf=True,
         )
+        data = loader.load()
+    elif uri.scheme == "http" or uri.scheme == "https":
+        # Download the PDF locally from the uri using the `requests` library.
+        # This is a bit of a hack, but it works.
+        r = requests.get(paper.ref)
+        pdf_path = (Path(".") / f"{paper_path.stem}.pdf").absolute()
+        if not pdf_path.exists():
+            with pdf_path.open("wb") as f:
+                f.write(r.content)
+        loader = UnstructuredPDFLoader(str(pdf_path))
         data = loader.load()
     else:
         raise NotImplementedError(f"Unknown scheme {uri.scheme} for {paper.ref}")
