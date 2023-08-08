@@ -323,9 +323,11 @@ def config_check(args):
                 table.add_row(ref, ", ".join(sorted(list(all_tags))))
                 count += 1
 
-        console = Console()
-        console.print(table)
-        print(f"Found {count} duplicate papers")
+        if count > 0:
+            console = Console()
+            console.print(table)
+            print(f"Found {count} duplicate papers")
+        print(f"Config file checks out!")
     else:
         new_config = ChatConfig(**config.dict())
         new_config.papers = []
