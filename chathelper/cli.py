@@ -359,7 +359,9 @@ def query_find(args):
         print("No OpenAI API key set, use chatter set key openai <key>")
         return
 
-    chunks = find_similar_text_chucks(vector_dir, openai_key, args.query, int(args.n))
+    chunks = find_similar_text_chucks(
+        vector_dir, openai_key, args.query, int(args.n or 4)
+    )
     if len(chunks) == 0:
         print("No similar chunks found")
         return
