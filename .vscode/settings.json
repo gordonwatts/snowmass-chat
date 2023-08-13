@@ -4,11 +4,15 @@
         "chardet",
         "chathelper",
         "docstore",
+        "FASER",
         "fitz",
         "indico",
         "langchain",
+        "MATHUSLA",
         "openai",
         "pydantic",
+        "Qand",
+        "qanda",
         "snowmass",
         "vectorstores"
     ]

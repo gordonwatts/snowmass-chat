@@ -1,7 +1,8 @@
 import argparse
-from collections import defaultdict
 import logging
 import shutil
+import sys
+from collections import defaultdict
 from pathlib import Path
 from typing import Any, Dict, List
 
@@ -14,9 +15,15 @@ from chathelper.cache import download_all, find_paper, load_paper
 from chathelper.config import ChatConfig, ChatDocument, load_chat_config
 from chathelper.model import (
     find_similar_text_chucks,
-    populate_vector_store,
     load_vector_store_files,
+    populate_vector_store,
     query_llm,
+)
+from chathelper.questions import (
+    QandASequence,
+    QuestionAndAnswer,
+    load_qanda,
+    load_questions,
 )
 
 
@@ -327,7 +334,7 @@ def config_check(args):
             console = Console()
             console.print(table)
             print(f"Found {count} duplicate papers")
-        print(f"Config file checks out!")
+        print("Config file checks out!")
     else:
         new_config = ChatConfig(**config.dict())
         new_config.papers = []
@@ -376,16 +383,126 @@ def query_find(args):
     console.print(table)
 
 
-def query_ask(args):
-    """Find all similar text chunks to the query"""
+def ask_from_args(args, query: str) -> Dict[str, Any]:
+    """Ask a query given the correct command line args
+
+    Args:
+        args (argparse.args): Arguments needed to ask the question
+
+    Returns:
+        str: Response from the model.
+    """
     vector_dir = vector_store_path(args)
     openai_key = config_cache().keys.get("openai", None)
     if openai_key is None:
-        print("No OpenAI API key set, use chatter set key openai <key>")
-        return
+        raise ValueError("No OpenAI API key set, use chatter set key openai <key>")
 
-    response = query_llm(vector_dir, openai_key, args.query, int(args.n or 4))
+    return query_llm(vector_dir, openai_key, query, int(args.n or 4))
+
+
+def query_ask(args):
+    """Find all similar text chunks to the query"""
+    response = ask_from_args(args, args.query)
     print(response["result"])
+
+
+def questions_list(args):
+    questions = load_questions(args.questions_file)
+    table = Table()
+    table.add_column("Question")
+
+    for q in questions.questions:
+        table.add_row(q.question)
+
+    console = Console()
+    console.print(table)
+    print(
+        f"There are {len(questions.questions)} questions in {args.questions_file.name}"
+    )
+
+
+def questions_compare(args):
+    """Compare sets of responses to questions, even if the
+    questions in the files aren't exactly the same"""
+
+    q_order = []
+    responses: List[QandASequence] = []
+    for r_file in args.response_files:
+        qanda = load_qanda(r_file)
+        responses.append(qanda)
+        for q in qanda.questions:
+            if q.question not in q_order:
+                q_order.append(q.question)
+
+    table_title = responses[0].title
+    table_headers = ["Question"]
+    table_content = []
+    for r in responses:
+        table_headers.append(r.description)
+    for q in q_order:
+        row = [q]
+        for r in responses:
+            a = [a.answer for a in r.questions if a.question == q]
+            if len(a) == 0:
+                row.append("Not Asked")
+            else:
+                row.append(a[0])
+        table_content.append(row)
+
+    if args.markdown:
+        sys.stdout.reconfigure(encoding="utf-8")  # type: ignore
+
+        print(f"# <center>{table_title}</center>")
+
+        table_content_br = [[c.replace("\n", "<br>") for c in r] for r in table_content]
+
+        def print_row(row, header=False):
+            print("|" + "|".join(row) + "|")
+            if header:
+                print("|" + "|".join([":---"] * len(row)) + "|")
+
+        print_row(table_headers, header=True)
+        for r in table_content_br:
+            print_row(r)
+    else:
+        table = Table(title=table_title, show_lines=True)
+        for h in table_headers:
+            table.add_column(h)
+        for row in table_content:
+            table.add_row(*row)
+
+        console = Console()
+        console.print(table)
+
+
+def questions_ask(args):
+    """Ask a question from the questions file"""
+
+    # Check args as much as we can early
+    if args.output_file.exists():
+        raise ValueError(
+            f"Output path {args.output_file} already exists. "
+            "Either delete or use --force"
+        )
+
+    # Build the description
+    description = f"{args.description} (-n {args.n})"
+
+    questions = load_questions(args.questions_file)
+
+    response = [
+        QuestionAndAnswer(
+            question=q.question, answer=ask_from_args(args, q.question)["result"]
+        )
+        for q in questions.questions
+    ]
+
+    qanda = QandASequence(
+        questions=response, title=questions.title, description=description
+    )
+
+    with open(args.output_file, "w") as f:
+        yaml.dump(qanda.dict(), f)
 
 
 def execute_command_line():
@@ -504,7 +621,9 @@ def execute_command_line():
     vector_populate_parser.set_defaults(func=vector_populate)
 
     # The query sub command has find and ask sub commands
-    query_parser = subparsers.add_parser("query", help="Query the vector store")
+    query_parser = subparsers.add_parser(
+        "query", help="Query LLM model (and vector store)"
+    )
     query_parser.set_defaults(func=lambda _: query_parser.print_help())
     query_subparsers = query_parser.add_subparsers(help="Possible Commands")
 
@@ -517,11 +636,12 @@ def execute_command_line():
     query_find_parser.set_defaults(func=query_find)
 
     # The ask command queries the LLM for the answer to a question.
+    def ask_args(parser):
+        parser.add_argument("-n", help="The number of results to return", default=4)
+
     query_ask_parser = query_subparsers.add_parser("ask", help="Ask the LLM a question")
     query_ask_parser.add_argument("query", help="The question to ask")
-    query_ask_parser.add_argument(
-        "-n", help="The number of results to return", default=4
-    )
+    ask_args(query_ask_parser)
     query_ask_parser.set_defaults(func=query_ask)
 
     # The config sub command, which will allow us to list a config file, and combine
@@ -551,6 +671,68 @@ def execute_command_line():
         help="Resolve issues detected if possible.",
     )
     config_check_parser.set_defaults(func=config_check)
+
+    # The questions subcommand deals with questions files
+    questions_parser = subparsers.add_parser(
+        "questions",
+        help="Working with questions files",
+        epilog="All commands require a questions file.",
+    )
+    questions_parser.set_defaults(func=lambda _: questions_parser.print_help())
+    questions_parser.add_argument(
+        "--questions_file", help="The questions file", type=Path
+    )
+    questions_subparsers = questions_parser.add_subparsers(help="Possible Commands")
+
+    # List the contents of a questions file
+    questions_list_parser = questions_subparsers.add_parser(
+        "list", help="List the contents of a questions file"
+    )
+    questions_list_parser.set_defaults(func=questions_list)
+
+    # Ask the questions and generate an output files
+    questions_ask_parser = questions_subparsers.add_parser(
+        "ask",
+        help="Ask the questions and generate an output files",
+        epilog="Answers are only written to a file to make sure they are saved "
+        "(given they cost money). Use the list command to show the responses "
+        "nicely formatted.",
+    )
+    questions_ask_parser.add_argument(
+        "description", help="Description to be stored along with answers", type=str
+    )
+    questions_ask_parser.add_argument("output_file", help="The output file", type=Path)
+    questions_ask_parser.add_argument(
+        "--force, -f",
+        help="Overwrite output file",
+        default=False,
+        action="store_true",
+    )
+    ask_args(questions_ask_parser)
+    questions_ask_parser.set_defaults(func=questions_ask)
+
+    # Compare sets of responses from multiple response files.
+    questions_compare_parser = questions_subparsers.add_parser(
+        "compare",
+        help="Compare sets of responses from multiple response files",
+        epilog="This command will compare the responses from multiple response "
+        "files (or just dump one). It will print a table with the questions and"
+        "the response from each response file. Will work if you add or remove"
+        "questions from the response files.",
+    )
+    questions_compare_parser.add_argument(
+        "response_files",
+        help="The response files to compare",
+        nargs="+",
+        type=Path,
+    )
+    questions_compare_parser.add_argument(
+        "--markdown",
+        "-m",
+        action="store_true",
+        help="Print the table in markdown format",
+    )
+    questions_compare_parser.set_defaults(func=questions_compare)
 
     # Parse the arguments
     args = parser.parse_args(namespace=None)
