@@ -18,6 +18,7 @@ from chathelper.model import (
     load_vector_store_files,
     query_llm,
 )
+from chathelper.questions import QandASequence, QuestionAndAnswer, load_questions
 
 
 class config_cache:
@@ -327,7 +328,7 @@ def config_check(args):
             console = Console()
             console.print(table)
             print(f"Found {count} duplicate papers")
-        print(f"Config file checks out!")
+        print("Config file checks out!")
     else:
         new_config = ChatConfig(**config.dict())
         new_config.papers = []
@@ -376,16 +377,73 @@ def query_find(args):
     console.print(table)
 
 
-def query_ask(args):
-    """Find all similar text chunks to the query"""
+def ask_from_args(args, query: str) -> Dict[str, Any]:
+    """Ask a query given the correct command line args
+
+    Args:
+        args (argparse.args): Arguments needed to ask the question
+
+    Returns:
+        str: Response from the model.
+    """
     vector_dir = vector_store_path(args)
     openai_key = config_cache().keys.get("openai", None)
     if openai_key is None:
-        print("No OpenAI API key set, use chatter set key openai <key>")
-        return
+        raise ValueError("No OpenAI API key set, use chatter set key openai <key>")
 
-    response = query_llm(vector_dir, openai_key, args.query, int(args.n or 4))
+    return query_llm(vector_dir, openai_key, query, int(args.n or 4))
+
+
+def query_ask(args):
+    """Find all similar text chunks to the query"""
+    response = ask_from_args(args, args.query)
     print(response["result"])
+
+
+def questions_list(args):
+    """List the questions in the questions file"""
+    questions = load_questions(args.questions_file)
+    table = Table()
+    table.add_column("Question")
+
+    for q in questions.questions:
+        table.add_row(q.question)
+
+    console = Console()
+    console.print(table)
+    print(
+        f"There are {len(questions.questions)} questions in {args.questions_file.name}"
+    )
+
+
+def questions_ask(args):
+    """Ask a question from the questions file"""
+
+    # Check args as much as we can early
+    if args.output_file.exists():
+        raise ValueError(
+            f"Output path {args.output_file} already exists. "
+            "Either delete or use --force"
+        )
+
+    # Build the description
+    description = f"{args.description} (-n {args.n})"
+
+    questions = load_questions(args.questions_file)
+
+    response = [
+        QuestionAndAnswer(
+            question=q.question, answer=ask_from_args(args, q.question)["result"]
+        )
+        for q in questions.questions
+    ]
+
+    qanda = QandASequence(
+        questions=response, title=questions.title, description=description
+    )
+
+    with open(args.output_file, "w") as f:
+        yaml.dump(qanda.dict(), f)
 
 
 def execute_command_line():
@@ -517,11 +575,12 @@ def execute_command_line():
     query_find_parser.set_defaults(func=query_find)
 
     # The ask command queries the LLM for the answer to a question.
+    def ask_args(parser):
+        parser.add_argument("-n", help="The number of results to return", default=4)
+
     query_ask_parser = query_subparsers.add_parser("ask", help="Ask the LLM a question")
     query_ask_parser.add_argument("query", help="The question to ask")
-    query_ask_parser.add_argument(
-        "-n", help="The number of results to return", default=4
-    )
+    ask_args(query_ask_parser)
     query_ask_parser.set_defaults(func=query_ask)
 
     # The config sub command, which will allow us to list a config file, and combine
@@ -551,6 +610,41 @@ def execute_command_line():
         help="Resolve issues detected if possible.",
     )
     config_check_parser.set_defaults(func=config_check)
+
+    # The questions subcommand deals with questions files
+    questions_parser = subparsers.add_parser(
+        "questions",
+        help="Working with questions files",
+        epilog="All commands require a questions file",
+    )
+    questions_parser.set_defaults(func=lambda _: questions_parser.print_help())
+    questions_parser.add_argument(
+        "--questions_file", help="The questions file", type=Path
+    )
+    questions_subparsers = questions_parser.add_subparsers(help="Possible Commands")
+
+    # List the contents of a questions file
+    questions_list_parser = questions_subparsers.add_parser(
+        "list", help="List the contents of a questions file"
+    )
+    questions_list_parser.set_defaults(func=questions_list)
+
+    # Ask the questions and generate an output files
+    questions_ask_parser = questions_subparsers.add_parser(
+        "ask", help="Ask the questions and generate an output files"
+    )
+    questions_ask_parser.add_argument(
+        "description", help="Description to be stored along with answers", type=str
+    )
+    questions_ask_parser.add_argument("output_file", help="The output file", type=Path)
+    questions_ask_parser.add_argument(
+        "--force, -f",
+        help="Overwrite output file",
+        default=False,
+        action="store_true",
+    )
+    ask_args(questions_ask_parser)
+    questions_ask_parser.set_defaults(func=questions_ask)
 
     # Parse the arguments
     args = parser.parse_args(namespace=None)
