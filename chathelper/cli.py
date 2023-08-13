@@ -562,7 +562,9 @@ def execute_command_line():
     vector_populate_parser.set_defaults(func=vector_populate)
 
     # The query sub command has find and ask sub commands
-    query_parser = subparsers.add_parser("query", help="Query the vector store")
+    query_parser = subparsers.add_parser(
+        "query", help="Query LLM model (and vector store)"
+    )
     query_parser.set_defaults(func=lambda _: query_parser.print_help())
     query_subparsers = query_parser.add_subparsers(help="Possible Commands")
 
