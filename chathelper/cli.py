@@ -1,7 +1,8 @@
 import argparse
-from collections import defaultdict
 import logging
 import shutil
+import sys
+from collections import defaultdict
 from pathlib import Path
 from typing import Any, Dict, List
 
@@ -14,8 +15,8 @@ from chathelper.cache import download_all, find_paper, load_paper
 from chathelper.config import ChatConfig, ChatDocument, load_chat_config
 from chathelper.model import (
     find_similar_text_chucks,
-    populate_vector_store,
     load_vector_store_files,
+    populate_vector_store,
     query_llm,
 )
 from chathelper.questions import (
@@ -433,11 +434,11 @@ def questions_compare(args):
             if q.question not in q_order:
                 q_order.append(q.question)
 
-    table = Table(title=responses[0].title, show_lines=True)
-    table.add_column("Question")
+    table_title = responses[0].title
+    table_headers = ["Question"]
+    table_content = []
     for r in responses:
-        table.add_column(r.description)
-
+        table_headers.append(r.description)
     for q in q_order:
         row = [q]
         for r in responses:
@@ -446,10 +447,32 @@ def questions_compare(args):
                 row.append("Not Asked")
             else:
                 row.append(a[0])
-        table.add_row(*row)
+        table_content.append(row)
 
-    console = Console()
-    console.print(table)
+    if args.markdown:
+        sys.stdout.reconfigure(encoding="utf-8")  # type: ignore
+
+        print(f"# <center>{table_title}</center>")
+
+        table_content_br = [[c.replace("\n", "<br>") for c in r] for r in table_content]
+
+        def print_row(row, header=False):
+            print("|" + "|".join(row) + "|")
+            if header:
+                print("|" + "|".join([":---"] * len(row)) + "|")
+
+        print_row(table_headers, header=True)
+        for r in table_content_br:
+            print_row(r)
+    else:
+        table = Table(title=table_title, show_lines=True)
+        for h in table_headers:
+            table.add_column(h)
+        for row in table_content:
+            table.add_row(*row)
+
+        console = Console()
+        console.print(table)
 
 
 def questions_ask(args):
@@ -702,6 +725,12 @@ def execute_command_line():
         help="The response files to compare",
         nargs="+",
         type=Path,
+    )
+    questions_compare_parser.add_argument(
+        "--markdown",
+        "-m",
+        action="store_true",
+        help="Print the table in markdown format",
     )
     questions_compare_parser.set_defaults(func=questions_compare)
 
