@@ -46,6 +46,19 @@ def load_questions(file_path: Path) -> QuestionSequence:
         return QuestionSequence(**yaml.safe_load(f))
 
 
+def load_qanda(file_path: Path) -> QandASequence:
+    """Load the question and answer sequence from a yaml file.
+
+    Args:
+        file_path (Path): Location of the file to load
+
+    Returns:
+        QandASequence: The loaded question and answer sequence
+    """
+    with open(file_path, "r") as f:
+        return QandASequence(**yaml.safe_load(f))
+
+
 def ask_questions(
     question_sequence: QuestionSequence, description: str, model: Callable[[str], str]
 ) -> QandASequence:

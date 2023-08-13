@@ -18,7 +18,12 @@ from chathelper.model import (
     load_vector_store_files,
     query_llm,
 )
-from chathelper.questions import QandASequence, QuestionAndAnswer, load_questions
+from chathelper.questions import (
+    QandASequence,
+    QuestionAndAnswer,
+    load_qanda,
+    load_questions,
+)
 
 
 class config_cache:
@@ -401,7 +406,6 @@ def query_ask(args):
 
 
 def questions_list(args):
-    """List the questions in the questions file"""
     questions = load_questions(args.questions_file)
     table = Table()
     table.add_column("Question")
@@ -414,6 +418,38 @@ def questions_list(args):
     print(
         f"There are {len(questions.questions)} questions in {args.questions_file.name}"
     )
+
+
+def questions_compare(args):
+    """Compare sets of responses to questions, even if the
+    questions in the files aren't exactly the same"""
+
+    q_order = []
+    responses: List[QandASequence] = []
+    for r_file in args.response_files:
+        qanda = load_qanda(r_file)
+        responses.append(qanda)
+        for q in qanda.questions:
+            if q.question not in q_order:
+                q_order.append(q.question)
+
+    table = Table(title=responses[0].title, show_lines=True)
+    table.add_column("Question")
+    for r in responses:
+        table.add_column(r.description)
+
+    for q in q_order:
+        row = [q]
+        for r in responses:
+            a = [a.answer for a in r.questions if a.question == q]
+            if len(a) == 0:
+                row.append("Not Asked")
+            else:
+                row.append(a[0])
+        table.add_row(*row)
+
+    console = Console()
+    console.print(table)
 
 
 def questions_ask(args):
@@ -651,6 +687,23 @@ def execute_command_line():
     )
     ask_args(questions_ask_parser)
     questions_ask_parser.set_defaults(func=questions_ask)
+
+    # Compare sets of responses from multiple response files.
+    questions_compare_parser = questions_subparsers.add_parser(
+        "compare",
+        help="Compare sets of responses from multiple response files",
+        epilog="This command will compare the responses from multiple response "
+        "files (or just dump one). It will print a table with the questions and"
+        "the response from each response file. Will work if you add or remove"
+        "questions from the response files.",
+    )
+    questions_compare_parser.add_argument(
+        "response_files",
+        help="The response files to compare",
+        nargs="+",
+        type=Path,
+    )
+    questions_compare_parser.set_defaults(func=questions_compare)
 
     # Parse the arguments
     args = parser.parse_args(namespace=None)
