@@ -615,7 +615,7 @@ def execute_command_line():
     questions_parser = subparsers.add_parser(
         "questions",
         help="Working with questions files",
-        epilog="All commands require a questions file",
+        epilog="All commands require a questions file.",
     )
     questions_parser.set_defaults(func=lambda _: questions_parser.print_help())
     questions_parser.add_argument(
@@ -631,7 +631,11 @@ def execute_command_line():
 
     # Ask the questions and generate an output files
     questions_ask_parser = questions_subparsers.add_parser(
-        "ask", help="Ask the questions and generate an output files"
+        "ask",
+        help="Ask the questions and generate an output files",
+        epilog="Answers are only written to a file to make sure they are saved "
+        "(given they cost money). Use the list command to show the responses "
+        "nicely formatted.",
     )
     questions_ask_parser.add_argument(
         "description", help="Description to be stored along with answers", type=str
