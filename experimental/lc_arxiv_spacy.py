@@ -4,14 +4,22 @@
 from pathlib import Path
 import pickle
 
-from archive_loader import ArxivLoader
+from chathelper.lc_experimental.archive_loader import ArxivLoader
+
+
+def sanitize(n: str) -> str:
+    return n.replace(":", "_").replace(".", "_")
+
 
 document_name = "id:2109.10905"
 
-downloaded = Path(f"./{document_name}.pkl")
+downloaded = Path(f"./{sanitize(document_name)}.pkl")
 if not downloaded.exists():
     loader = ArxivLoader(
-        document_name, load_all_available_meta=True, doc_content_chars_max=None
+        document_name,
+        load_all_available_meta=True,
+        doc_content_chars_max=None,
+        keep_pdf=True,
     )
     data = loader.load()
 
@@ -28,3 +36,5 @@ else:
 
 # And now read it back in to test that pickle round trip worked.
 print(f"content len: {len(good_doc.page_content)}")
+
+# Now lets see how this noun thing works.
