@@ -25,6 +25,7 @@ dependencies = [
     "langchain",
     "arxiv",
     "pymupdf",
+    "spacy",
 ]
 
 [tool.setuptools.packages.find]

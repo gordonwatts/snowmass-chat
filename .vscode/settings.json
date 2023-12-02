@@ -1,19 +1,20 @@
 {
-    "cSpell.words": [
-        "arxiv",
-        "chardet",
-        "chathelper",
-        "docstore",
-        "FASER",
-        "fitz",
-        "indico",
-        "langchain",
-        "MATHUSLA",
-        "openai",
-        "pydantic",
-        "Qand",
-        "qanda",
-        "snowmass",
-        "vectorstores"
-    ]
+  "cSpell.words": [
+    "arxiv",
+    "chardet",
+    "chathelper",
+    "docstore",
+    "FASER",
+    "fitz",
+    "indico",
+    "langchain",
+    "MATHUSLA",
+    "openai",
+    "pydantic",
+    "Qand",
+    "qanda",
+    "snowmass",
+    "spacy",
+    "vectorstores"
+  ]
 }
