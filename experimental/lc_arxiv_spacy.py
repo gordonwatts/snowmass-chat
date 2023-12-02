@@ -39,15 +39,29 @@ else:
 print(f"content len: {len(good_doc.page_content)}")
 
 # Now lets see how this noun thing works.
-nlp = spacy.load("en_core_web_sm")
+models = {"lg": "en_core_web_lg", "md": "en_core_web_md", "sm": "en_core_web_sm"}
+nlp = {name: spacy.load(m) for name, m in models.items()}
 
-text = "The MATHUSLA experiment is great! FASER is also pretty awesome!"
+docs = {name: nlp(good_doc.page_content) for name, nlp in nlp.items()}
 
-doc = nlp(good_doc.page_content)
-properNouns = [token.text for token in doc if token.pos_ == "PROPN"]
+good_nouns = {
+    name: {
+        token.text
+        for token in doc
+        if len(token.text) > 2
+        and token.pos_ == "PROPN"
+        and token.is_oov
+        and not token.text.lower().startswith("arxiv:")
+    }
+    for name, doc in docs.items()
+}
 
-# Now, try to slim them down a bit.
-good_nouns = set([n for n in properNouns if len(n) > 2])
+for name, nouns in good_nouns.items():
+    print(f"{name}: {len(nouns)}")
+    print(list(nouns)[:10])
 
-print(good_nouns)
-print(len(good_nouns))
+# Lets look at the difference in names found by the medium model and the large model.
+print("lg - md")
+print(good_nouns["lg"] - good_nouns["md"])
+print("md - lg")
+print(good_nouns["md"] - good_nouns["lg"])
