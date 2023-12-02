@@ -65,3 +65,17 @@ print("lg - md")
 print(good_nouns["lg"] - good_nouns["md"])
 print("md - lg")
 print(good_nouns["md"] - good_nouns["lg"])
+
+# Finally, lets look at entities in the large model:
+print("Organizations (lg):")
+organizations = {ent.text for ent in docs["lg"].ents if ent.label_ == "ORG"}
+for o in sorted([o.replace("\n", " ") for o in organizations]):
+    if not o.lower().startswith("arxiv:"):
+        print(f"  {o}")
+
+# This did not turn up MATHUSLA, but it did turn up FASER and all its
+# variations well! This might be a good way to do this, actually.
+
+# for ent_tokens in docs["lg"].ents:
+#     if ent_tokens.label_ == "ORG":
+#         print(f"  {ent_tokens.text}: {ent_tokens.label_}")
