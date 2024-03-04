@@ -2,6 +2,7 @@ from typing import List, Optional
 
 from langchain.docstore.document import Document
 from langchain.document_loaders.base import BaseLoader
+from pathlib import Path
 
 from .arxiv import ArxivAPIWrapper
 
@@ -20,6 +21,7 @@ class ArxivLoader(BaseLoader):
         load_all_available_meta: Optional[bool] = False,
         doc_content_chars_max: Optional[int] = 40000,
         keep_pdf: bool = False,
+        cache_dir: Optional[Path] = None,
     ):
         self.query = query
         """The query to be passed to the arxiv.org API."""
@@ -31,6 +33,8 @@ class ArxivLoader(BaseLoader):
         """The maximum number of characters to load from the document content."""
         self.keep_pdf = keep_pdf
         """Whether to keep the PDF file on disk where it is downloaded."""
+        self.cache_dir = cache_dir if cache_dir is not None else Path(".")
+        """The directory where the PDF files are stored when downloaded."""
 
     def load(self) -> List[Document]:
         arxiv_client = ArxivAPIWrapper(
@@ -38,6 +42,7 @@ class ArxivLoader(BaseLoader):
             load_all_available_meta=self.load_all_available_meta,
             doc_content_chars_max=self.doc_content_chars_max,
             keep_pdf=self.keep_pdf,
+            cache_dir=self.cache_dir,
         )  # type: ignore
         docs = arxiv_client.load(self.query)
         return docs
