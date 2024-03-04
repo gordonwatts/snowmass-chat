@@ -3602,4 +3602,8 @@ papers:
       - Early
       - report
     title: null
+  - ref: https://www.usparticlephysics.org/2023-p5-report/assets/pdf/P5Report2023_121023-DRAFT_single-pages.pdf
+    title: Pathways to Innovation and Discovery in Particle Physics The P5 Report
+    tags:
+      - report
 short_name: snowmass
