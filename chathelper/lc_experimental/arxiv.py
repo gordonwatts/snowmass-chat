@@ -177,5 +177,5 @@ class ArxivAPIWrapper(BaseModel):
             )
             docs.append(doc)
             if not self.keep_pdf:
-                os.remove(doc_file_name)
+                os.remove(doc_file_path)
         return docs
