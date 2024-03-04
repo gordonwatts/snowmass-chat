@@ -3,10 +3,9 @@ from pathlib import Path
 from typing import Callable, Iterable, List, Optional
 
 from langchain.chains import RetrievalQA
-from langchain_community.chat_models import ChatOpenAI
-from langchain_openai import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from pydantic import BaseModel, SecretStr
 
 from chathelper.cache import load_paper
@@ -183,9 +182,9 @@ def query_llm(
 ):
     # Vector store db and embedding function
     vector_store = load_vector_store_database(vector_store_path, api_key)
-    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0, openai_api_key=api_key)
+    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0, api_key=api_key)
     ret = vector_store.as_retriever()
     ret.search_kwargs = {"k": n_chunks}
     qa_chain = RetrievalQA.from_chain_type(llm, retriever=ret)
 
-    return qa_chain({"query": query})
+    return qa_chain.invoke({"query": query})
