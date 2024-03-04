@@ -10,6 +10,7 @@ Getting from a list of documents to a working chat-bot follows the below steps:
 
 1. Download locally all the PDF files that are the source material.
     * Use the `chatter -c snowmass/snowmass.yaml cache download` command
+    * Use the `chatter -c snowmass/snowmass.yaml cache set <dir>` to set a custom directory and copy down all the previously downloaded files to avoid having to hit the archive for anything but metadata. Better yet, copy down the `pickle` files.
 1. The next steps require accessing OpenAI endpoints.
     * Use `chatter keys set openai <key>` to set the key.
 1. Load the files, using their embedding, into the vector store database
