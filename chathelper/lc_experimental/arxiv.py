@@ -144,9 +144,11 @@ class ArxivAPIWrapper(BaseModel):
         docs: List[Document] = []
         for result in results:
             try:
-                doc_file_name: str = result.download_pdf(dirpath=self.cache_dir)
-                with fitz.open(doc_file_name) as doc_file:  # type: ignore
-                    text: str = "".join(page.get_text() for page in doc_file)
+                doc_file_path: Path = self.cache_dir / result._get_default_filename()
+                if not doc_file_path.exists():
+                    doc_file_path = Path(result.download_pdf(dirpath=self.cache_dir))
+                with fitz.open(doc_file_path) as doc_file:
+                    text: str = "".join(page.get_text() for page in doc_file)  # type: ignore
             except FileNotFoundError as f_ex:
                 logger.debug(f_ex)
                 continue
