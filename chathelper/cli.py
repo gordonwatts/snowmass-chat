@@ -5,6 +5,7 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 from typing import Any, Dict, List
+from pydantic import SecretStr
 
 import yaml
 from rich.console import Console
@@ -70,7 +71,7 @@ class config_cache:
         self._update({"vector_store_dir": str(value.absolute())})
 
     @property
-    def keys(self) -> Dict[str, str]:
+    def keys(self) -> Dict[str, SecretStr]:
         """Return the keys"""
         return self._load().get("keys", {})
 
@@ -208,7 +209,7 @@ def keys_list(args):
     table.add_column("Key")
     table.add_column("Value")
     for key, value in keys.items():
-        table.add_row(key, value)
+        table.add_row(key, str(value))
 
     console = Console()
     console.print(table)
@@ -363,7 +364,7 @@ def query_find(args):
     vector_dir = vector_store_path(args)
     openai_key = config_cache().keys.get("openai", None)
     if openai_key is None:
-        print("No OpenAI API key set, use chatter set key openai <key>")
+        print("No OpenAI API key set, use `chatter set key openai <key>`")
         return
 
     chunks = find_similar_text_chucks(
