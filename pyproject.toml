@@ -23,6 +23,8 @@ dependencies = [
     "rich",
     "unstructured[local-inference]",
     "langchain",
+    "langchain-community",
+    "langchain-openai",
     "arxiv",
     "pymupdf",
     "spacy",

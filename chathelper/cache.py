@@ -6,7 +6,7 @@ import requests
 
 
 from langchain.schema.document import Document
-from langchain.document_loaders import UnstructuredPDFLoader
+from langchain_community.document_loaders import UnstructuredPDFLoader
 
 from chathelper.utils import throttle
 
@@ -85,6 +85,7 @@ def do_download(paper: ChatDocument, cache_dir: Path, paper_path: Path):
             load_all_available_meta=True,
             doc_content_chars_max=None,
             keep_pdf=True,
+            cache_dir=cache_dir,
         )
         data = loader.load()
     elif uri.scheme == "http" or uri.scheme == "https":

@@ -1,6 +1,8 @@
 """Util that calls Arxiv."""
+
 import logging
 import os
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, root_validator
@@ -57,6 +59,7 @@ class ArxivAPIWrapper(BaseModel):
     load_all_available_meta: bool = False
     doc_content_chars_max: Optional[int] = 4000
     keep_pdf: bool = False
+    cache_dir: Path = Path(".")
 
     @root_validator()
     def validate_environment(cls, values: Dict) -> Dict:
@@ -141,9 +144,11 @@ class ArxivAPIWrapper(BaseModel):
         docs: List[Document] = []
         for result in results:
             try:
-                doc_file_name: str = result.download_pdf()
-                with fitz.open(doc_file_name) as doc_file:  # type: ignore
-                    text: str = "".join(page.get_text() for page in doc_file)
+                doc_file_path: Path = self.cache_dir / result._get_default_filename()
+                if not doc_file_path.exists():
+                    doc_file_path = Path(result.download_pdf(dirpath=self.cache_dir))
+                with fitz.open(doc_file_path) as doc_file:
+                    text: str = "".join(page.get_text() for page in doc_file)  # type: ignore
             except FileNotFoundError as f_ex:
                 logger.debug(f_ex)
                 continue
@@ -172,5 +177,5 @@ class ArxivAPIWrapper(BaseModel):
             )
             docs.append(doc)
             if not self.keep_pdf:
-                os.remove(doc_file_name)
+                os.remove(doc_file_path)
         return docs

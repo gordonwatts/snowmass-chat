@@ -3,11 +3,10 @@ from pathlib import Path
 from typing import Callable, Iterable, List, Optional
 
 from langchain.chains import RetrievalQA
-from langchain.chat_models import ChatOpenAI
-from langchain.embeddings import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.vectorstores import Chroma
-from pydantic import BaseModel
+from langchain_community.vectorstores import Chroma
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from pydantic import BaseModel, SecretStr
 
 from chathelper.cache import load_paper
 from chathelper.config import ChatDocument
@@ -16,7 +15,7 @@ from chathelper.config import ChatDocument
 def _load_vector_store(
     vector_store_path: Path,
     cache_dir: Path,
-    api_key: str,
+    api_key: SecretStr,
     docs: Iterable,
 ) -> Chroma:
     """Loads the vector store from a list of cached documents.
@@ -73,7 +72,7 @@ def _load_vector_store(
     return vector_store
 
 
-def load_vector_store_database(vector_store_path, api_key) -> Chroma:
+def load_vector_store_database(vector_store_path, api_key: SecretStr) -> Chroma:
     """Open the Vector store and create the embedding function
 
     Args:
@@ -85,7 +84,7 @@ def load_vector_store_database(vector_store_path, api_key) -> Chroma:
     """
     embedding = OpenAIEmbeddings(
         model="text-embedding-ada-002",
-        openai_api_key=api_key,
+        api_key=api_key,
     )  # type: ignore
     vector_store = Chroma(
         embedding_function=embedding, persist_directory=str(vector_store_path)
@@ -121,7 +120,7 @@ def _save_store(vector_store_path: Path, files: VectorStoreFiles):
 def populate_vector_store(
     vector_store_path: Path,
     cache_dir: Path,
-    api_key: str,
+    api_key: SecretStr,
     docs: Iterable[ChatDocument],
     progress_cb: Optional[Callable[[int], None]] = None,
 ):
@@ -167,7 +166,7 @@ def populate_vector_store(
 
 
 def find_similar_text_chucks(
-    vector_store_path: Path, api_key: str, query: str, n_results: int = 4
+    vector_store_path: Path, api_key: SecretStr, query: str, n_results: int = 4
 ):
     """Return documents from store that might answer the question"""
     # Vector store db and embedding function
@@ -177,15 +176,15 @@ def find_similar_text_chucks(
 
 def query_llm(
     vector_store_path: Path,
-    api_key: str,
+    api_key: SecretStr,
     query: str,
     n_chunks: int = 4,
 ):
     # Vector store db and embedding function
     vector_store = load_vector_store_database(vector_store_path, api_key)
-    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0, openai_api_key=api_key)
+    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0, api_key=api_key)
     ret = vector_store.as_retriever()
     ret.search_kwargs = {"k": n_chunks}
     qa_chain = RetrievalQA.from_chain_type(llm, retriever=ret)
 
-    return qa_chain({"query": query})
+    return qa_chain.invoke({"query": query})

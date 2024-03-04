@@ -54,7 +54,7 @@ all_splits = text_splitter.split_documents([good_doc_prime])
 print(len(all_splits))
 
 # Now, put it in the vector store
-from langchain.embeddings import OpenAIEmbeddings
+from langchain_community.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
 
 # Need api key for this next bit - to access the embeddings.
