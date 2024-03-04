@@ -3,7 +3,7 @@ import pickle
 from unittest.mock import patch
 
 import pytest
-from langchain.document_loaders import UnstructuredPDFLoader
+from langchain_community.document_loaders import UnstructuredPDFLoader
 
 from chathelper.cache import (
     _paper_path,

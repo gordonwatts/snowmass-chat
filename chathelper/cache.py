@@ -6,7 +6,7 @@ import requests
 
 
 from langchain.schema.document import Document
-from langchain.document_loaders import UnstructuredPDFLoader
+from langchain_community.document_loaders import UnstructuredPDFLoader
 
 from chathelper.utils import throttle
 
