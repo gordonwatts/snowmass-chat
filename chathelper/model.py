@@ -1,6 +1,6 @@
 import logging
 from pathlib import Path
-from typing import Callable, Iterable, List, Optional
+from typing import Callable, Iterable, List, Optional, Tuple
 
 from langchain.chains import RetrievalQA
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -14,9 +14,9 @@ from chathelper.config import ChatDocument
 
 def _load_vector_store(
     vector_store_path: Path,
-    cache_dir: Path,
     api_key: SecretStr,
     docs: Iterable,
+    split_info: Tuple[int, int],
 ) -> Chroma:
     """Loads the vector store from a list of cached documents.
 
@@ -26,15 +26,34 @@ def _load_vector_store(
     Args:
         vector_store_path (Path): The folder where the vector store can be put.
         api_key (str): The OpenAI key to use for the embeddings.
-        cache_dir (Path): The path to the cache directory.
         docs (Iterable[ChatDocument]): List of documents to load into db
+        split_info (Tuple[int, int]): The size of chunks and the overlap
 
     Returns:
         Chroma: The vector store
     """
+    # Our list of separators:
+    separators: List[str] = [
+        "\n",
+        ".",
+        ",",
+        ";",
+        ":",
+        "!",
+        "?",
+        "(",
+        ")",
+        "[",
+        "]",
+        "-",
+        '"',
+        " ",
+    ]
     # Get the vector store and splitter
     vector_store = load_vector_store_database(vector_store_path, api_key)
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=0)
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=split_info[0], chunk_overlap=split_info[1], separators=separators
+    )
 
     # Loop over the documents, sending them through the splitter
     # and then through the embedding, finally storing them in the
@@ -122,6 +141,7 @@ def populate_vector_store(
     cache_dir: Path,
     api_key: SecretStr,
     docs: Iterable[ChatDocument],
+    split_info: Tuple[int, int],
     progress_cb: Optional[Callable[[int], None]] = None,
 ):
     """
@@ -162,7 +182,7 @@ def populate_vector_store(
             count += 1
             my_cb(count)
 
-    _load_vector_store(vector_store_path, cache_dir, api_key, good_documents())
+    _load_vector_store(vector_store_path, api_key, good_documents(), split_info)
 
 
 def find_similar_text_chucks(
