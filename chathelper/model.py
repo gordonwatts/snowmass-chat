@@ -17,6 +17,7 @@ def _load_vector_store(
     api_key: SecretStr,
     docs: Iterable,
     split_info: Tuple[int, int],
+    embedding_model: str,
 ) -> Chroma:
     """Loads the vector store from a list of cached documents.
 
@@ -50,7 +51,9 @@ def _load_vector_store(
         " ",
     ]
     # Get the vector store and splitter
-    vector_store = load_vector_store_database(vector_store_path, api_key)
+    vector_store = load_vector_store_database(
+        vector_store_path, api_key, embedding_model
+    )
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=split_info[0], chunk_overlap=split_info[1], separators=separators
     )
@@ -91,7 +94,9 @@ def _load_vector_store(
     return vector_store
 
 
-def load_vector_store_database(vector_store_path, api_key: SecretStr) -> Chroma:
+def load_vector_store_database(
+    vector_store_path, api_key: SecretStr, embedding_model: str
+) -> Chroma:
     """Open the Vector store and create the embedding function
 
     Args:
@@ -102,7 +107,7 @@ def load_vector_store_database(vector_store_path, api_key: SecretStr) -> Chroma:
         Tuple[Chroma, OpenAIEmbeddings]: The vector store and the embedding function
     """
     embedding = OpenAIEmbeddings(
-        model="text-embedding-ada-002",
+        model=embedding_model,
         api_key=api_key,
     )  # type: ignore
     vector_store = Chroma(
@@ -142,6 +147,7 @@ def populate_vector_store(
     api_key: SecretStr,
     docs: Iterable[ChatDocument],
     split_info: Tuple[int, int],
+    embedding_model: str,
     progress_cb: Optional[Callable[[int], None]] = None,
 ):
     """
@@ -182,15 +188,23 @@ def populate_vector_store(
             count += 1
             my_cb(count)
 
-    _load_vector_store(vector_store_path, api_key, good_documents(), split_info)
+    _load_vector_store(
+        vector_store_path, api_key, good_documents(), split_info, embedding_model
+    )
 
 
 def find_similar_text_chucks(
-    vector_store_path: Path, api_key: SecretStr, query: str, n_results: int = 4
+    vector_store_path: Path,
+    api_key: SecretStr,
+    query: str,
+    embedding_model: str,
+    n_results: int = 4,
 ):
     """Return documents from store that might answer the question"""
     # Vector store db and embedding function
-    vector_store = load_vector_store_database(vector_store_path, api_key)
+    vector_store = load_vector_store_database(
+        vector_store_path, api_key, embedding_model
+    )
     return vector_store.similarity_search(query, k=n_results)  # type: ignore
 
 
@@ -199,10 +213,13 @@ def query_llm(
     api_key: SecretStr,
     query: str,
     query_model: str,
+    embedding_model: str,
     n_chunks: int = 4,
 ):
     # Vector store db and embedding function
-    vector_store = load_vector_store_database(vector_store_path, api_key)
+    vector_store = load_vector_store_database(
+        vector_store_path, api_key, embedding_model
+    )
     llm = ChatOpenAI(model=query_model, temperature=0, api_key=api_key)
     ret = vector_store.as_retriever()
     ret.search_kwargs = {"k": n_chunks}
