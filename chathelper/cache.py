@@ -91,9 +91,9 @@ def do_download(paper: ChatDocument, cache_dir: Path, paper_path: Path):
     elif uri.scheme == "http" or uri.scheme == "https":
         # Download the PDF locally from the uri using the `requests` library.
         # This is a bit of a hack, but it works.
-        r = requests.get(paper.ref)
-        pdf_path = (Path(".") / f"{paper_path.stem}.pdf").absolute()
+        pdf_path = (cache_dir / f"{paper_path.stem}.pdf").absolute()
         if not pdf_path.exists():
+            r = requests.get(paper.ref)
             with pdf_path.open("wb") as f:
                 f.write(r.content)
         loader = UnstructuredPDFLoader(str(pdf_path))
