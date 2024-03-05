@@ -408,6 +408,8 @@ def query_find(args):
     for c in chunks:
         table.add_row(c.metadata["Title"], c.page_content.replace("\n", " "))
 
+    print(f"Pulling chunks from the vector store database found at {vector_dir}")
+
     console = Console()
     console.print(table)
 
