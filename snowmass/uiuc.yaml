@@ -1,4 +1,5 @@
 title: "UIUC Chat with GPT 3.5"
+description: NCSA Tool using GPT 3.5
 questions:
   - question: "What does the FASER experiment do?"
     answer: "The FASER (ForwArd Search ExpeRiment) experiment is designed to explore the forward region of the Large Hadron Collider (LHC) and search for 
