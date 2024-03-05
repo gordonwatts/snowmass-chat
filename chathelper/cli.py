@@ -4,7 +4,7 @@ import shutil
 import sys
 from collections import defaultdict
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
 from pydantic import SecretStr
 
 import yaml
@@ -97,6 +97,15 @@ class config_cache:
     @top_k.setter
     def top_k(self, value: int) -> None:
         self._update({"top_k": value})
+
+    @property
+    def split_info(self) -> Tuple[int, int]:
+        "Get the split info for the vector store"
+        return self._load().get("split_info", (500, 0))
+
+    @split_info.setter
+    def split_info(self, value: Tuple[int, int]) -> None:
+        self._update({"split_info": value})
 
 
 def load_config(args) -> ChatConfig:
@@ -245,7 +254,7 @@ def vector_get(args):
 
 def vector_set(args):
     """set the vector directory"""
-    vector_dir = Path(args.dir)
+    vector_dir = Path(args.directory)
     config_cache().vector_store_dir = vector_dir
 
 
@@ -293,6 +302,7 @@ def vector_populate(args):
     """Populate the store from cached papers"""
     vector_dir = vector_store_path(args)
     cache_dir = config_cache().cache_dir
+    split_info = config_cache().split_info
     chat_config = load_config(args)
     openai_key = config_cache().keys.get("openai", None)
     if openai_key is None:
@@ -308,6 +318,7 @@ def vector_populate(args):
             cache_dir,
             openai_key,
             chat_config.papers,
+            split_info,
             lambda _: progress.update(task1, advance=1),
         )
 
@@ -396,6 +407,8 @@ def query_find(args):
 
     for c in chunks:
         table.add_row(c.metadata["Title"], c.page_content.replace("\n", " "))
+
+    print(f"Pulling chunks from the vector store database found at {vector_dir}")
 
     console = Console()
     console.print(table)
@@ -536,6 +549,10 @@ def default_list(args):
     """List the defaults"""
     print(f"Query Model: {config_cache().query_model}")
     print(f"Top k (# chunks of documents sent as context): {config_cache().top_k}")
+    print(
+        f"Chunk Split Info: max_size={config_cache().split_info[0]}, "
+        f"overlap={config_cache().split_info[1]}"
+    )
 
 
 def default_set(args):
@@ -544,6 +561,10 @@ def default_set(args):
         config_cache().query_model = args.value
     elif args.key == "top_k":
         config_cache().top_k = int(args.value)
+    elif args.key == "split_info":
+        split_info = tuple(int(x) for x in args.value.split(","))
+        assert len(split_info) == 2
+        config_cache().split_info = split_info
     else:
         raise ValueError(f"Unknown default key {args.key}")
 
@@ -805,7 +826,10 @@ def execute_command_line():
     # The set command will set a default
     defaults_set_parser = defaults_subparsers.add_parser("set", help="Set a default")
     defaults_set_parser.add_argument(
-        "key", help="The key to set", type=str, choices=["query_model", "top_k"]
+        "key",
+        help="The key to set",
+        type=str,
+        choices=["query_model", "top_k", "split_info"],
     )
     defaults_set_parser.add_argument("value", help="The value to set the key to")
     defaults_set_parser.set_defaults(func=default_set)
