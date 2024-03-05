@@ -535,7 +535,7 @@ def questions_ask(args):
 def default_list(args):
     """List the defaults"""
     print(f"Query Model: {config_cache().query_model}")
-    print(f"Top K: {config_cache().top_k}")
+    print(f"Top k (# chunks of documents sent as context): {config_cache().top_k}")
 
 
 def default_set(args):
