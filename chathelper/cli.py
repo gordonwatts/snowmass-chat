@@ -81,6 +81,14 @@ class config_cache:
         keys[key] = value
         self._update({"keys": keys})
 
+    @property
+    def query_model(self) -> str:
+        return self._load().get("query_model", "gpt-3.5-turbo")
+
+    @query_model.setter
+    def query_model(self, value: str) -> None:
+        self._update({"query_model": value})
+
 
 def load_config(args) -> ChatConfig:
     """Load the config file from the command line arguments
@@ -398,7 +406,13 @@ def ask_from_args(args, query: str) -> Dict[str, Any]:
     if openai_key is None:
         raise ValueError("No OpenAI API key set, use chatter set key openai <key>")
 
-    return query_llm(vector_dir, openai_key, query, int(args.n or 4))
+    return query_llm(
+        vector_dir,
+        openai_key,
+        query,
+        args.query_model or config_cache().query_model,
+        int(args.n or 4),
+    )
 
 
 def query_ask(args):
@@ -639,6 +653,13 @@ def execute_command_line():
     # The ask command queries the LLM for the answer to a question.
     def ask_args(parser):
         parser.add_argument("-n", help="The number of results to return", default=4)
+        parser.add_argument(
+            "--query_model",
+            "-q",
+            help="Use a different query model (default is whatever is set in the config)",
+            type=str,
+            default=None,
+        )
 
     query_ask_parser = query_subparsers.add_parser("ask", help="Ask the LLM a question")
     query_ask_parser.add_argument("query", help="The question to ask")
