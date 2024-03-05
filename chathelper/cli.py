@@ -254,7 +254,7 @@ def vector_get(args):
 
 def vector_set(args):
     """set the vector directory"""
-    vector_dir = Path(args.dir)
+    vector_dir = Path(args.directory)
     config_cache().vector_store_dir = vector_dir
 
 
