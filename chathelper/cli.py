@@ -501,7 +501,10 @@ def questions_ask(args):
         )
 
     # Build the description
-    description = f"{args.description} (-n {args.n})"
+    description = (
+        f"{args.description} (-n {args.n}, "
+        f"{args.query_model or config_cache().query_model})"
+    )
 
     questions = load_questions(args.questions_file)
 
