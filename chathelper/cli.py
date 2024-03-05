@@ -81,6 +81,14 @@ class config_cache:
         keys[key] = value
         self._update({"keys": keys})
 
+    @property
+    def query_model(self) -> str:
+        return self._load().get("query_model", "gpt-3.5-turbo")
+
+    @query_model.setter
+    def query_model(self, value: str) -> None:
+        self._update({"query_model": value})
+
 
 def load_config(args) -> ChatConfig:
     """Load the config file from the command line arguments
@@ -398,7 +406,13 @@ def ask_from_args(args, query: str) -> Dict[str, Any]:
     if openai_key is None:
         raise ValueError("No OpenAI API key set, use chatter set key openai <key>")
 
-    return query_llm(vector_dir, openai_key, query, int(args.n or 4))
+    return query_llm(
+        vector_dir,
+        openai_key,
+        query,
+        args.query_model or config_cache().query_model,
+        int(args.n or 4),
+    )
 
 
 def query_ask(args):
@@ -487,7 +501,10 @@ def questions_ask(args):
         )
 
     # Build the description
-    description = f"{args.description} (-n {args.n})"
+    description = (
+        f"{args.description} (-n {args.n}, "
+        f"{args.query_model or config_cache().query_model})"
+    )
 
     questions = load_questions(args.questions_file)
 
@@ -504,6 +521,19 @@ def questions_ask(args):
 
     with open(args.output_file, "w") as f:
         yaml.dump(qanda.dict(), f)
+
+
+def default_list(args):
+    """List the defaults"""
+    print(f"Query Model: {config_cache().query_model}")
+
+
+def default_set(args):
+    """Set a default"""
+    if args.key == "query_model":
+        config_cache().query_model = args.value
+    else:
+        raise ValueError(f"Unknown default key {args.key}")
 
 
 def execute_command_line():
@@ -639,6 +669,13 @@ def execute_command_line():
     # The ask command queries the LLM for the answer to a question.
     def ask_args(parser):
         parser.add_argument("-n", help="The number of results to return", default=4)
+        parser.add_argument(
+            "--query_model",
+            "-q",
+            help="Use a different query model (default is whatever is set in the config)",
+            type=str,
+            default=None,
+        )
 
     query_ask_parser = query_subparsers.add_parser("ask", help="Ask the LLM a question")
     query_ask_parser.add_argument("query", help="The question to ask")
@@ -734,6 +771,27 @@ def execute_command_line():
         help="Print the table in markdown format",
     )
     questions_compare_parser.set_defaults(func=questions_compare)
+
+    # The default sub command works with defaults for processing, like the
+    # default OpenAI LLM model. It has sub-commands like list (which lists all of the
+    # defaults), and set (which sets a default).
+    defaults_parser = subparsers.add_parser("defaults", help="Working with defaults")
+    defaults_parser.set_defaults(func=lambda _: defaults_parser.print_help())
+    defaults_subparsers = defaults_parser.add_subparsers(help="Possible Commands")
+
+    # list the defaults
+    defaults_list_parser = defaults_subparsers.add_parser(
+        "list", help="List the defaults"
+    )
+    defaults_list_parser.set_defaults(func=default_list)
+
+    # The set command will set a default
+    defaults_set_parser = defaults_subparsers.add_parser("set", help="Set a default")
+    defaults_set_parser.add_argument(
+        "key", help="The key to set", type=str, choices=["query_model"]
+    )
+    defaults_set_parser.add_argument("value", help="The value to set the key to")
+    defaults_set_parser.set_defaults(func=default_set)
 
     # Parse the arguments
     args = parser.parse_args(namespace=None)
