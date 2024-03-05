@@ -89,6 +89,15 @@ class config_cache:
     def query_model(self, value: str) -> None:
         self._update({"query_model": value})
 
+    @property
+    def top_k(self) -> int:
+        "Get the number of documents fed as part of context to the LLM to answer the question"
+        return self._load().get("top_k", 4)
+
+    @top_k.setter
+    def top_k(self, value: int) -> None:
+        self._update({"top_k": value})
+
 
 def load_config(args) -> ChatConfig:
     """Load the config file from the command line arguments
@@ -526,12 +535,15 @@ def questions_ask(args):
 def default_list(args):
     """List the defaults"""
     print(f"Query Model: {config_cache().query_model}")
+    print(f"Top K: {config_cache().top_k}")
 
 
 def default_set(args):
     """Set a default"""
     if args.key == "query_model":
         config_cache().query_model = args.value
+    elif args.key == "top_k":
+        config_cache().top_k = int(args.value)
     else:
         raise ValueError(f"Unknown default key {args.key}")
 
@@ -658,17 +670,14 @@ def execute_command_line():
     query_parser.set_defaults(func=lambda _: query_parser.print_help())
     query_subparsers = query_parser.add_subparsers(help="Possible Commands")
 
-    # The find command finds similar text chunks.
-    query_find_parser = query_subparsers.add_parser(
-        "find", help="Find similar text chunks from the vector store"
-    )
-    query_find_parser.add_argument("query", help="The query to match")
-    query_find_parser.add_argument("-n", help="The number of results to return")
-    query_find_parser.set_defaults(func=query_find)
-
     # The ask command queries the LLM for the answer to a question.
     def ask_args(parser):
-        parser.add_argument("-n", help="The number of results to return", default=4)
+        parser.add_argument(
+            "-n",
+            help="The number of results to return",
+            default=config_cache().top_k,
+            type=int,
+        )
         parser.add_argument(
             "--query_model",
             "-q",
@@ -676,6 +685,14 @@ def execute_command_line():
             type=str,
             default=None,
         )
+
+    # The find command finds similar text chunks.
+    query_find_parser = query_subparsers.add_parser(
+        "find", help="Find similar text chunks from the vector store"
+    )
+    query_find_parser.add_argument("query", help="The query to match")
+    ask_args(query_find_parser)
+    query_find_parser.set_defaults(func=query_find)
 
     query_ask_parser = query_subparsers.add_parser("ask", help="Ask the LLM a question")
     query_ask_parser.add_argument("query", help="The question to ask")
@@ -788,7 +805,7 @@ def execute_command_line():
     # The set command will set a default
     defaults_set_parser = defaults_subparsers.add_parser("set", help="Set a default")
     defaults_set_parser.add_argument(
-        "key", help="The key to set", type=str, choices=["query_model"]
+        "key", help="The key to set", type=str, choices=["query_model", "top_k"]
     )
     defaults_set_parser.add_argument("value", help="The value to set the key to")
     defaults_set_parser.set_defaults(func=default_set)
