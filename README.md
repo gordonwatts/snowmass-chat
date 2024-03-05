@@ -19,6 +19,7 @@ Getting from a list of documents to a working chat-bot follows the below steps:
 1. Make your query
     * Use `chatter -c snowmass/snowmass.yaml query ask "What does the MATHUSLA experiment do?`
     * Change `ask` to `find` to see what chunks of text are used by the LLM to answer your question.
+    * Use the new gpt 4.5 turbo from the command line: `chatter -c snowmass/snowmass.yaml query ask -q "gpt-4-turbo-preview" "What does the MATHUSLA experiment do?"`, or set it as the default:
 1. Generate answers file for comparison
     * Generate a `yaml` file contains the answers to a list of questions
         * `chatter -c snowmass/snowmass.yaml questions --questions_file snowmass/snowmass-questions.yaml ask "Default config, but updated code" snowmass/snowmass-v1.0-update.yaml`
