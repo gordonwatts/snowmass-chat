@@ -1,0 +1,351 @@
+description: Using splitting large text embedding (-n 7, gpt-4-turbo-preview, text-embedding-3-large)
+questions:
+- answer: The FASER experiment is designed to search for light and weakly-interacting
+    particles, including long-lived particles, new force carriers, axion-like particles,
+    light neutralinos, and dark sector particles. It utilizes a magnetic spectrometer
+    and tracker to increase sensitivity significantly beyond previous experiments.
+    FASER is located in the line-of-sight, 480 meters downstream from the ATLAS interaction
+    point at the LHC, in an unused service tunnel. The experiment benefits from the
+    LHC magnets, which sweep away charged particle backgrounds, allowing for a low
+    radiation environment in the experimental area. FASER aims to detect long-lived
+    particles, such as dark photons, that are produced at the primary ATLAS interaction
+    point with high rapidity and then decay within the FASER detector to, for example,
+    lepton pairs. This experiment is part of a broader class of new LHC experiments
+    proposed to search for new dark-sector or long-lived states far from the primary
+    interaction points.
+  question: What does the FASER experiment do?
+- answer: The MATHUSLA experiment is a proposed large-scale detector designed to be
+    situated at CERN near the CMS detector. Its primary function is to detect and
+    reconstruct the decay of neutral Long-Lived Particles (LLPs) that are produced
+    in High-Luminosity Large Hadron Collider (HL-LHC) collisions at CMS. These particles
+    are characterized by their ability to travel significant distances before decaying,
+    and MATHUSLA aims to observe these decays as displaced vertices (DV) in a near-zero-background
+    environment. This capability is crucial for probing unexplored parameter spaces
+    and could potentially lead to the discovery of new physics phenomena by detecting
+    ultra long-lived neutral weakly interacting particles with proper lifetimes ranging
+    significantly, covering lifetimes from the early Universe to the Big Bang Nucleosynthesis
+    era. The experiment is designed with an array of 81 identical modules, each filled
+    with layers of scintillating planes, to detect these rare particle decays effectively.
+  question: What does the MATHUSLA experiment do?
+- answer: 'The ATLAS experiment is one of the two large general-purpose particle physics
+    detectors at the Large Hadron Collider (LHC) at CERN. It is designed to explore
+    a wide range of physics questions, including the search for the Higgs boson, the
+    study of properties of the newly discovered Higgs particle, and the search for
+    other new particles that could provide evidence for theories beyond the Standard
+    Model, such as supersymmetry or extra dimensions. ATLAS also investigates the
+    properties of the fundamental forces and particles at the highest energy levels
+    ever created in a laboratory setting.
+
+
+    The experiment involves colliding protons at very high energies and analyzing
+    the particles produced in these collisions. ATLAS is equipped with a complex array
+    of detectors that can track and identify a wide variety of particles, including
+    photons, electrons, muons, and hadrons. This allows scientists to reconstruct
+    the events that occur during collisions and to search for signs of new physics
+    phenomena.
+
+
+    ATLAS, along with CMS (the Compact Muon Solenoid experiment), played a crucial
+    role in the discovery of the Higgs boson in 2012, a fundamental particle associated
+    with the mechanism that gives mass to other particles. The experiment continues
+    to perform precision measurements of the Higgs boson''s properties and to search
+    for direct evidence of new particles, quantum imprints of new phenomena, and to
+    contribute to our understanding of dark matter.'
+  question: What does the ATLAS experiment do?
+- answer: 'The CMS (Compact Muon Solenoid) experiment is one of the major research
+    projects operating at the Large Hadron Collider (LHC) at CERN. It is designed
+    to investigate a wide range of physics phenomena, including the search for the
+    Higgs boson, studies of the properties of the Higgs boson, searches for evidence
+    of new particles beyond the Standard Model, and measurements that test the limits
+    of the Standard Model of particle physics. The CMS experiment does this by colliding
+    protons at very high energies and analyzing the particles produced in these collisions.
+
+
+    The CMS detector is a general-purpose detector that has various components designed
+    to measure the energy and momentum of photons, electrons, muons, and other particles
+    produced in the collisions. It uses a large solenoid magnet to bend the paths
+    of charged particles, allowing their momenta to be measured accurately. The experiment
+    is also involved in more specific studies, such as testing the universality of
+    electron and muon interactions in loop decays of the b quark and hadron spectroscopy.
+
+
+    CMS has released research-quality data for public use, which includes both actual
+    collision data and simulated data corresponding to these collisions. This open
+    data initiative allows for a broader scientific community to engage in the analysis
+    and potentially contribute to new discoveries.
+
+
+    Additionally, CMS is part of efforts to explore fundamental questions such as
+    the nature of dark matter, the reasons behind the Higgs boson''s properties, and
+    the search for direct evidence of new particles that could indicate physics beyond
+    the Standard Model. The experiment operates in conjunction with other projects
+    and experiments, like ATLAS, to provide a comprehensive understanding of high-energy
+    physics phenomena.'
+  question: What does the CMS experiment do?
+- answer: 'The LHCb (Large Hadron Collider beauty) experiment is a specialized project
+    operating at the Large Hadron Collider (LHC) at CERN. It is optimized for flavor
+    physics, particularly focusing on the study of particles containing bottom (b)
+    and charm (c) quarks. The main goals of the LHCb experiment include:
+
+
+    1. **Exploring the Matter-Antimatter Asymmetry:** LHCb investigates the differences
+    between matter and antimatter, contributing to our understanding of why the universe
+    is made predominantly of matter.
+
+
+    2. **Studying Rare Processes:** The experiment is designed to explore extremely
+    rare processes involving b and c hadrons. This includes studying rare decays and
+    searching for new particles or phenomena beyond the Standard Model of particle
+    physics.
+
+
+    3. **Precision Measurements:** LHCb performs precision measurements of CP violation
+    and rare decays of b and c hadrons. These measurements can provide hints of new
+    physics through deviations from the Standard Model predictions.
+
+
+    4. **Probing the Quark Structure of Matter:** By studying the decays and interactions
+    of b and c hadrons, LHCb provides insights into the strong force that binds quarks
+    together inside hadrons.
+
+
+    5. **Searching for New Particles:** The experiment searches for exotic particles
+    such as pentaquarks, hidden sector particles, and potential new states of matter.
+
+
+    LHCb benefits from the high production cross-sections of b and c quarks in proton-proton
+    collisions at the LHC, allowing it to collect large samples of these particles.
+    Its unique design, optimized for detecting particles produced at small angles
+    to the beam, enables it to perform measurements that are complementary to those
+    of the general-purpose detectors at the LHC. The experiment uses a variety of
+    sophisticated detection technologies to identify and measure the properties of
+    particles, including a vertex locator for precise tracking, ring imaging Cherenkov
+    detectors for particle identification, and calorimeters and muon stations for
+    measuring particle energies and types.
+
+
+    In summary, the LHCb experiment plays a crucial role in testing the Standard Model''s
+    predictions, searching for new physics phenomena, and enhancing our understanding
+    of the fundamental forces and particles that constitute the universe.'
+  question: What does the LHCb experiment do?
+- answer: "The CODEX-b experiment is designed to explore a wide range of Beyond the\
+    \ Standard Model (BSM) scenarios involving long-lived particles (LLPs). It aims\
+    \ to achieve this by leveraging its competitive sensitivity to detect these particles,\
+    \ which may not be observable with existing or proposed detectors. The experiment\
+    \ benefits from a zero-background environment and is situated in an accessible\
+    \ location where many necessary services are already in place. Additionally, CODEX-b\
+    \ has the capability to tag events of interest within the existing LHCb experiment\
+    \ framework, enabling joint searches between both experiments. The design includes\
+    \ a 2 m \xD7 2 m \xD7 2 m demonstrator detector, CODEX-\u03B2, which will be equipped\
+    \ with Resistive Plate Chambers (RPCs) to detect the passage of particles. This\
+    \ setup allows CODEX-b to provide valuable insights into the physics of LLPs,\
+    \ complementing the broader efforts to understand the fundamental constituents\
+    \ of the universe and their interactions."
+  question: What does the CODEX-b experiment do?
+- answer: "The HL-LHC, or High-Luminosity Large Hadron Collider, is an upgrade to\
+    \ the existing Large Hadron Collider (LHC) at CERN. Officially approved by the\
+    \ CERN council in June 2016, this project aims to significantly extend the capabilities\
+    \ of the LHC, allowing for more detailed exploration of fundamental physics. The\
+    \ upgrade involves improvements to the accelerator and detectors, enabling the\
+    \ collider to achieve higher luminosities\u2014a measure of the number of particle\
+    \ collisions per second. This is achieved through techniques such as luminosity\
+    \ leveling (\u03B2*-leveling) to maximize integrated luminosity while extending\
+    \ beam lifetimes. The goal is to accumulate 3000 to 4000 fb^(-1) of data over\
+    \ about ten years, enhancing the sensitivity to additional gauge bosons and fermions,\
+    \ as well as allowing for more precise measurements of the Higgs boson's properties.\
+    \ The HL-LHC project also includes the construction of upgraded detectors (CMS,\
+    \ ATLAS) and new Interaction Regions (IR) designed to support a tenfold increase\
+    \ in the luminosity delivered to the detectors. The United States government is\
+    \ contributing over $750 million to this upgrade, which aims to probe the boundaries\
+    \ of the Standard Model further, measure the properties of the Higgs boson more\
+    \ precisely, and potentially observe new physics or direct future discoveries."
+  question: What is the HL-LHC?
+- answer: "The muon collider, especially at energies around 10 TeV, is projected to\
+    \ significantly improve the precision of Higgs couplings measurements compared\
+    \ to the High-Luminosity Large Hadron Collider (HL-LHC). It is expected to achieve\
+    \ subpercent precision for the couplings to vector bosons Z, W, reaching the permille\
+    \ level at 10 TeV. This represents a substantial advancement in the precision\
+    \ of Higgs couplings measurements, offering insights well beyond the capabilities\
+    \ of a 100 TeV proton collider. The muon collider's ability to make differential\
+    \ measurements allows for unprecedented assessments of multi-Higgs production,\
+    \ thereby enabling better than 10% precision in determining the Higgs trilinear\
+    \ and even quartic couplings.\n\nOn the other hand, the FCC-ee (Future Circular\
+    \ Collider-electron-positron) is also aimed at achieving permille level precision\
+    \ in Higgs couplings measurements, operating typically at hundreds of GeV energies\
+    \ to exploit the Higgs-strahlung production mechanism (e+e\u2212 \u2192 HZ). The\
+    \ FCC-ee is designed to complement the precision measurements of the Higgs boson's\
+    \ properties, including its couplings, mass, and width, with a high degree of\
+    \ accuracy, potentially offering precision at the few percent levels for certain\
+    \ measurements.\n\nIn summary, both the muon collider and the FCC-ee are expected\
+    \ to significantly enhance the precision of Higgs couplings measurements, with\
+    \ the muon collider offering exceptional capabilities at higher energies and the\
+    \ FCC-ee providing high precision at lower energies through different production\
+    \ mechanisms."
+  question: How good is the muon collide at measuring Higgs couplings? How about FCCee?
+- answer: "The information provided does not explicitly detail the expected performance\
+    \ on Higgs boson pair production (HH) measurements during Run 3 of the LHC. However,\
+    \ it does mention that the High-Luminosity LHC (HL-LHC) will dramatically expand\
+    \ the physics reach for Higgs physics, including the milestone observation of\
+    \ Higgs boson pairs. This implies a significant improvement in the ability to\
+    \ study HH production at the HL-LHC compared to earlier runs, including Run 3.\
+    \ The HL-LHC, with its higher collision energy of 14 TeV and an integrated luminosity\
+    \ of 3 ab\u22121 per interaction point, is expected to allow for an increase in\
+    \ the precision for most of the Higgs boson couplings measurements, which would\
+    \ include HH production.\n\nAs for future colliders potentially doing better than\
+    \ the HL-LHC in terms of HH measurements, the provided context does not mention\
+    \ any specific future collider projects or their capabilities relative to the\
+    \ HL-LHC. However, it is generally expected in the high-energy physics community\
+    \ that future colliders designed with higher energies and luminosities than the\
+    \ HL-LHC could potentially offer further improvements in the study of Higgs boson\
+    \ pairs and other phenomena, by providing either larger datasets or higher collision\
+    \ energies. These could include projects like the Future Circular Collider (FCC)\
+    \ or the International Linear Collider (ILC), which are conceptualized to push\
+    \ the energy frontier beyond the capabilities of the LHC and HL-LHC."
+  question: How well will do on HH in Run 3? How about HL-LHC? Will any future collide
+    do better?
+- answer: 'IRIS-HEP (the Institute for Research and Innovation in Software for High-Energy
+    Physics) and HEP-CCE (High Energy Physics Center for Computational Excellence)
+    are playing crucial roles in preparing for the High-Luminosity Large Hadron Collider
+    (HL-LHC) era. Their efforts are focused on addressing the significant challenges
+    in data, software, and computational resources that the HL-LHC will present. Here
+    are some of the key initiatives and strategies they are implementing:
+
+
+    1. **Development of Integrated Data, Software, and Computational Resources**:
+    Both IRIS-HEP and HEP-CCE are working on creating infrastructure and services
+    that provide integrated data, software, and computational resources. These resources
+    are essential for executing elements of an analysis workflow, which is becoming
+    increasingly complex with the data volumes and processing needs of the HL-LHC.
+
+
+    2. **Analysis Grand Challenge**: IRIS-HEP is organizing an "Analysis Grand Challenge"
+    as a comprehensive test of new concepts for and prototypes of analysis facilities.
+    This challenge aims to demonstrate and test new technologies envisioned for the
+    HL-LHC era, including new user interfaces, innovative data access services for
+    quick access to experiment data sets, and new systems and frameworks. The challenge
+    is an institute-wide effort that serves as an integration test of all components
+    of IRIS-HEP, conducted in collaboration with the U.S. LHC Operations program,
+    the ATLAS and CMS collaborations, and the Worldwide LHC Computing Grid (WLCG).
+    The challenge includes a series of global processing tasks that scale up to the
+    demands of the HL-LHC.
+
+
+    3. **Software Modernization and Efficiency**: Recognizing that software efficiency
+    and performance are key to maintaining an affordable infrastructure for the HL-LHC,
+    both IRIS-HEP and HEP-CCE are focused on the modernization of High Energy Physics
+    (HEP) software. This involves leveraging existing initiatives such as the HEP
+    Software Foundation (HSF) and integrating software products emerging from R&D
+    programs.
+
+
+    4. **Collaboration and Knowledge Sharing**: These organizations are also emphasizing
+    the importance of collaboration and knowledge sharing within the HEP community.
+    By building on the experience and cumulative knowledge from the LHC and integrating
+    software components for data analysis, they aim to meet the needs of the HL-LHC
+    and future colliders.
+
+
+    In summary, IRIS-HEP and HEP-CCE are addressing the challenges of the HL-LHC through
+    a combination of developing integrated resources, organizing grand challenges
+    to test new technologies, modernizing software for efficiency, and fostering collaboration
+    within the HEP community. These efforts are crucial for ensuring that the HEP
+    community is prepared to fully exploit the scientific opportunities that the HL-LHC
+    will offer.'
+  question: What will IRIS-HEP and HEP-CCE do to help prepare for the HL-LHC?
+- answer: Yes, there has been discussion and exploration of using machine learning
+    (ML) techniques for complete event reconstruction in particle physics. The text
+    mentions the broad application of ML in nearly every aspect of experimental operation,
+    including triggering, data quality monitoring, reconstruction, and analysis. This
+    indicates that ML algorithms are being considered and developed for comprehensive
+    tasks, including the complete reconstruction of events. The development of ML
+    algorithms for use in trigger and data acquisition systems, as well as their application
+    in areas like particle identification, event classification, and energy regression,
+    suggests a move towards utilizing ML for full event reconstruction. The challenges
+    of managing increased event complexity and computational demands are driving the
+    exploration of ML solutions for these comprehensive tasks.
+  question: Was there eny discussion of using ML to do complete event reconstruction?
+- answer: 'The prospects of Long-Lived Particle (LLP) searches at the High-Luminosity
+    Large Hadron Collider (HL-LHC) appear promising and are a significant area of
+    interest for uncovering Beyond Standard Model (BSM) physics. The HL-LHC aims to
+    extend the reach for discovering LLPs produced at a wide range of energies, from
+    TeV- to sub-GeV-scale, by implementing dedicated analyses and optimized search
+    strategies. These strategies may significantly increase the signal-to-background
+    ratio over standard search methods, enhancing the ability of LHC experiments to
+    probe new physics scenarios, including those that could address fundamental questions
+    like the Hierarchy Problem.
+
+
+    The search for LLPs at the HL-LHC will benefit from dedicated detectors like MATHUSLA,
+    which are designed to explicitly reconstruct and identify LLPs while effectively
+    managing beam-induced backgrounds and other challenges such as pileup, detector
+    readout timing, and the material budget of the detector areas closest to the interaction
+    point. The use of timing and angular measurements, restrictions on particle velocity,
+    and topological consistency checks are among the techniques that can help achieve
+    high background rejection rates while maintaining good signal efficiency for LLPs.
+
+
+    Moreover, the HL-LHC''s capability to perform searches for LLPs across a broad
+    energy spectrum, combined with the development of optimized cut-flows and search
+    strategies, positions it as a very promising avenue for potentially uncovering
+    new discoveries in physics. The observation of even a few high-energy, oppositely-charged
+    tracks coming from LLP decays could provide sufficient evidence for new physics,
+    making the search for LLPs at the HL-LHC a highly anticipated endeavor in the
+    physics community.'
+  question: What are the prospects of LLP searches at the HL-LHC?
+- answer: "The current Higgs boson mass, as reported from the most recent measurements\
+    \ by CMS and ATLAS, is approximately 125.38\xB10.14 GeV and 124.92\xB10.21 GeV,\
+    \ respectively, using both the diphoton (\u03B3\u03B3) and ZZ decay channels.\
+    \ \n\nWith the planned High-Luminosity Large Hadron Collider (HL-LHC), the precision\
+    \ of the Higgs boson mass measurement is expected to improve significantly. The\
+    \ HL-LHC is projected to achieve a measurement uncertainty of approximately \u2206\
+    mh \u223C 30 MeV in the h \u2192 ZZ \u2192 4l and h \u2192 \u03B3\u03B3 channels,\
+    \ assuming detector upgrades lead to a 25% improvement in the 4\xB5 resolution\
+    \ and a 17% increase in the 4\xB5 and 4e channels. This represents a substantial\
+    \ improvement over the current level of uncertainty."
+  question: What is the current Higgs mass? How much will the uncertainty improve
+    with the HL-LHC?
+- answer: 'Given the context provided, it''s clear that the exploration of Long-Lived
+    Particles (LLPs) at the High-Luminosity Large Hadron Collider (HL-LHC) is a vibrant
+    and evolving field, with a variety of models and theoretical frameworks suggesting
+    different types of LLPs. While the context does not specify a single "new" LLP
+    model to explore, it highlights the importance of investigating a broad spectrum
+    of possibilities to uncover new physics beyond the Standard Model (BSM).
+
+
+    Some of the promising avenues for LLP exploration mentioned include:
+
+
+    1. **Hadronically Decaying LLPs Produced in Exotic Higgs Decays**: These are part
+    of a large variety of new physics scenarios, including solutions to the Hierarchy
+    Problem. Investigating these LLPs could provide insights into the nature of the
+    Higgs boson and its potential interactions beyond the Standard Model.
+
+
+    2. **Models Predicting Disappearing LLPs**: These LLPs could give rise to experimental
+    signatures such as "short" or "broken" tracks, which are distinct from the usual
+    Standard Model processes. Such signatures would be a clear indication of new physics.
+
+
+    3. **LLPs Resulting in Unusual Jets, Such as "Dark Showers"**: These could arise
+    from different BSM scenarios and would present unique challenges and opportunities
+    for detection at the HL-LHC.
+
+
+    4. **Heavy Neutral Leptons and Axion-Like Particles**: These are examples of light
+    LLPs that require innovative trigger strategies and possibly auxiliary LLP detectors
+    for their discovery.
+
+
+    The context also emphasizes the importance of developing innovative trigger strategies
+    and investing in auxiliary detectors, especially for light LLPs, to maximize the
+    discovery potential of the HL-LHC. Additionally, it suggests that exploring a
+    variety of models, including those predicting different types of LLP signatures,
+    is crucial for a comprehensive search for new physics.
+
+
+    Therefore, while not specifying a single "new" model, the context suggests that
+    the future of LLP research at the HL-LHC should be broad and inclusive, exploring
+    a wide range of theoretical predictions and experimental signatures to ensure
+    that no stone is left unturned in the search for new physics.'
+  question: What is a new LLP model that we should be exploring at the hl LHC?
+title: Standard questions for the Snowmass Whitepaper and Report Dataset

@@ -1,0 +1,104 @@
+description: Using splitting large text embedding (-n 4, gpt-3.5-turbo, text-embedding-3-large)
+questions:
+- answer: The FASER experiment, along with its upgrade FASER2, is designed to search
+    for light and weakly-interacting states, including long-lived particles, new force
+    carriers, axion-like particles, light neutralinos, and dark sector particles.
+    It aims to increase sensitivity by many orders of magnitude beyond previous experiments
+    by detecting decays of new long-lived particles predicted by models of new physics.
+  question: What does the FASER experiment do?
+- answer: The MATHUSLA experiment is a proposed large-scale detector situated near
+    the CMS detector at CERN. It is designed to reconstruct the decay of neutral Long-Lived
+    Particles (LLPs) produced in HL-LHC collisions as displaced vertices in a near-zero-background
+    environment. The experiment aims to detect decays of ultra long-lived neutral
+    weakly interacting particles with proper lifetimes up to 10^7 - 10^8 meters, covering
+    a wide range of lifetimes from the early Universe to the Big Bang Nucleosynthesis.
+  question: What does the MATHUSLA experiment do?
+- answer: The ATLAS experiment, along with the CMS experiment, is used to search for
+    direct evidence of new particles, pursue quantum imprints of new phenomena, and
+    determine the nature of dark matter. These experiments are part of the High-Luminosity
+    Large Hadron Collider (HL-LHC) project, which aims to reveal the secrets of the
+    Higgs boson and address why it condensed in the universe.
+  question: What does the ATLAS experiment do?
+- answer: The CMS experiment at the Large Hadron Collider (LHC) is involved in releasing
+    research-quality data, including reprocessed collision data and corresponding
+    simulated data. It can be used for displaced vertex reconstruction and has shown
+    optimistic results in certain studies. Additionally, CMS looks at emerging particles
+    from the interaction region in a specific forward region with respect to the incoming
+    beams, providing hints for possible Flavor Non-Universality.
+  question: What does the CMS experiment do?
+- answer: The LHCb experiment is optimized for flavor physics and explores rare flavor
+    processes, matter-antimatter asymmetries in the charm sector, and searches for
+    and studies pentaquarks, hidden sector particles, anomalous B meson decays, and
+    more. It leverages the large b and c production cross-sections at the LHC to study
+    particles produced at small angles to the beam, allowing it to be competitive
+    with general-purpose detectors for some new particle searches.
+  question: What does the LHCb experiment do?
+- answer: The CODEX-b experiment aims to study long-lived particles (LLPs) by providing
+    competitive sensitivity to a wide range of Beyond the Standard Model (BSM) LLP
+    scenarios. It operates in a zero-background environment and is designed to work
+    in conjunction with the LHCb experiment, enabling joint searches between the two
+    experiments. The experiment is relatively compact, affordable, and utilizes proven
+    technology.
+  question: What does the CODEX-b experiment do?
+- answer: The HL-LHC stands for High-Luminosity Large Hadron Collider. It is an upgrade
+    of the Large Hadron Collider (LHC) that aims to significantly increase the luminosity
+    of the collisions, allowing for more precise measurements and the potential discovery
+    of new particles or phenomena in high-energy physics.
+  question: What is the HL-LHC?
+- answer: The muon collider is good at measuring Higgs couplings, with precision at
+    the permille level being the target for most proposed muon colliders. The FCC-ee
+    collider is also capable of measuring Higgs couplings with smaller uncertainties
+    compared to the HL-LHC due to various factors like precise calculations, better
+    detector resolutions, and smaller background environments. However, for precision
+    measurements at the few percent levels, colliders with partonic center-of-mass
+    energies of around 10 TeV, such as the FCC-hh or a muon collider, would be required.
+  question: How good is the muon collide at measuring Higgs couplings? How about FCCee?
+- answer: "Based on the provided context, the High-Luminosity LHC (HL-LHC) will significantly\
+    \ expand the physics reach for Higgs physics. The HL-LHC program is expected to\
+    \ extend the existing LHC program with proton-proton collisions at a center-of-mass\
+    \ energy of 14 TeV and an integrated luminosity of 3 ab\u22121. This will allow\
+    \ for precise measurements of Higgs properties, top properties, rare processes\
+    \ in the flavor sector, precision QCD measurements, and heavy ion related analyses.\n\
+    \nTherefore, in terms of studying the Higgs boson (HH), the HL-LHC is expected\
+    \ to perform much better than Run 3 of the LHC. The HL-LHC will have twenty times\
+    \ the current available dataset, enabling more precise measurements and a broader\
+    \ range of analyses related to the Higgs boson.\n\nAs for future colliders beyond\
+    \ the HL-LHC, it is challenging to predict their performance without specific\
+    \ information on the design and capabilities of those colliders."
+  question: How well will do on HH in Run 3? How about HL-LHC? Will any future collide
+    do better?
+- answer: IRIS-HEP and HEP-CCE will work on developing a coherent vision and strategy
+    with the LHC experiments to reduce time-to-insight for physicists analyzing data
+    during the HL-LHC era. They will invest in infrastructure and services to support
+    the construction of upgraded detectors and new Interaction Regions for the HL-LHC.
+    Additionally, they will organize an "Analysis Grand Challenge" to test new concepts
+    and prototypes of analysis facilities to prepare for the challenges presented
+    by the HL-LHC.
+  question: What will IRIS-HEP and HEP-CCE do to help prepare for the HL-LHC?
+- answer: Yes, there is ongoing work in the collaborations to evolve or rewrite existing
+    toolkits and algorithms focused on physics and technical performance at high event
+    complexity, such as high pileup at HL-LHC, using machine learning techniques.
+    Additionally, there are efforts to develop ML algorithms for use in trigger and
+    data acquisition systems of future HEP experiments, which includes challenges
+    like complete event reconstruction.
+  question: Was there eny discussion of using ML to do complete event reconstruction?
+- answer: The prospects of LLP (long-lived particle) searches at the HL-LHC are promising.
+    Dedicated analyses of simplified models can lead to optimized search strategies,
+    increasing the ability of LHC experiments to probe TeV-scale physics. Optimized
+    cut-flows have shown to significantly increase the signal-to-background ratio
+    over standard same-sign dilepton cuts. Searches for LLPs at the LHC far detectors
+    are encouraged to develop a program to search for new physics, as observing only
+    a few events could provide evidence supporting new discoveries.
+  question: What are the prospects of LLP searches at the HL-LHC?
+- answer: "The current Higgs boson mass is approximately 125.38 \xB1 0.14 GeV according\
+    \ to CMS and 124.92 \xB1 0.21 GeV according to ATLAS. With the HL-LHC, the uncertainty\
+    \ in the Higgs boson mass measurements is expected to improve significantly, allowing\
+    \ for increased precision in most of the Higgs-boson coupling measurements."
+  question: What is the current Higgs mass? How much will the uncertainty improve
+    with the HL-LHC?
+- answer: One example of a new LLP model that could be explored at the HL-LHC is the
+    heavy neutral leptons. These are mentioned in the context as one of the models
+    that carry over to other analyses and could be of interest for probing new physics
+    with LLPs at higher energies.
+  question: What is a new LLP model that we should be exploring at the hl LHC?
+title: Standard questions for the Snowmass Whitepaper and Report Dataset

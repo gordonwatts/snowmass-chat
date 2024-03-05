@@ -107,6 +107,15 @@ class config_cache:
     def split_info(self, value: Tuple[int, int]) -> None:
         self._update({"split_info": value})
 
+    @property
+    def embed_model(self) -> str:
+        "The tokenizer model for embedding"
+        return self._load().get("embed_model", "text-embedding-ada-002")
+
+    @embed_model.setter
+    def embed_model(self, value: str) -> None:
+        self._update({"embed_model": value})
+
 
 def load_config(args) -> ChatConfig:
     """Load the config file from the command line arguments
@@ -319,6 +328,7 @@ def vector_populate(args):
             openai_key,
             chat_config.papers,
             split_info,
+            args.embedding_model,
             lambda _: progress.update(task1, advance=1),
         )
 
@@ -396,7 +406,7 @@ def query_find(args):
         return
 
     chunks = find_similar_text_chucks(
-        vector_dir, openai_key, args.query, int(args.n or 4)
+        vector_dir, openai_key, args.query, args.embedding_model, int(args.n or 4)
     )
     if len(chunks) == 0:
         print("No similar chunks found")
@@ -433,6 +443,7 @@ def ask_from_args(args, query: str) -> Dict[str, Any]:
         openai_key,
         query,
         args.query_model or config_cache().query_model,
+        args.embedding_model,
         int(args.n or 4),
     )
 
@@ -525,7 +536,9 @@ def questions_ask(args):
     # Build the description
     description = (
         f"{args.description} (-n {args.n}, "
-        f"{args.query_model or config_cache().query_model})"
+        f"{args.query_model or config_cache().query_model}, "
+        f"{args.embedding_model}"
+        ")"
     )
 
     questions = load_questions(args.questions_file)
@@ -548,6 +561,7 @@ def questions_ask(args):
 def default_list(args):
     """List the defaults"""
     print(f"Query Model: {config_cache().query_model}")
+    print(f"Embedding Model: {config_cache().embed_model}")
     print(f"Top k (# chunks of documents sent as context): {config_cache().top_k}")
     print(
         f"Chunk Split Info: max_size={config_cache().split_info[0]}, "
@@ -559,6 +573,8 @@ def default_set(args):
     """Set a default"""
     if args.key == "query_model":
         config_cache().query_model = args.value
+    elif args.key == "embedding_model":
+        config_cache().embed_model = args.value
     elif args.key == "top_k":
         config_cache().top_k = int(args.value)
     elif args.key == "split_info":
@@ -682,6 +698,13 @@ def execute_command_line():
     vector_populate_parser = vector_subparsers.add_parser(
         "populate", help="populate vector store with already cached papers"
     )
+    vector_populate_parser.add_argument(
+        "--embedding_model",
+        "-e",
+        help="Use a different embedding model",
+        type=str,
+        default=config_cache().embed_model,
+    )
     vector_populate_parser.set_defaults(func=vector_populate)
 
     # The query sub command has find and ask sub commands
@@ -702,9 +725,16 @@ def execute_command_line():
         parser.add_argument(
             "--query_model",
             "-q",
-            help="Use a different query model (default is whatever is set in the config)",
+            help="Use a different query model",
             type=str,
-            default=None,
+            default=config_cache().query_model,
+        )
+        parser.add_argument(
+            "--embedding_model",
+            "-e",
+            help="Use a different embedding model",
+            type=str,
+            default=config_cache().embed_model,
         )
 
     # The find command finds similar text chunks.
@@ -829,7 +859,7 @@ def execute_command_line():
         "key",
         help="The key to set",
         type=str,
-        choices=["query_model", "top_k", "split_info"],
+        choices=["query_model", "top_k", "split_info", "embedding_model"],
     )
     defaults_set_parser.add_argument("value", help="The value to set the key to")
     defaults_set_parser.set_defaults(func=default_set)
