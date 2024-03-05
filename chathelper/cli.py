@@ -523,6 +523,19 @@ def questions_ask(args):
         yaml.dump(qanda.dict(), f)
 
 
+def default_list(args):
+    """List the defaults"""
+    print(f"Query Model: {config_cache().query_model}")
+
+
+def default_set(args):
+    """Set a default"""
+    if args.key == "query_model":
+        config_cache().query_model = args.value
+    else:
+        raise ValueError(f"Unknown default key {args.key}")
+
+
 def execute_command_line():
     """Parse command line arguments using the `argparse` module as a series of
     sub-commands.
@@ -758,6 +771,27 @@ def execute_command_line():
         help="Print the table in markdown format",
     )
     questions_compare_parser.set_defaults(func=questions_compare)
+
+    # The default sub command works with defaults for processing, like the
+    # default OpenAI LLM model. It has sub-commands like list (which lists all of the
+    # defaults), and set (which sets a default).
+    defaults_parser = subparsers.add_parser("defaults", help="Working with defaults")
+    defaults_parser.set_defaults(func=lambda _: defaults_parser.print_help())
+    defaults_subparsers = defaults_parser.add_subparsers(help="Possible Commands")
+
+    # list the defaults
+    defaults_list_parser = defaults_subparsers.add_parser(
+        "list", help="List the defaults"
+    )
+    defaults_list_parser.set_defaults(func=default_list)
+
+    # The set command will set a default
+    defaults_set_parser = defaults_subparsers.add_parser("set", help="Set a default")
+    defaults_set_parser.add_argument(
+        "key", help="The key to set", type=str, choices=["query_model"]
+    )
+    defaults_set_parser.add_argument("value", help="The value to set the key to")
+    defaults_set_parser.set_defaults(func=default_set)
 
     # Parse the arguments
     args = parser.parse_args(namespace=None)
