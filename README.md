@@ -27,6 +27,8 @@ Getting from a list of documents to a working chat-bot follows the below steps:
         * `chatter -c snowmass/snowmass.yaml questions --questions_file snowmass/snowmass-questions.yaml compare snowmass/snowmass-v1.0.yaml snowmass/snowmass-v1.0-update.yaml`
         * This will write a table to your output terminal, but you can also generate a markdown file - see command line help for the `compare` sub-command.
 
+Use `chatter default list` to see what parameters are set by default when invoking the commands.
+
 ### Snowmass Info
 
 Included is a config file for `snowmass`.
