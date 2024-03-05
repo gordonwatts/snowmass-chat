@@ -19,6 +19,12 @@ Getting from a list of documents to a working chat-bot follows the below steps:
 1. Make your query
     * Use `chatter -c snowmass/snowmass.yaml query ask "What does the MATHUSLA experiment do?`
     * Change `ask` to `find` to see what chunks of text are used by the LLM to answer your question.
+1. Generate answers file for comparison
+    * Generate a `yaml` file contains the answers to a list of questions
+        * `chatter -c snowmass/snowmass.yaml questions --questions_file snowmass/snowmass-questions.yaml ask "Default config, but updated code" snowmass/snowmass-v1.0-update.yaml`
+    * You can then generate a markdown file that "compares" the answers in a table
+        * `chatter -c snowmass/snowmass.yaml questions --questions_file snowmass/snowmass-questions.yaml compare snowmass/snowmass-v1.0.yaml snowmass/snowmass-v1.0-update.yaml`
+        * This will write a table to your output terminal, but you can also generate a markdown file - see command line help for the `compare` sub-command.
 
 ### Snowmass Info
 
