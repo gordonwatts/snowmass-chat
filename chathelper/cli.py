@@ -585,6 +585,11 @@ def default_set(args):
         raise ValueError(f"Unknown default key {args.key}")
 
 
+def light_rag_populate(args):
+    """Populate the lightRag store from cached papers"""
+    print("Populating lightRag store...")
+
+
 def execute_command_line():
     """Parse command line arguments using the `argparse` module as a series of
     sub-commands.
@@ -863,6 +868,17 @@ def execute_command_line():
     )
     defaults_set_parser.add_argument("value", help="The value to set the key to")
     defaults_set_parser.set_defaults(func=default_set)
+
+    # The light-rag sub-command for future lightRag commands
+    light_rag_parser = subparsers.add_parser("lightrag", help="LightRag Interface")
+    light_rag_parser.set_defaults(func=lambda _: light_rag_parser.print_help())
+    light_rag_subparsers = light_rag_parser.add_subparsers(help="Possible Commands")
+
+    # Populate command for light-rag
+    light_rag_populate_parser = light_rag_subparsers.add_parser(
+        "populate", help="Populate lightRag store with already cached papers"
+    )
+    light_rag_populate_parser.set_defaults(func=light_rag_populate)
 
     # Parse the arguments
     args = parser.parse_args(namespace=None)
