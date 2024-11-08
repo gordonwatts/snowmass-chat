@@ -83,7 +83,7 @@ class config_cache:
 
     @property
     def query_model(self) -> str:
-        return self._load().get("query_model", "gpt-3.5-turbo")
+        return self._load().get("query_model", "gpt-4o-mini")
 
     @query_model.setter
     def query_model(self, value: str) -> None:
@@ -110,7 +110,7 @@ class config_cache:
     @property
     def embed_model(self) -> str:
         "The tokenizer model for embedding"
-        return self._load().get("embed_model", "text-embedding-ada-002")
+        return self._load().get("embed_model", "text-embedding-3-large")
 
     @embed_model.setter
     def embed_model(self, value: str) -> None:
