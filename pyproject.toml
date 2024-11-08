@@ -28,6 +28,7 @@ dependencies = [
     "arxiv",
     "pymupdf",
     "spacy",
+    # "LightRAG @ git+https://github.com/HKUDS/LightRAG.git@main#egg=LightRAG",
 ]
 
 [tool.setuptools.packages.find]

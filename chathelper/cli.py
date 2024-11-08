@@ -585,9 +585,34 @@ def default_set(args):
         raise ValueError(f"Unknown default key {args.key}")
 
 
+def init_lightrag(model: str, working_dir: Path):
+    from lightrag import LightRAG
+    from lightrag.llm import gpt_4o_mini_complete, gpt_4o_complete
+
+    model_func = gpt_4o_mini_complete if model == "4o-mini" else gpt_4o_complete
+
+    rag = LightRAG(
+        working_dir=str(working_dir),
+        llm_model_func=model_func,
+    )
+
+    return rag
+
+
 def light_rag_populate(args):
     """Populate the lightRag store from cached papers"""
-    print("Populating lightRag store...")
+    # Get the defaults
+    working_dir = config_cache().cache_dir / "lightRag"
+    model = config_cache().query_model
+    if not model.startswith("gpt-"):
+        raise ValueError(f"Model {model} is not a valid model for lightRag - only `gpt-4o-mini`"
+                         " and `gpt-4o` are supported")
+    model = model[4:]
+
+    if not working_dir.exists():
+        working_dir.mkdir(parents=True)
+
+    l_rag = init_lightrag(model, working_dir)
 
 
 def execute_command_line():
@@ -607,6 +632,9 @@ def execute_command_line():
     parser = argparse.ArgumentParser(description="Chat Helper")
     parser.add_argument(
         "-c", "--config", help="The yaml filename we will use for the config file."
+    )
+    parser.add_argument(
+        "-v", "--verbose", action="count", default=0, help="Increase verbosity level"
     )
     parser.set_defaults(func=lambda _: parser.print_help())
     subparsers = parser.add_subparsers(help="Possible Commands")
@@ -882,6 +910,17 @@ def execute_command_line():
 
     # Parse the arguments
     args = parser.parse_args(namespace=None)
+
+    # Initialize the logger
+    log_level = logging.WARNING  # default level
+    if args.verbose == 1:
+        log_level = logging.INFO
+    elif args.verbose >= 2:
+        log_level = logging.DEBUG
+
+    logging.basicConfig(level=log_level)
+
+    # Dispatch the function.
     args.func(args)
 
 
