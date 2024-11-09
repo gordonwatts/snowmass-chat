@@ -6,6 +6,7 @@
     "docstore",
     "FASER",
     "fitz",
+    "httpcore",
     "indico",
     "langchain",
     "lightrag",
@@ -17,5 +18,7 @@
     "snowmass",
     "spacy",
     "vectorstores"
-  ]
+  ],
+  "editor.defaultFormatter": "ms-python.black-formatter",
+  "debugpy.debugJustMyCode": false
 }
