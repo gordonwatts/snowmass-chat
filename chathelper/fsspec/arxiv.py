@@ -1,11 +1,11 @@
 from urllib.parse import urlparse
 from fsspec import AbstractFileSystem
 import fsspec
-from pydantic_core import Url
+from httpcore import URL
 
 
 class ArxivFileSystem(AbstractFileSystem):
-    def _get_paper_url(self, path: str) -> Url:
+    def _get_paper_url(self, path: str) -> URL:
         """Get the URL of the paper from the metadata
 
         Args:
@@ -15,7 +15,7 @@ class ArxivFileSystem(AbstractFileSystem):
             Url: The URL of the paper
         """
         uri = urlparse(path)
-        return Url(f"https://arxiv.org/pdf/{uri.netloc}.pdf")
+        return URL(f"https://arxiv.org/pdf/{uri.netloc}.pdf")
 
     def ls(self, path, detail=True, **kwargs):
         """Get metadata info for the given path. Cached.

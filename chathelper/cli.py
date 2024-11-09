@@ -585,6 +585,36 @@ def default_set(args):
         raise ValueError(f"Unknown default key {args.key}")
 
 
+def init_lightrag(model: str, working_dir: Path):
+    from lightrag import LightRAG
+    from lightrag.llm import gpt_4o_mini_complete, gpt_4o_complete
+
+    model_func = gpt_4o_mini_complete if model == "4o-mini" else gpt_4o_complete
+
+    rag = LightRAG(
+        working_dir=str(working_dir),
+        llm_model_func=model_func,
+    )
+
+    return rag
+
+
+def light_rag_populate(args):
+    """Populate the lightRag store from cached papers"""
+    # Get the defaults
+    working_dir = config_cache().cache_dir / "lightRag"
+    model = config_cache().query_model
+    if not model.startswith("gpt-"):
+        raise ValueError(f"Model {model} is not a valid model for lightRag - only `gpt-4o-mini`"
+                         " and `gpt-4o` are supported")
+    model = model[4:]
+
+    if not working_dir.exists():
+        working_dir.mkdir(parents=True)
+
+    l_rag = init_lightrag(model, working_dir)
+
+
 def execute_command_line():
     """Parse command line arguments using the `argparse` module as a series of
     sub-commands.
@@ -602,6 +632,9 @@ def execute_command_line():
     parser = argparse.ArgumentParser(description="Chat Helper")
     parser.add_argument(
         "-c", "--config", help="The yaml filename we will use for the config file."
+    )
+    parser.add_argument(
+        "-v", "--verbose", action="count", default=0, help="Increase verbosity level"
     )
     parser.set_defaults(func=lambda _: parser.print_help())
     subparsers = parser.add_subparsers(help="Possible Commands")
@@ -864,8 +897,30 @@ def execute_command_line():
     defaults_set_parser.add_argument("value", help="The value to set the key to")
     defaults_set_parser.set_defaults(func=default_set)
 
+    # The light-rag sub-command for future lightRag commands
+    light_rag_parser = subparsers.add_parser("lightrag", help="LightRag Interface")
+    light_rag_parser.set_defaults(func=lambda _: light_rag_parser.print_help())
+    light_rag_subparsers = light_rag_parser.add_subparsers(help="Possible Commands")
+
+    # Populate command for light-rag
+    light_rag_populate_parser = light_rag_subparsers.add_parser(
+        "populate", help="Populate lightRag store with already cached papers"
+    )
+    light_rag_populate_parser.set_defaults(func=light_rag_populate)
+
     # Parse the arguments
     args = parser.parse_args(namespace=None)
+
+    # Initialize the logger
+    log_level = logging.WARNING  # default level
+    if args.verbose == 1:
+        log_level = logging.INFO
+    elif args.verbose >= 2:
+        log_level = logging.DEBUG
+
+    logging.basicConfig(level=log_level)
+
+    # Dispatch the function.
     args.func(args)
 
 

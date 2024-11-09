@@ -8,6 +8,7 @@
     "fitz",
     "indico",
     "langchain",
+    "lightrag",
     "MATHUSLA",
     "openai",
     "pydantic",
