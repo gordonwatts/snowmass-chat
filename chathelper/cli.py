@@ -612,7 +612,7 @@ def light_rag_populate(args):
     if not working_dir.exists():
         working_dir.mkdir(parents=True)
 
-    l_rag = init_lightrag(model, working_dir)
+    _ = init_lightrag(model, working_dir)
 
 
 def execute_command_line():
