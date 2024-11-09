@@ -7,7 +7,7 @@ import pytest
 
 from chathelper.cache import _paper_path
 from chathelper.config import ChatDocument
-from chathelper.model import populate_vector_store
+from chathelper.model import load_vector_store_database, populate_vector_store
 
 
 class _dummy_document:
@@ -42,10 +42,10 @@ def test_load_vector_store(mock_load, tmp_path, cache_with_files):
     cache_dir, papers = cache_with_files
     vector_store = tmp_path / "vector_store"
 
-    populate_vector_store(vector_store, cache_dir, "api_key", papers)
+    populate_vector_store(vector_store, cache_dir, "api_key", papers, (500, 0), "do-embed")
 
     mock_load.assert_called_once()
-    assert len(list(mock_load.call_args[0][3])) == 1
+    assert len(list(mock_load.call_args[0][2])) == 1
 
 
 @patch("chathelper.model._load_vector_store")
@@ -57,10 +57,10 @@ def test_load_vector_store_nocache(mock_load, tmp_path):
 
     papers = [ChatDocument(ref="arxiv://2109.10905", tags=[])]
 
-    populate_vector_store(vector_store, cache_dir, "api_key", papers)
+    populate_vector_store(vector_store, cache_dir, "api_key", papers, (500, 0), "do-embed")
 
     mock_load.assert_called_once()
-    assert len(list(mock_load.call_args[0][3])) == 0
+    assert len(list(mock_load.call_args[0][2])) == 0
 
 
 @patch("chathelper.model._load_vector_store")
@@ -70,9 +70,18 @@ def test_load_vector_store_repeat(mock_load, tmp_path, cache_with_files):
     cache_dir, papers = cache_with_files
     vector_store = tmp_path / "vector_store"
 
-    populate_vector_store(vector_store, cache_dir, "api_key1", papers)
-    list(mock_load.call_args[0][3])
-    populate_vector_store(vector_store, cache_dir, "api_key2", papers)
+    populate_vector_store(vector_store, cache_dir, "api_key1", papers, (500, 0), "do-embed")
+    list(mock_load.call_args[0][2])
+    populate_vector_store(vector_store, cache_dir, "api_key2", papers, (500, 0), "do-embed")
 
     assert mock_load.call_count == 2
-    assert len(list(mock_load.call_args[0][3])) == 0
+    assert len(list(mock_load.call_args[0][2])) == 0
+
+
+def test_load_vector_store_database(tmp_path):
+    "Test the database is saved and can be created"
+
+    from pydantic import SecretStr
+
+    db = load_vector_store_database(tmp_path, SecretStr("dude"), "fork-it")
+    assert db is not None
