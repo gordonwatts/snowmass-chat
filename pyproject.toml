@@ -22,7 +22,7 @@ dependencies = [
     "fsspec[http]",
     "requests",
     "openai",
-    "tiktoken",
+    # "tiktoken",
     "rich",
     "unstructured[local-inference]",
     "arxiv",
@@ -32,7 +32,7 @@ dependencies = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["chathelper"]
+include = ["chathelper", "chathelper.fsspec"]
 
 [project.scripts]
 chatter = "chathelper.cli:main"
