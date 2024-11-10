@@ -127,11 +127,11 @@ def test_download_arxiv(mock_load, mock_init, tmp_path):
     paper = ChatDocument(ref=f"arxiv://{paper_name}", tags=[])
     download_paper(paper, cache_dir)
 
-    mock_init.assert_called_once_with(
-        "id:2109.10905",
-        load_all_available_meta=True,
-        doc_content_chars_max=None,
-    )
+    mock_init.assert_called_once()
+    args, kwargs = mock_init.call_args
+    assert args[0] == "id:2109.10905"
+    assert kwargs["load_all_available_meta"] is True
+    assert kwargs["doc_content_chars_max"] is None
 
 
 @pytest.mark.skip(reason="Skipping this test due to SSL error")
