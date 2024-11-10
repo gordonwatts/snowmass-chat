@@ -13,18 +13,18 @@ requires-python = ">=3.10"
 # classifiers = ["Framework :: Django", "Programming Language :: Python :: 3"]
 
 dependencies = [
+    "langchain==0.3.7",
+    "langchain-community",
+    "langchain-openai",
+    "langchain-chroma",
     "PyYAML",
-    "pydantic~=1.8",
+    "pydantic",
     "fsspec[http]",
     "requests",
     "openai",
     "tiktoken",
     "rich",
     "unstructured[local-inference]",
-    "langchain",
-    "langchain-community",
-    "langchain-openai",
-    "langchain-chroma",
     "arxiv",
     "pymupdf",
     "spacy",
