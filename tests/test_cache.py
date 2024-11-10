@@ -127,7 +127,7 @@ def test_download_arxiv(mock_load, mock_init, tmp_path):
     paper = ChatDocument(ref=f"arxiv://{paper_name}", tags=[])
     download_paper(paper, cache_dir)
 
-    assert mock_init.called_once_with(
+    mock_init.assert_called_once_with(
         "id:2109.10905",
         load_all_available_meta=True,
         doc_content_chars_max=None,
