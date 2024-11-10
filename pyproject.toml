@@ -32,7 +32,7 @@ dependencies = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["chathelper", "chathelper.fsspec"]
+include = ["chathelper", "chathelper.fsspec", "chathelper.lc_experimental"]
 
 [project.scripts]
 chatter = "chathelper.cli:main"
