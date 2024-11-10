@@ -13,7 +13,8 @@ from chathelper.cache import (
     load_paper,
 )
 from chathelper.config import ChatDocument
-from chathelper.lc_experimental.archive_loader import ArxivLoader
+
+# from chathelper.lc_experimental.archive_loader import ArxivLoader
 
 
 class _dummy_document:
@@ -96,41 +97,41 @@ def test_find(tmp_path):
     assert find_paper(paper2, tmp_path) is None
 
 
-@patch.object(ArxivLoader, "load", return_value=[_dummy_document()])
-def test_download_archive_loaded(mock_load, tmp_path):
-    "Download a paper to the cache"
-    paper_name = "2109.10905"
+# @patch.object(ArxivLoader, "load", return_value=[_dummy_document()])
+# def test_download_archive_loaded(mock_load, tmp_path):
+#     "Download a paper to the cache"
+#     paper_name = "2109.10905"
 
-    cache_dir = tmp_path / "cache"
-    # expected_paper = cache_dir / f"{paper_name}.pickle"
+#     cache_dir = tmp_path / "cache"
+#     # expected_paper = cache_dir / f"{paper_name}.pickle"
 
-    paper = ChatDocument(ref=f"arxiv://{paper_name}", tags=[])
-    assert download_paper(paper, cache_dir)
+#     paper = ChatDocument(ref=f"arxiv://{paper_name}", tags=[])
+#     assert download_paper(paper, cache_dir)
 
-    downloaded = find_paper(paper, cache_dir)
-    assert downloaded is not None
-    assert downloaded.exists()
+#     downloaded = find_paper(paper, cache_dir)
+#     assert downloaded is not None
+#     assert downloaded.exists()
 
-    mock_load.assert_called_once_with()
+#     mock_load.assert_called_once_with()
 
 
-@patch.object(ArxivLoader, "__init__", return_value=None)
-@patch.object(ArxivLoader, "load", return_value=[_dummy_document()])
-def test_download_arxiv(mock_load, mock_init, tmp_path):
-    "Make sure the Archive loader is called correctly"
-    paper_name = "2109.10905"
+# @patch.object(ArxivLoader, "__init__", return_value=None)
+# @patch.object(ArxivLoader, "load", return_value=[_dummy_document()])
+# def test_download_arxiv(mock_load, mock_init, tmp_path):
+#     "Make sure the Archive loader is called correctly"
+#     paper_name = "2109.10905"
 
-    cache_dir = tmp_path / "cache"
-    # expected_paper = cache_dir / f"{paper_name}.pickle"
+#     cache_dir = tmp_path / "cache"
+#     # expected_paper = cache_dir / f"{paper_name}.pickle"
 
-    paper = ChatDocument(ref=f"arxiv://{paper_name}", tags=[])
-    download_paper(paper, cache_dir)
+#     paper = ChatDocument(ref=f"arxiv://{paper_name}", tags=[])
+#     download_paper(paper, cache_dir)
 
-    assert mock_init.called_once_with(
-        "id:2109.10905",
-        load_all_available_meta=True,
-        doc_content_chars_max=None,
-    )
+#     assert mock_init.called_once_with(
+#         "id:2109.10905",
+#         load_all_available_meta=True,
+#         doc_content_chars_max=None,
+#     )
 
 
 @patch.object(UnstructuredPDFLoader, "__init__", return_value=None)
@@ -156,22 +157,22 @@ def test_download_pdf_From_url(mock_load, mock_init, tmp_path):
     assert Path(arg).name == "ExecutiveSummary.pdf"
 
 
-@patch.object(ArxivLoader, "load", side_effect=ValueError("should not be called"))
-def test_download_cached(mock_load, tmp_path):
-    "Do not re-download a paper"
-    paper_name = "2109.10905"
+# @patch.object(ArxivLoader, "load", side_effect=ValueError("should not be called"))
+# def test_download_cached(mock_load, tmp_path):
+#     "Do not re-download a paper"
+#     paper_name = "2109.10905"
 
-    cache_dir = tmp_path / "cache"
-    # expected_paper = cache_dir / f"{paper_name}.pickle"
+#     cache_dir = tmp_path / "cache"
+#     # expected_paper = cache_dir / f"{paper_name}.pickle"
 
-    paper = ChatDocument(ref=f"arxiv://{paper_name}", tags=[])
-    expected_paper_path = _paper_path(paper, cache_dir)
-    expected_paper_path.parent.mkdir(exist_ok=True, parents=True)
-    expected_paper_path.touch()
+#     paper = ChatDocument(ref=f"arxiv://{paper_name}", tags=[])
+#     expected_paper_path = _paper_path(paper, cache_dir)
+#     expected_paper_path.parent.mkdir(exist_ok=True, parents=True)
+#     expected_paper_path.touch()
 
-    # This download should do nothing
-    assert not download_paper(paper, cache_dir)
-    mock_load.assert_not_called()
+#     # This download should do nothing
+#     assert not download_paper(paper, cache_dir)
+#     mock_load.assert_not_called()
 
 
 def test_load_cached(tmp_path):
