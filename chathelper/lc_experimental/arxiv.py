@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel, root_validator
+from pydantic import BaseModel, model_validator
 
 from langchain.schema import Document
 
@@ -61,7 +61,7 @@ class ArxivAPIWrapper(BaseModel):
     keep_pdf: bool = False
     cache_dir: Path = Path(".")
 
-    @root_validator()
+    @model_validator(mode="before")
     def validate_environment(cls, values: Dict) -> Dict:
         """Validate that the python package exists in environment."""
         try:
