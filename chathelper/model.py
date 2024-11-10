@@ -51,7 +51,9 @@ def _split_document_generator(docs, split_info):
         yield doc_info, splits
 
 
-def _insert_into_vector_store_generator(vector_store_path, api_key, embedding_model, split_docs):
+def _insert_into_vector_store_generator(
+    vector_store_path, api_key, embedding_model, split_docs
+):
     """Generator that inserts document splits into the vector store."""
     vector_store = load_vector_store_database(
         vector_store_path, api_key, embedding_model
@@ -67,7 +69,7 @@ def _insert_into_vector_store_generator(vector_store_path, api_key, embedding_mo
                 )
                 for k, v in doc_info.metadata.items():
                     logging.warning(f"  {k}: {v}")
-                raise
+            raise
         yield doc_info
 
 
@@ -91,15 +93,16 @@ def _load_vector_store(
 
     """
     split_docs = _split_document_generator(docs, split_info)
-    for _ in _insert_into_vector_store_generator(vector_store_path, api_key, embedding_model,
-                                                 split_docs):
+    for _ in _insert_into_vector_store_generator(
+        vector_store_path, api_key, embedding_model, split_docs
+    ):
         pass
 
 
 def load_vector_store_database(
     vector_store_path: Path, api_key: SecretStr, embedding_model: str
 ) -> Chroma:
-    """Open the Vector store and create the embedding function
+    """Open the Vector store and and attach the correct the embedding function
 
     Args:
         vector_store_path (Path): The location of the vector store
@@ -146,7 +149,7 @@ def _save_store(vector_store_path: Path, files: VectorStoreFiles):
 def populate_vector_store(
     vector_store_path: Path,
     cache_dir: Path,
-    api_key: str,
+    api_key: SecretStr,
     docs: Iterable[ChatDocument],
     split_info: Tuple[int, int],
     embedding_model: str,
@@ -189,6 +192,11 @@ def populate_vector_store(
             _save_store(vector_store_path, files)
             count += 1
             my_cb(count)
+        if count == 0:
+            logging.warning(
+                "No documents to process - did you download the cache with `chatter "
+                "--config <config-file> cache download`?"
+            )
 
     _load_vector_store(
         vector_store_path, api_key, good_documents(), split_info, embedding_model
