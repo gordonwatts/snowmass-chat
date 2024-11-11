@@ -134,7 +134,7 @@ def test_download_arxiv(mock_load, mock_init, tmp_path):
     assert kwargs["doc_content_chars_max"] is None
 
 
-@pytest.mark.skip(reason="Skipping this test due to SSL error")
+# @pytest.mark.skip(reason="Skipping this test due to SSL error")
 @patch.object(UnstructuredPDFLoader, "__init__", return_value=None)
 @patch.object(UnstructuredPDFLoader, "load", return_value=[_dummy_document()])
 def test_download_pdf_From_url(mock_load, mock_init, tmp_path):

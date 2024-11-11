@@ -93,7 +93,7 @@ def do_download(paper: ChatDocument, cache_dir: Path, paper_path: Path):
         # This is a bit of a hack, but it works.
         pdf_path = (cache_dir / f"{paper_path.stem}.pdf").absolute()
         if not pdf_path.exists():
-            r = requests.get(paper.ref)
+            r = requests.get(paper.ref, verify=False)
             with pdf_path.open("wb") as f:
                 f.write(r.content)
         loader = UnstructuredPDFLoader(str(pdf_path))
