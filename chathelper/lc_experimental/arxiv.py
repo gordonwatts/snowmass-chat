@@ -51,8 +51,6 @@ class ArxivAPIWrapper(BaseModel):
             arxiv.run("tree of thought llm)
     """
 
-    arxiv_search: Any  #: :meta private:
-    arxiv_exceptions: Any  # :meta private:
     top_k_results: int = 3
     ARXIV_MAX_QUERY_LENGTH: int = 300
     load_max_docs: int = 100
@@ -65,15 +63,7 @@ class ArxivAPIWrapper(BaseModel):
     def validate_environment(cls, values: Dict) -> Dict:
         """Validate that the python package exists in environment."""
         try:
-            import arxiv
-
-            values["arxiv_search"] = arxiv.Search
-            values["arxiv_exceptions"] = (
-                arxiv.ArxivError,
-                arxiv.UnexpectedEmptyPageError,
-                arxiv.HTTPError,
-            )
-            values["arxiv_result"] = arxiv.Result
+            import arxiv  # noqa: F401
         except ImportError:
             raise ImportError(
                 "Could not import arxiv python package. "
@@ -95,9 +85,13 @@ class ArxivAPIWrapper(BaseModel):
             query: a plaintext search query
         """  # noqa: E501
         try:
-            results = self.arxiv_search(  # type: ignore
+            import arxiv
+
+            search = arxiv.Search(  # type: ignore
                 query[: self.ARXIV_MAX_QUERY_LENGTH], max_results=self.top_k_results
-            ).results()
+            )
+            client = arxiv.Client()
+            results = client.results(search)
         except self.arxiv_exceptions as ex:
             return f"Arxiv exception: {ex}"
         docs = [
@@ -133,12 +127,16 @@ class ArxivAPIWrapper(BaseModel):
                 "`pip install pymupdf`"
             )
 
+        import arxiv
+
         try:
-            results = self.arxiv_search(  # type: ignore
+            search = arxiv.Search(  # type: ignore
                 query[: self.ARXIV_MAX_QUERY_LENGTH], max_results=self.load_max_docs
-            ).results()
-        except self.arxiv_exceptions as ex:
-            logger.debug("Error on arxiv: %s", ex)
+            )
+            client = arxiv.Client()
+            results = client.results(search)
+        except arxiv.ArxivError as ex:
+            logger.warning("Error on arxiv: %s", ex)
             return []
 
         docs: List[Document] = []
