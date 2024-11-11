@@ -3,7 +3,7 @@
 import logging
 import os
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 
 from pydantic import BaseModel, model_validator
 
@@ -92,7 +92,7 @@ class ArxivAPIWrapper(BaseModel):
             )
             client = arxiv.Client()
             results = client.results(search)
-        except self.arxiv_exceptions as ex:
+        except arxiv.ArxivError as ex:
             return f"Arxiv exception: {ex}"
         docs = [
             f"Published: {result.updated.date()}\n"
