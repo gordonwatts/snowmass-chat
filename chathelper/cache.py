@@ -1,3 +1,4 @@
+import logging
 import pickle
 from pathlib import Path
 from typing import Callable, Iterable, Optional
@@ -180,6 +181,10 @@ def download_all(
     """
     counter = 0
     downloaded = 0
+
+    if not cache_dir.exists():
+        logging.debug(f"Creating cache directory {cache_dir}")
+        cache_dir.mkdir(parents=True)
 
     def my_cb(count: int):
         if progress_callback is not None:
