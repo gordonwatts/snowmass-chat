@@ -1,5 +1,6 @@
 import argparse
 import logging
+import os
 import shutil
 import sys
 from collections import defaultdict
@@ -589,8 +590,17 @@ def init_lightrag(model: str, working_dir: Path):
     from lightrag import LightRAG
     from lightrag.llm import gpt_4o_mini_complete, gpt_4o_complete
 
+    if model not in ["4o-mini", "4o"]:
+        raise ValueError(
+            f"Model {model} is not a valid model for lightRag - only `4o-mini`"
+            " and `4o` are supported"
+        )
     model_func = gpt_4o_mini_complete if model == "4o-mini" else gpt_4o_complete
 
+    open_api_key = config_cache().keys.get("openai", None)
+    if open_api_key is None:
+        raise ValueError("No OpenAI API key set, use chatter set key openai <key>")
+    os.environ["OPENAI_API_KEY"] = open_api_key
     rag = LightRAG(
         working_dir=str(working_dir),
         llm_model_func=model_func,
@@ -605,14 +615,34 @@ def light_rag_populate(args):
     working_dir = config_cache().cache_dir / "lightRag"
     model = config_cache().query_model
     if not model.startswith("gpt-"):
-        raise ValueError(f"Model {model} is not a valid model for lightRag - only `gpt-4o-mini`"
-                         " and `gpt-4o` are supported")
+        raise ValueError(
+            f"Model {model} is not a valid model for lightRag - only `gpt-4o-mini`"
+            " and `gpt-4o` are supported"
+        )
     model = model[4:]
 
     if not working_dir.exists():
         working_dir.mkdir(parents=True)
 
-    _ = init_lightrag(model, working_dir)
+    logging.info(f"lightRag: {model}, {working_dir}")
+    l_rag = init_lightrag(model, working_dir)
+
+    # Now we can populate it.
+    chat_config = load_config(args)
+    progress = Progress()
+    with progress:
+        task1 = progress.add_task("Downloading", total=len(chat_config.papers))
+        for ref in chat_config.papers:
+            doc = load_paper(ref, config_cache().cache_dir)
+            if doc is None:
+                logging.info(f"Skipping {ref} - not cached")
+                continue
+            # if ref in l_rag.store:
+            #     logging.info(f"Skipping {ref} - already in lightRag store")
+            #     continue
+            logging.info(f"Adding {ref.ref}")
+            l_rag.insert(doc.page_content)
+            progress.update(task1, advance=1)
 
 
 def execute_command_line():
