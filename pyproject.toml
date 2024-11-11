@@ -28,7 +28,7 @@ dependencies = [
     "arxiv",
     "pymupdf",
     # "spacy",
-    #"LightRAG-hku @ git+https://github.com/HKUDS/LightRAG@39cf939d153230c970ae98a9d5b5fbd30340cf3a#egg=LightRAG-HKU",
+    "LightRAG-hku @ git+https://github.com/HKUDS/LightRAG@39cf939d153230c970ae98a9d5b5fbd30340cf3a#egg=LightRAG-HKU",
     "accelerate",
     "aioboto3",
     "graspologic",
