@@ -28,7 +28,19 @@ dependencies = [
     "arxiv",
     "pymupdf",
     # "spacy",
-    # "LightRAG @ git+https://github.com/HKUDS/LightRAG.git@main#egg=LightRAG",
+    #"LightRAG-hku @ git+https://github.com/HKUDS/LightRAG@39cf939d153230c970ae98a9d5b5fbd30340cf3a#egg=LightRAG-HKU",
+    "accelerate",
+    "aioboto3",
+    "graspologic",
+    "nano-vectordb",
+    "neo4j",
+    "networkx",
+    "ollama",
+    "pyvis",
+    "tenacity",
+    "torch",
+    "transformers",
+    "xxhash",
 ]
 
 [tool.setuptools.packages.find]
