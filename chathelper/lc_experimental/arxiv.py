@@ -144,7 +144,9 @@ class ArxivAPIWrapper(BaseModel):
             try:
                 doc_file_path: Path = self.cache_dir / result._get_default_filename()
                 if not doc_file_path.exists():
-                    doc_file_path = Path(result.download_pdf(dirpath=self.cache_dir))
+                    doc_file_path = Path(
+                        result.download_pdf(dirpath=str(self.cache_dir))
+                    )
                 with fitz.open(doc_file_path) as doc_file:
                     text: str = "".join(page.get_text() for page in doc_file)  # type: ignore
             except FileNotFoundError as f_ex:
