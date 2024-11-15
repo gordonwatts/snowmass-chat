@@ -610,7 +610,15 @@ def init_lightrag(model: str, working_dir: Path):
 
 
 def light_rag_populate(args):
-    """Populate the lightRag store from cached papers"""
+    '''Populate the light rag database's (knowledge, lookup, etc.).
+
+    Notes:
+
+    * If we try to reload a document that is already in there, it is quickly skipped.
+    * If we load a document that is the same as one in there, but has one word changed, then
+    *   we end up re-loading it.
+    * We use the same PDF input as the rest of this app does.
+    '''
     # Get the defaults
     working_dir = config_cache().cache_dir / "lightRag"
     model = config_cache().query_model
@@ -627,7 +635,8 @@ def light_rag_populate(args):
     logging.info(f"lightRag: {model}, {working_dir}")
     l_rag = init_lightrag(model, working_dir)
 
-    # Now we can populate it.
+    # Now we can populate it by looping over all the documents
+    # we have cached locally.
     chat_config = load_config(args)
     progress = Progress()
     with progress:
@@ -637,9 +646,6 @@ def light_rag_populate(args):
             if doc is None:
                 logging.info(f"Skipping {ref} - not cached")
                 continue
-            # if ref in l_rag.store:
-            #     logging.info(f"Skipping {ref} - already in lightRag store")
-            #     continue
             logging.info(f"Adding {ref.ref}")
             l_rag.insert(doc.page_content)
             progress.update(task1, advance=1)
