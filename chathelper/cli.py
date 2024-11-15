@@ -6,6 +6,7 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
+import lightrag
 from pydantic import SecretStr
 
 import yaml
@@ -609,16 +610,16 @@ def init_lightrag(model: str, working_dir: Path):
     return rag
 
 
-def light_rag_populate(args):
-    '''Populate the light rag database's (knowledge, lookup, etc.).
+def init_rag() -> lightrag.LightRAG:
+    """Generate the light-rag model.
 
-    Notes:
+    Args:
+        model (str): The GPT model to use.
+        working_dir (Path): Where the working directory is.
 
-    * If we try to reload a document that is already in there, it is quickly skipped.
-    * If we load a document that is the same as one in there, but has one word changed, then
-    *   we end up re-loading it.
-    * We use the same PDF input as the rest of this app does.
-    '''
+    Returns:
+        lightRag: The light rag object.
+    """
     # Get the defaults
     working_dir = config_cache().cache_dir / "lightRag"
     model = config_cache().query_model
@@ -634,6 +635,21 @@ def light_rag_populate(args):
 
     logging.info(f"lightRag: {model}, {working_dir}")
     l_rag = init_lightrag(model, working_dir)
+    logging.debug("lightRag: finished loading")
+    return l_rag
+
+
+def light_rag_populate(args):
+    """Populate the light rag database's (knowledge, lookup, etc.).
+
+    Notes:
+
+    * If we try to reload a document that is already in there, it is quickly skipped.
+    * If we load a document that is the same as one in there, but has one word changed, then
+    *   we end up re-loading it.
+    * We use the same PDF input as the rest of this app does.
+    """
+    l_rag = init_rag()
 
     # Now we can populate it by looping over all the documents
     # we have cached locally.
@@ -649,6 +665,32 @@ def light_rag_populate(args):
             logging.info(f"Adding {ref.ref}")
             l_rag.insert(doc.page_content)
             progress.update(task1, advance=1)
+
+
+def light_rag_query(args):
+    """Query the light rag database.
+
+    Args:
+        args (argpars): Arguments from the command line.
+    """
+    scope = args.scope
+    query = args.query
+
+    from lightrag import QueryParam
+
+    rag = init_rag()
+
+    print(
+        rag.query(
+            query,
+            param=QueryParam(
+                mode=scope,
+                # max_token_for_global_context=3000,
+                # max_token_for_local_context=3000,
+                # max_token_for_text_unit=3000,
+            ),
+        )
+    )
 
 
 def execute_command_line():
@@ -943,6 +985,20 @@ def execute_command_line():
         "populate", help="Populate lightRag store with already cached papers"
     )
     light_rag_populate_parser.set_defaults(func=light_rag_populate)
+
+    # Query command for light-rag
+    light_rag_query_parser = light_rag_subparsers.add_parser(
+        "query", help="Query the lightRag store"
+    )
+    light_rag_query_parser.add_argument("query", help="The query to ask")
+    light_rag_query_parser.add_argument(
+        "--scope",
+        help="The scope of the query (what level of entities to search)",
+        type=str,
+        default="hybrid",
+        choices=["local", "global", "hybrid", "naive"],
+    )
+    light_rag_query_parser.set_defaults(func=light_rag_query)
 
     # Parse the arguments
     args = parser.parse_args(namespace=None)
