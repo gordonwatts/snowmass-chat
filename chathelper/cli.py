@@ -600,7 +600,7 @@ def init_lightrag(model: str, working_dir: Path):
     open_api_key = config_cache().keys.get("openai", None)
     if open_api_key is None:
         raise ValueError("No OpenAI API key set, use chatter set key openai <key>")
-    os.environ["OPENAI_API_KEY"] = open_api_key
+    os.environ["OPENAI_API_KEY"] = open_api_key  # type: ignore
     rag = LightRAG(
         working_dir=str(working_dir),
         llm_model_func=model_func,
