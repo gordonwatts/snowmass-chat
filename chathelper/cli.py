@@ -610,7 +610,7 @@ def init_lightrag(model: str, working_dir: Path):
     return rag
 
 
-def init_rag() -> lightrag.LightRAG:
+def init_rag(args) -> lightrag.LightRAG:
     """Generate the light-rag model.
 
     Args:
@@ -622,7 +622,7 @@ def init_rag() -> lightrag.LightRAG:
     """
     # Get the defaults
     working_dir = config_cache().cache_dir / "lightRag"
-    model = config_cache().query_model
+    model = args.query_model
     if not model.startswith("gpt-"):
         raise ValueError(
             f"Model {model} is not a valid model for lightRag - only `gpt-4o-mini`"
@@ -678,7 +678,7 @@ def light_rag_query(args):
 
     from lightrag import QueryParam
 
-    rag = init_rag()
+    rag = init_rag(args)
 
     print(
         rag.query(
@@ -984,6 +984,13 @@ def execute_command_line():
     light_rag_populate_parser = light_rag_subparsers.add_parser(
         "populate", help="Populate lightRag store with already cached papers"
     )
+    light_rag_populate_parser.add_argument(
+        "--query_model",
+        "-q",
+        help="Use a different query model",
+        type=str,
+        default=config_cache().query_model,
+    )
     light_rag_populate_parser.set_defaults(func=light_rag_populate)
 
     # Query command for light-rag
@@ -997,6 +1004,13 @@ def execute_command_line():
         type=str,
         default="hybrid",
         choices=["local", "global", "hybrid", "naive"],
+    )
+    light_rag_query_parser.add_argument(
+        "--query_model",
+        "-q",
+        help="Use a different query model",
+        type=str,
+        default=config_cache().query_model,
     )
     light_rag_query_parser.set_defaults(func=light_rag_query)
 
