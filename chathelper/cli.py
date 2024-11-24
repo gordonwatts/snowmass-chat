@@ -649,7 +649,7 @@ def light_rag_populate(args):
     *   we end up re-loading it.
     * We use the same PDF input as the rest of this app does.
     """
-    l_rag = init_rag()
+    l_rag = init_rag(args)
 
     # Now we can populate it by looping over all the documents
     # we have cached locally.
