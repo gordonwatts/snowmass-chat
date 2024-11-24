@@ -13,6 +13,7 @@ from chathelper.cache import (
     load_paper,
 )
 from chathelper.config import ChatDocument
+
 from chathelper.lc_experimental.archive_loader import ArxivLoader
 
 
@@ -126,13 +127,14 @@ def test_download_arxiv(mock_load, mock_init, tmp_path):
     paper = ChatDocument(ref=f"arxiv://{paper_name}", tags=[])
     download_paper(paper, cache_dir)
 
-    assert mock_init.called_once_with(
-        "id:2109.10905",
-        load_all_available_meta=True,
-        doc_content_chars_max=None,
-    )
+    mock_init.assert_called_once()
+    args, kwargs = mock_init.call_args
+    assert args[0] == "id:2109.10905"
+    assert kwargs["load_all_available_meta"] is True
+    assert kwargs["doc_content_chars_max"] is None
 
 
+# @pytest.mark.skip(reason="Skipping this test due to SSL error")
 @patch.object(UnstructuredPDFLoader, "__init__", return_value=None)
 @patch.object(UnstructuredPDFLoader, "load", return_value=[_dummy_document()])
 def test_download_pdf_From_url(mock_load, mock_init, tmp_path):

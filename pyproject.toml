@@ -13,25 +13,38 @@ requires-python = ">=3.10"
 # classifiers = ["Framework :: Django", "Programming Language :: Python :: 3"]
 
 dependencies = [
+    "langchain==0.3.7",
+    "langchain-community",
+    "langchain-openai",
+    "langchain-chroma",
     "PyYAML",
-    "pydantic~=1.8",
+    "pydantic",
     "fsspec[http]",
     "requests",
     "openai",
-    "chromadb",
-    "tiktoken",
+    # "tiktoken",
     "rich",
     "unstructured[local-inference]",
-    "langchain",
-    "langchain-community",
-    "langchain-openai",
     "arxiv",
     "pymupdf",
-    "spacy",
+    # "spacy",
+    "LightRAG-hku @ git+https://github.com/HKUDS/LightRAG@39cf939d153230c970ae98a9d5b5fbd30340cf3a#egg=LightRAG-HKU",
+    "accelerate",
+    "aioboto3",
+    "graspologic",
+    "nano-vectordb",
+    "neo4j",
+    "networkx",
+    "ollama",
+    "pyvis",
+    "tenacity",
+    "torch",
+    "transformers",
+    "xxhash",
 ]
 
 [tool.setuptools.packages.find]
-include = ["chathelper"]
+include = ["chathelper", "chathelper.fsspec", "chathelper.lc_experimental"]
 
 [project.scripts]
 chatter = "chathelper.cli:main"

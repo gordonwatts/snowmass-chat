@@ -4,7 +4,7 @@ from typing import Callable, Iterable, List, Optional, Tuple
 
 from langchain.chains import RetrievalQA
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from pydantic import BaseModel, SecretStr
 
@@ -12,27 +12,8 @@ from chathelper.cache import load_paper
 from chathelper.config import ChatDocument
 
 
-def _load_vector_store(
-    vector_store_path: Path,
-    api_key: SecretStr,
-    docs: Iterable,
-    split_info: Tuple[int, int],
-    embedding_model: str,
-) -> Chroma:
-    """Loads the vector store from a list of cached documents.
-
-    Note: This has as little non-langchain logic in it
-    as possible - and is not tested by unit tests atm.
-
-    Args:
-        vector_store_path (Path): The folder where the vector store can be put.
-        api_key (str): The OpenAI key to use for the embeddings.
-        docs (Iterable[ChatDocument]): List of documents to load into db
-        split_info (Tuple[int, int]): The size of chunks and the overlap
-
-    Returns:
-        Chroma: The vector store
-    """
+def _split_document_generator(docs, split_info):
+    """Generator that splits documents using the provided text splitter."""
     # Our list of separators:
     separators: List[str] = [
         "\n",
@@ -50,18 +31,10 @@ def _load_vector_store(
         '"',
         " ",
     ]
-    # Get the vector store and splitter
-    vector_store = load_vector_store_database(
-        vector_store_path, api_key, embedding_model
-    )
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=split_info[0], chunk_overlap=split_info[1], separators=separators
     )
 
-    # Loop over the documents, sending them through the splitter
-    # and then through the embedding, finally storing them in the
-    # vector store.
-    count = 0
     for doc_info in docs:
         # ChromaDB cannot deal with complex metadata, so flatten lists
         bad_metadata = []
@@ -73,8 +46,19 @@ def _load_vector_store(
         for k in bad_metadata:
             del doc_info.metadata[k]
 
-        # Split and then store
+        # Split the document
         splits = text_splitter.split_documents([doc_info])
+        yield doc_info, splits
+
+
+def _insert_into_vector_store_generator(
+    vector_store_path, api_key, embedding_model, split_docs
+):
+    """Generator that inserts document splits into the vector store."""
+    vector_store = load_vector_store_database(
+        vector_store_path, api_key, embedding_model
+    )
+    for doc_info, splits in split_docs:
         try:
             vector_store.add_documents(splits)
         except Exception as e:
@@ -85,19 +69,40 @@ def _load_vector_store(
                 )
                 for k, v in doc_info.metadata.items():
                     logging.warning(f"  {k}: {v}")
-                raise
+            raise
+        yield doc_info
 
-        count += 1
 
-    # Make sure all data is on disk
-    vector_store.persist()
-    return vector_store
+def _load_vector_store(
+    vector_store_path: Path,
+    api_key: SecretStr,
+    docs: Iterable,
+    split_info: Tuple[int, int],
+    embedding_model: str,
+):
+    """Loads the vector store from a list of cached documents.
+
+    Note: This has as little non-langchain logic in it
+    as possible - and is not tested by unit tests atm.
+
+    Args:
+        vector_store_path (Path): The folder where the vector store can be put.
+        api_key (str): The OpenAI key to use for the embeddings.
+        docs (Iterable[ChatDocument]): List of documents to load into db
+        split_info (Tuple[int, int]): The size of chunks and the overlap
+
+    """
+    split_docs = _split_document_generator(docs, split_info)
+    for _ in _insert_into_vector_store_generator(
+        vector_store_path, api_key, embedding_model, split_docs
+    ):
+        pass
 
 
 def load_vector_store_database(
-    vector_store_path, api_key: SecretStr, embedding_model: str
+    vector_store_path: Path, api_key: SecretStr, embedding_model: str
 ) -> Chroma:
-    """Open the Vector store and create the embedding function
+    """Open the Vector store and and attach the correct the embedding function
 
     Args:
         vector_store_path (Path): The location of the vector store
@@ -187,6 +192,11 @@ def populate_vector_store(
             _save_store(vector_store_path, files)
             count += 1
             my_cb(count)
+        if count == 0:
+            logging.warning(
+                "No documents to process - did you download the cache with `chatter "
+                "--config <config-file> cache download`?"
+            )
 
     _load_vector_store(
         vector_store_path, api_key, good_documents(), split_info, embedding_model

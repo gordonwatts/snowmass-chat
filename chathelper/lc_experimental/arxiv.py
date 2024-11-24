@@ -3,9 +3,9 @@
 import logging
 import os
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 
-from pydantic import BaseModel, root_validator
+from pydantic import BaseModel, model_validator
 
 from langchain.schema import Document
 
@@ -51,29 +51,19 @@ class ArxivAPIWrapper(BaseModel):
             arxiv.run("tree of thought llm)
     """
 
-    arxiv_search: Any  #: :meta private:
-    arxiv_exceptions: Any  # :meta private:
     top_k_results: int = 3
-    ARXIV_MAX_QUERY_LENGTH = 300
+    ARXIV_MAX_QUERY_LENGTH: int = 300
     load_max_docs: int = 100
     load_all_available_meta: bool = False
     doc_content_chars_max: Optional[int] = 4000
     keep_pdf: bool = False
     cache_dir: Path = Path(".")
 
-    @root_validator()
+    @model_validator(mode="before")
     def validate_environment(cls, values: Dict) -> Dict:
         """Validate that the python package exists in environment."""
         try:
-            import arxiv
-
-            values["arxiv_search"] = arxiv.Search
-            values["arxiv_exceptions"] = (
-                arxiv.ArxivError,
-                arxiv.UnexpectedEmptyPageError,
-                arxiv.HTTPError,
-            )
-            values["arxiv_result"] = arxiv.Result
+            import arxiv  # noqa: F401
         except ImportError:
             raise ImportError(
                 "Could not import arxiv python package. "
@@ -95,10 +85,14 @@ class ArxivAPIWrapper(BaseModel):
             query: a plaintext search query
         """  # noqa: E501
         try:
-            results = self.arxiv_search(  # type: ignore
+            import arxiv
+
+            search = arxiv.Search(  # type: ignore
                 query[: self.ARXIV_MAX_QUERY_LENGTH], max_results=self.top_k_results
-            ).results()
-        except self.arxiv_exceptions as ex:
+            )
+            client = arxiv.Client()
+            results = client.results(search)
+        except arxiv.ArxivError as ex:
             return f"Arxiv exception: {ex}"
         docs = [
             f"Published: {result.updated.date()}\n"
@@ -133,12 +127,16 @@ class ArxivAPIWrapper(BaseModel):
                 "`pip install pymupdf`"
             )
 
+        import arxiv
+
         try:
-            results = self.arxiv_search(  # type: ignore
+            search = arxiv.Search(  # type: ignore
                 query[: self.ARXIV_MAX_QUERY_LENGTH], max_results=self.load_max_docs
-            ).results()
-        except self.arxiv_exceptions as ex:
-            logger.debug("Error on arxiv: %s", ex)
+            )
+            client = arxiv.Client()
+            results = client.results(search)
+        except arxiv.ArxivError as ex:
+            logger.warning("Error on arxiv: %s", ex)
             return []
 
         docs: List[Document] = []
@@ -146,7 +144,9 @@ class ArxivAPIWrapper(BaseModel):
             try:
                 doc_file_path: Path = self.cache_dir / result._get_default_filename()
                 if not doc_file_path.exists():
-                    doc_file_path = Path(result.download_pdf(dirpath=self.cache_dir))
+                    doc_file_path = Path(
+                        result.download_pdf(dirpath=str(self.cache_dir))
+                    )
                 with fitz.open(doc_file_path) as doc_file:
                     text: str = "".join(page.get_text() for page in doc_file)  # type: ignore
             except FileNotFoundError as f_ex:

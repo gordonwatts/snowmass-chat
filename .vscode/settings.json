@@ -1,13 +1,17 @@
 {
   "cSpell.words": [
+    "argpars",
     "arxiv",
+    "caplog",
     "chardet",
     "chathelper",
     "docstore",
     "FASER",
     "fitz",
+    "httpcore",
     "indico",
     "langchain",
+    "lightrag",
     "MATHUSLA",
     "openai",
     "pydantic",
@@ -16,5 +20,7 @@
     "snowmass",
     "spacy",
     "vectorstores"
-  ]
+  ],
+  "editor.defaultFormatter": "ms-python.black-formatter",
+  "debugpy.debugJustMyCode": false
 }
